@@ -27,12 +27,16 @@
           "type": "path"
         },
         {
-          "foreground": "#F141A8",
+          "foreground": "#ee79d1",
           "properties": {
-            "branch_icon": "\ue0a0 "
+            "branch_icon": "\ue0a0 ",
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "fetch_worktree_count": true
           },
           "style": "plain",
-          "template": "<#F3EFF5>on</> {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} ",
+          "template": " {{ .UpstreamIcon }} {{ .HEAD }} {{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "type": "git"
         },
         {
