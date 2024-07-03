@@ -14,6 +14,12 @@
 >
 > So be it, until victory is ours and there are no bugs, but peace!
 
+## Pre-requisites
+
+* Git
+* Stow
+* oh-my-posh
+* and a whole bunch of other stuff...
 
 ## Installation
 
