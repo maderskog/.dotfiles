@@ -20,6 +20,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light MichaelAquilina/zsh-autoswitch-virtualenv
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -30,11 +31,8 @@ zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colored-man-pages
-# zinit snippet OMZP::docker
 zinit snippet OMZP::dotenv
 zinit snippet OMZP::node
-# zinit snippet OMZP::pipenv
-# zinit snippet OMZP::poetry
 zinit snippet OMZP::sbt
 
 # Load completions
