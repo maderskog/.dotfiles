@@ -33,7 +33,7 @@ blocks:
         template: "{{ .UpstreamIcon }}{{ .HEAD }}
           {{ if .BranchStatus }}<#fffb00>{{ .BranchStatus }}</>{{ end }}
           {{ if .Working.Changed }}<f><#ff9500>\uF044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}
-          {{ if .Staging.Changed }}<f><#00f900>\uF046 {{ .Staging.String }}</></f>{{ end }} "
+          {{ if .Staging.Changed }}<f><#00f900>\uF046 {{ .Staging.String }}</></f>{{ end }}"
         properties:
           branch_icon: "\ue0a0 "
           fetch_stash_count: true
@@ -46,6 +46,14 @@ blocks:
         text: ""
         duration: 0s
         namelength: 0
+      - type: python
+        style: plain
+        template: "{{ if .Error }}{{ .Error }}{{ else }}
+          {{ if .Venv }}<d>{{ .Venv }}</d> {{ end }}
+          \ue606 {{ .Full }}{{ end }} "
+        set:
+          background: ""
+          foreground: "#FFD43B"
       - type: project
         style: plain
         template: "{{if .Version}}<#F3EFF5>is</> \uf487 {{.Version}} {{end}}"
