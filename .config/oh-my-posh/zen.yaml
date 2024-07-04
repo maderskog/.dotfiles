@@ -32,9 +32,8 @@ blocks:
         style: plain
         template: "{{ .UpstreamIcon }}{{ .HEAD }}
           {{if .BranchStatus }}<#fffb00>{{ .BranchStatus }}</>{{ end }}
-          {{ if .Working.Changed }}<f><#ff9500>\uF044</></f> {{ .Working.String }}{{ end }}
-          {{ if and (.Staging.Changed) (.Working.Changed) }}|{{ end }}
-          {{ if .Staging.Changed }}<f><#00f900>\uF046</></f> {{ .Staging.String }}{{ end }} "
+          {{ if .Working.Changed }}<f><#ff9500>\uF044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}
+          {{ if .Staging.Changed }}<f><#00f900>\uF046 {{ .Staging.String }}</></f>{{ end }} "
         properties:
           branch_icon: "\ue0a0 "
           fetch_stash_count: true
