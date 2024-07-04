@@ -30,7 +30,7 @@ blocks:
         namelength: 0
       - type: git
         style: plain
-        template: "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <f><#ff9500>\uF044</></f> {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900>\uF046</></f> {{ .Staging.String }}{{ end }} "
+        template: "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <f><#ff9500>\uF044</></f> {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900>\uF046</></f> x{{ .Staging.String }}x{{ end }} "
         properties:
           branch_icon: "\ue0a0 "
           fetch_stash_count: true
