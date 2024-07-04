@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version: 2
+blocks:
+  - type: prompt
+    alignment: left
+    segments:
+      - type: text
+        style: plain
+        template: "❯ "
+        set:
+          background: ""
+          foreground: "#00f900"
+        text: ""
+        duration: 0s
+        namelength: 0
+  - type: rprompt
+    alignment: right
+    segments:
+      - type: path
+        style: plain
+        template: "{{ .Path }} "
+        properties:
+          style: folder
+        set:
+          background: ""
+          foreground: "#15C2CB"
+        text: ""
+        duration: 0s
+        namelength: 0
+      - type: git
+        style: plain
+        template: "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <f><#ff9500>\uF044</></f> {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <#00f900>\uF046</> {{ .Staging.String }}{{ end }} "
+        properties:
+          branch_icon: "\ue0a0 "
+          fetch_stash_count: true
+          fetch_status: true
+          fetch_upstream_icon: true
+          fetch_worktree_count: true
+        set:
+          background: ""
+          foreground: "#ee79d1"
+        text: ""
+        duration: 0s
+        namelength: 0
+      - type: project
+        style: plain
+        template: "{{if .Version}}<#F3EFF5>is</> \uf487 {{.Version}} {{end}}"
+        set:
+          background: ""
+          foreground: "#5EADF2"
+        text: ""
+        duration: 0s
+        namelength: 0
+      - type: node
+        style: plain
+        template: "<#F3EFF5>via</> \ue718 {{ .Full }} "
+        properties:
+          fetch_version: true
+        set:
+          background: ""
+          foreground: "#44FFD2"
+        text: ""
+        duration: 0s
+        namelength: 0
+      - type: npm
+        style: plain
+        template: "<#F3EFF5>and</> \ue71e {{.Full}} "
+        set:
+          background: ""
+          foreground: "#FE4A49"
+        text: ""
+        duration: 0s
+        namelength: 0
+transient_prompt:
+  template: "❯ "
+  set:
+    background: transparent
+    foreground: "#009051"
+  text: ""
+  duration: 0s
+  namelength: 0

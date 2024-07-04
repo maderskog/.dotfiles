@@ -43,13 +43,13 @@ autoload -Uz compinit && compinit
 zinit cdreplay -q
 
 # Initialize oh-my-posh
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/zen.json)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/zen.yaml)"
 
 # Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
+# bindkey -e
+# bindkey '^p' history-search-backward
+# bindkey '^n' history-search-forward
+# bindkey '^[w' kill-region
 
 # History
 HISTSIZE=5000
