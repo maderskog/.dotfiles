@@ -7,7 +7,7 @@ blocks:
     segments:
       - type: text
         style: plain
-        template: "❯ "
+        template: "\ue795 "
         set:
           background: ""
           foreground: "#00f900"
@@ -17,6 +17,13 @@ blocks:
   - type: rprompt
     alignment: right
     segments:
+      - type: upgrade
+        style: plain
+        foreground: "#111111"
+        background: "#FFD664"
+      - type: status
+        style: plain
+        template: "<f><#ff2600>{{ if eq .Code 0 }}\uf00c{{ else }}\uf071</></f> {{ reason .Code }}{{ end }} "
       - type: path
         style: plain
         template: "{{ .Path }} "
@@ -46,6 +53,9 @@ blocks:
         text: ""
         duration: 0s
         namelength: 0
+      - type: elixir
+        style: plain
+        template: " <#af52de>\ue62d {{ .Full }}</> "
       - type: python
         style: plain
         template: "{{ if .Error }}{{ .Error }}{{ else }}
@@ -84,7 +94,7 @@ blocks:
         duration: 0s
         namelength: 0
 transient_prompt:
-  template: "❯ "
+  template: "\uf120 "
   set:
     background: transparent
     foreground: "#009051"
