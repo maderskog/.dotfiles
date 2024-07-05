@@ -39,8 +39,6 @@ blocks:
         style: plain
         template: "{{ .UpstreamIcon }}{{ .HEAD }}
           {{ if .BranchStatus }}<#fffb00>{{ .BranchStatus }}</>{{ end }}
-          {{ if .Ahead }}<#fffb00>\uf01b{{ .Ahead }}</>{{ end }}
-          {{ if .Behind }}<#fffb00>\uf01a{{ .Behind }}</>{{ end }}
           {{ if .Working.Changed }}<f><#ff9500>\uF044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}
           {{ if .Staging.Changed }}<f><#00f900>\uF046 {{ .Staging.String }}</></f>{{ end }}"
         properties:
