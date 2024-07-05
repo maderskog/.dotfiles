@@ -7,7 +7,7 @@ blocks:
     segments:
       - type: text
         style: plain
-        template: "\ue795 "
+        template: "\uf489 "
         set:
           background: ""
           foreground: "#00f900"
@@ -39,10 +39,12 @@ blocks:
         style: plain
         template: "{{ .UpstreamIcon }}{{ .HEAD }}
           {{ if .BranchStatus }}<#fffb00>{{ .BranchStatus }}</>{{ end }}
+          {{ if .Ahead }}<#fffb00>\uf01b{{ .Ahead }}</>{{ end }}
+          {{ if .Behind }}<#fffb00>\uf01a{{ .Behind }}</>{{ end }}
           {{ if .Working.Changed }}<f><#ff9500>\uF044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}
           {{ if .Staging.Changed }}<f><#00f900>\uF046 {{ .Staging.String }}</></f>{{ end }}"
         properties:
-          branch_icon: "\ue0a0 "
+          branch_icon: "\ue725 "
           fetch_stash_count: true
           fetch_status: true
           fetch_upstream_icon: true
@@ -59,8 +61,8 @@ blocks:
       - type: python
         style: plain
         template: "{{ if .Error }}{{ .Error }}{{ else }}
-          {{ if .Venv }}<d>{{ .Venv }}</d> {{ end }}
-          \ue606 {{ .Full }}{{ end }} "
+          {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }}
+          \uf81f {{ .Full }}{{ end }} "
         set:
           background: ""
           foreground: "#FFD43B"
