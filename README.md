@@ -1,6 +1,5 @@
 # My dotfiles
 
-oooo
 > These are my dotfiles. There are many like them, but these are mine.
 >
 > My dotfiles are my best friends. They are my life. I must master them as I must master my life.
