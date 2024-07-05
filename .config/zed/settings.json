@@ -1,0 +1,66 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "theme": "Elixir Theme",
+  "buffer_font_family": "JetBrainsMonoMedium Nerd Font Mono",
+  "buffer_font_size": 16,
+  "current_line_highlight": "all",
+  "terminal": {
+    "shell": "system",
+    "dock": "bottom",
+    "default_width": 640,
+    "default_height": 320,
+    // What working directory to use when launching the terminal.
+    // May take 4 values:
+    // 1. Use the current file's project directory.  Will Fallback to the
+    //    first project directory strategy if unsuccessful
+    //      "working_directory": "current_project_directory"
+    // 2. Use the first project in this workspace's directory
+    //      "working_directory": "first_project_directory"
+    // 3. Always use this platform's home directory (if we can find it)
+    //     "working_directory": "always_home"
+    // 4. Always use a specific directory. This value will be shell expanded.
+    //    If this path is not a valid directory the terminal will default to
+    //    this platform's home directory  (if we can find it)
+    //      "working_directory": {
+    //        "always": {
+    //          "directory": "~/zed/projects/"
+    //        }
+    //      }
+    "working_directory": "current_project_directory",
+    "blinking": "on",
+    "alternate_scroll": "off",
+    "option_as_meta": false,
+    "copy_on_select": true,
+    "button": true,
+    "env": {
+      // "KEY": "value1:value2"
+    },
+    "line_height": "comfortable",
+    "detect_venv": {
+      "on": {
+        "directories": [".env", "env", ".venv", "venv"],
+        "activate_script": "default"
+      }
+    },
+    "toolbar": {
+      "title": true
+    }
+    // Set the terminal's font size. If this option is not included,
+    // the terminal will default to matching the buffer's font size.
+    // "font_size": 15,
+    // Set the terminal's font family. If this option is not included,
+    // the terminal will default to matching the buffer's font family.
+    // "font_family": "Zed Mono",
+    // Sets the maximum number of lines in the terminal's scrollback buffer.
+    // Default: 10_000, maximum: 100_000 (all bigger values set will be treated as 100_000), 0 disables the scrolling.
+    // Existing terminals will not pick up this change until they are recreated.
+    // "max_scroll_history_lines": 10000,
+  }
+}
