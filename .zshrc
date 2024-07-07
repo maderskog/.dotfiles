@@ -75,8 +75,8 @@ alias c='clear'
 alias cat="bat"
 alias ls="lsd --classify"
 alias l="ls -l -a -t -r"
-alias tree="tree -C"
-alias vim='nvim'
+alias tree="tree -C -a -I .git"
+alias vi='nvim'
 
 # Path
 export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
