@@ -74,6 +74,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Aliases
 alias c='clear'
 # alias cd="z"
+alias grep='grep --color="always"'
 alias cat="bat"
 alias ls="lsd --classify"
 alias l="ls -l -a -t -r"
