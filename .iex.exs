@@ -16,7 +16,7 @@ magenta = IO.ANSI.magenta()
 green = IO.ANSI.green()
 yellow = IO.ANSI.yellow()
 
-prefix = magenta <> "%prefix" <> reset
+prefix = magenta <> "\ue62d %prefix" <> reset
 parens_start = cyan <> "(" <> reset
 parens_end = cyan <> ")" <> reset
 counter = green <> "%counter" <> reset
