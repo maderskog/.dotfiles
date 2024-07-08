@@ -8,9 +8,7 @@ blocks:
       - type: text
         style: plain
         template: "\uf489  "
-        set:
-          background: ""
-          foreground: "#00f900"
+        foreground: "#00f900"
         text: ""
         duration: 0s
         namelength: 0
@@ -29,9 +27,7 @@ blocks:
         template: "{{ .Path }} "
         properties:
           style: folder
-        set:
-          background: ""
-          foreground: "#15C2CB"
+        foreground: "#15C2CB"
         text: ""
         duration: 0s
         namelength: 0
@@ -44,9 +40,7 @@ blocks:
           fetch_status: true
           fetch_upstream_icon: true
           fetch_worktree_count: true
-        set:
-          background: ""
-          foreground: "#ee79d1"
+        foreground: "#ee79d1"
         text: ""
         duration: 0s
         namelength: 0
@@ -58,15 +52,11 @@ blocks:
         template: "{{ if .Error }}{{ .Error }}{{ else }}
           {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }}
           \ue235 {{ .Full }}{{ end }} "
-        set:
-          background: ""
-          foreground: "#FFD43B"
+        foreground: "#FFD43B"
       - type: project
         style: plain
         template: "{{if .Version}}<#F3EFF5>is</> \uf487 {{.Version}} {{end}}"
-        set:
-          background: ""
-          foreground: "#5EADF2"
+        foreground: "#5EADF2"
         text: ""
         duration: 0s
         namelength: 0
@@ -75,25 +65,19 @@ blocks:
         template: "<#F3EFF5>via</> \ue718 {{ .Full }} "
         properties:
           fetch_version: true
-        set:
-          background: ""
-          foreground: "#44FFD2"
+        foreground: "#44FFD2"
         text: ""
         duration: 0s
         namelength: 0
       - type: npm
         style: plain
         template: "<#F3EFF5>and</> \ue71e {{.Full}} "
-        set:
-          background: ""
-          foreground: "#FE4A49"
+        foreground: "#FE4A49"
         text: ""
         duration: 0s
         namelength: 0
 transient_prompt:
   template: "<d><#009051>\uf120</></d>  "
-  set:
-    background: transparent
   text: ""
   duration: 0s
   namelength: 0
