@@ -23,7 +23,7 @@ blocks:
         background: "#FFD664"
       - type: status
         style: plain
-        template: "<f><#ff2600>{{ if eq .Code 0 }}\ufb92{{ else }}\uf79f</></f> <#941100>{{ reason .Code }}</>{{ end }} "
+        template: "<f><#ff2600>{{ if eq .Code 0 }}\ue007{{ else }}󰊠</></f> <#941100>{{ reason .Code }}</>{{ end }} "
       - type: path
         style: plain
         template: "{{ .Path }} "
@@ -57,7 +57,7 @@ blocks:
         style: plain
         template: "{{ if .Error }}{{ .Error }}{{ else }}
           {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }}
-          \uf81f {{ .Full }}{{ end }} "
+          \ue235 {{ .Full }}{{ end }} "
         set:
           background: ""
           foreground: "#FFD43B"
