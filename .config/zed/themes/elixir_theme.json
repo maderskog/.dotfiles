@@ -132,7 +132,7 @@
             "color": "#1e66f5"
           },
           "number": {
-            "color": "#fe640b"
+            "color": "#ae81ff"
           },
           "operator": {
             "color": "#04a5e5"
@@ -168,7 +168,7 @@
             "color": "#d20f39"
           },
           "string": {
-            "color": "#40a02b"
+            "color": "#e6db74"
           },
           "string.escape": {
             "color": "#ea76cb"
