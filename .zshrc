@@ -103,10 +103,15 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export ERL_AFLAGS="-kernel shell_history enabled"
 export LDFLAGS="-L$(brew --prefix zbar)/lib"
 export CFLAGS="-I$(brew --prefix zbar)/include"
+export POETRY_VIRTUALENVS_IN_PROJECT=true
 
 launchctl setenv PATH ${PATH}
 
 # Functions
+
+function path() {
+  echo $PATH | tr ':' '\n'
+}
 
 function json() {
   cat $1 | jq | bat --language json
