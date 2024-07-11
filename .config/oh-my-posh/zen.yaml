@@ -15,10 +15,6 @@ blocks:
   - type: rprompt
     alignment: right
     segments:
-      - type: upgrade
-        style: plain
-        foreground: "#111111"
-        background: "#FFD664"
       - type: status
         style: plain
         template: "<f><#ff2600>{{ if eq .Code 0 }}\ue007{{ else }}󰊠</></f> <#941100>{{ reason .Code }}</>{{ end }} "
@@ -76,6 +72,10 @@ blocks:
         text: ""
         duration: 0s
         namelength: 0
+      - type: upgrade
+        style: plain
+        foreground: "#d780d6"
+        template: "\uf019 {{ .Current }} \uf061 {{ .Latest }} "
 transient_prompt:
   template: "<d><#009051>\uf120</></d>  "
   text: ""
