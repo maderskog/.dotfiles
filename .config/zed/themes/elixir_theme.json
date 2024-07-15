@@ -135,7 +135,7 @@
             "color": "#ae81ff"
           },
           "operator": {
-            "color": "#04a5e5"
+            "color": "#ff5385"
           },
           "predictive": {
             "color": "#acb0be"
@@ -202,7 +202,7 @@
             "color": "#df8e1d"
           },
           "variable": {
-            "color": "#4c4f69"
+            "color": "#ffffff"
           },
           "variable.member": {
             "color": "#4c4f69"
