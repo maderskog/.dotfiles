@@ -82,7 +82,7 @@ alias tree="tree -C -a -I .git"
 alias vi='nvim'
 
 # Path
-export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
+export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
 export PATH="$PATH:/Users/michael/bin"
 export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
