@@ -77,7 +77,8 @@ alias c='clear'
 alias grep='grep --color="always"'
 alias cat="bat"
 alias ls="lsd --classify"
-alias l="ls -l -a -t -r"
+alias l="lsd -l --classify --group-directories-first"
+alias la="lsd -l -a --classify --group-directories-first"
 alias tree="tree -C -a -I .git"
 alias vi='nvim'
 
