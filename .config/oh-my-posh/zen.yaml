@@ -17,7 +17,7 @@ blocks:
     segments:
       - type: status
         style: plain
-        template: "<f><#ff2600>{{ if eq .Code 0 }}\ue007{{ else }}󰊠</></f> <#941100>{{ reason .Code }}</>{{ end }} "
+        template: "{{ if ne .Code 0 }}<f><#ff2600> 󰊠 </></f><d><#941100>{{ reason .Code }}</></d>{{ end }} "
       - type: path
         style: plain
         template: "{{ .Path }} "
