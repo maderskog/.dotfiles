@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
-
+final_space: true
 version: 2
 blocks:
   - type: prompt
@@ -7,7 +7,7 @@ blocks:
     segments:
       - type: text
         style: plain
-        template: "\uf489  "
+        template: "\uf489 "
         foreground: "#00f900"
         text: ""
         duration: 0s
@@ -20,13 +20,9 @@ blocks:
         template: "{{ if ne .Code 0 }}<f><#ff2600> 󰊠 </></f><d><#941100>{{ reason .Code }}</></d>{{ end }} "
       - type: path
         style: plain
-        template: "{{ .Path }} "
         properties:
-          style: folder
+          style: unique
         foreground: "#15C2CB"
-        text: ""
-        duration: 0s
-        namelength: 0
       - type: git
         style: plain
         template: "{{ .UpstreamIcon }}{{ .HEAD }}{{ if .BranchStatus }}<#fffb00> {{ .BranchStatus }}</>{{ end }}{{ if .StashCount }}<#0433ff> \uf097 {{ .StashCount }}</>{{ end }}{{ if .Working.Changed }}<f><#ff9500> \uF044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900>\uF046 {{ .Staging.String }}</></f>{{ end }} "
