@@ -133,4 +133,3 @@ source <(fzf --zsh)
 
 source /Users/michael/.config/broot/launcher/bash/br
 
-cd $HOME
