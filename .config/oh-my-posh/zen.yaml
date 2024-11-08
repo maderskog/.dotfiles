@@ -1,79 +1,60 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
-final_space: true
-version: 2
-blocks:
-  - type: prompt
-    alignment: left
-    segments:
-      - type: text
-        style: plain
-        template: "\uf489 "
-        foreground: "#00f900"
-        text: ""
-        duration: 0s
-        namelength: 0
-  - type: rprompt
-    alignment: right
-    segments:
-      - type: status
-        style: plain
-        template: "{{ if ne .Code 0 }}<f><#ff2600> 󰊠 </></f><d><#941100>{{ reason .Code }}</></d>{{ end }} "
-      - type: path
-        style: plain
-        properties:
-          style: unique
-        foreground: "#15C2CB"
-      - type: git
-        style: plain
-        template: "{{ .UpstreamIcon }}{{ .HEAD }}{{ if .BranchStatus }}<#fffb00> {{ .BranchStatus }}</>{{ end }}{{ if .StashCount }}<#0433ff> \uf097 {{ .StashCount }}</>{{ end }}{{ if .Working.Changed }}<f><#ff9500> \uF044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900>\uF046 {{ .Staging.String }}</></f>{{ end }} "
-        properties:
-          branch_icon: "\ue725 "
-          fetch_stash_count: true
-          fetch_status: true
-          fetch_upstream_icon: true
-          fetch_worktree_count: true
-        foreground: "#ee79d1"
-        text: ""
-        duration: 0s
-        namelength: 0
-      - type: elixir
-        style: plain
-        template: " <#af52de>\ue62d {{ .Full }}</> "
-      - type: python
-        style: plain
-        template: "{{ if .Error }}{{ .Error }}{{ else }}
-          {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }}
-          \ue235 {{ .Full }}{{ end }} "
-        foreground: "#FFD43B"
-      - type: project
-        style: plain
-        template: "{{if .Version}}<#F3EFF5>is</> \uf487 {{.Version}} {{end}}"
-        foreground: "#5EADF2"
-        text: ""
-        duration: 0s
-        namelength: 0
-      - type: node
-        style: plain
-        template: "<#F3EFF5>via</> \ue718 {{ .Full }} "
-        properties:
-          fetch_version: true
-        foreground: "#44FFD2"
-        text: ""
-        duration: 0s
-        namelength: 0
-      - type: npm
-        style: plain
-        template: "<#F3EFF5>and</> \ue71e {{.Full}} "
-        foreground: "#FE4A49"
-        text: ""
-        duration: 0s
-        namelength: 0
-      - type: upgrade
-        style: plain
-        foreground: "#d780d6"
-        template: "\uf019 {{ .Current }} \uf061 {{ .Latest }} "
+
 transient_prompt:
   template: "<d><#009051>\uf120</></d>  "
-  text: ""
-  duration: 0s
-  namelength: 0
+blocks:
+- type: prompt
+  alignment: left
+  segments:
+  - template: "\uf489 "
+    foreground: "#00f900"
+    type: text
+    style: plain
+- type: rprompt
+  alignment: right
+  segments:
+  - template: "{{ if ne .Code 0 }}<f><#ff2600> \U000f02a0 </></f><d><#941100>{{ reason .Code }}</></d>{{ end }} "
+    type: status
+    style: plain
+  - properties:
+      style: unique
+    foreground: "#15C2CB"
+    type: path
+    style: plain
+  - properties:
+      branch_icon: "\ue725 "
+      fetch_stash_count: true
+      fetch_status: true
+      fetch_upstream_icon: true
+      fetch_worktree_count: true
+    template: "{{ .UpstreamIcon }}{{ .HEAD }}{{ if .BranchStatus }}<#fffb00> {{ .BranchStatus }}</>{{ end }}{{ if .StashCount }}<#0433ff> \uf097 {{ .StashCount }}</>{{ end }}{{ if .Working.Changed }}<f><#ff9500> \uf044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900>\uf046 {{ .Staging.String }}</></f>{{ end }} "
+    foreground: "#ee79d1"
+    type: git
+    style: plain
+  - template: " <#af52de>\ue62d {{ .Full }}</> "
+    type: elixir
+    style: plain
+  - template: "{{ if .Error }}{{ .Error }}{{ else }} {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }} \ue235 {{ .Full }}{{ end }} "
+    foreground: "#FFD43B"
+    type: python
+    style: plain
+  - template: "{{if .Version}}<#F3EFF5>is</> \uf487 {{.Version}} {{end}}"
+    foreground: "#5EADF2"
+    type: project
+    style: plain
+  - properties:
+      fetch_version: true
+    template: "<#F3EFF5>via</> \ue718 {{ .Full }} "
+    foreground: "#44FFD2"
+    type: node
+    style: plain
+  - template: "<#F3EFF5>and</> \ue71e {{.Full}} "
+    foreground: "#FE4A49"
+    type: npm
+    style: plain
+  - template: "\uf019 {{ .Current }} \uf061 {{ .Latest }} "
+    foreground: "#d780d6"
+    type: upgrade
+    style: plain
+version: 3
+final_space: true
