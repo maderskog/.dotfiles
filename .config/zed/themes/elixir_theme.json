@@ -36,7 +36,7 @@
         "tab.inactive_background": "#132134",
         "tab_bar.background": "#030812",
         "editor.gutter.background": "#030812",
-        "panel.background": "#132134",
+        "panel.background": "#030812",
         "panel.focused_border": "#ffffff",
         "toolbar.background": "#030812",
         "terminal.background": "#132134",
