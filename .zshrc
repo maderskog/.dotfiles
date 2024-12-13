@@ -81,6 +81,7 @@ alias l="lsd --long --classify --group-directories-first"
 alias la="lsd --long --almost-all --classify --group-directories-first"
 alias tree="tree -C -a -I .git"
 alias vi='nvim'
+alias json='fx'
 
 # Path
 export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
@@ -112,10 +113,6 @@ launchctl setenv PATH ${PATH}
 
 function path() {
   echo $PATH | tr ':' '\n'
-}
-
-function json() {
-  cat $1 | jq | bat --language json
 }
 
 # pnpm
