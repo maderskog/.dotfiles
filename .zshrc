@@ -73,7 +73,6 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias c='clear'
-# alias cd="z"
 alias grep='grep --color="always"'
 alias cat="bat"
 alias ls="lsd --classify"
@@ -92,11 +91,9 @@ export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 export PATH="$PATH:/Users/michael/Library/Application Support/edgedb/bin"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
 
 # Environment Variables
 export LC_ALL=en_US.UTF-8
@@ -110,7 +107,6 @@ export POETRY_VIRTUALENVS_IN_PROJECT=true
 launchctl setenv PATH ${PATH}
 
 # Functions
-
 function path() {
   echo $PATH | tr ':' '\n'
 }
@@ -121,15 +117,12 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
 # Completions
 source <(kubectl completion zsh)
 source <(op completion zsh)
 source <(fzf --zsh)
-
 source /Users/michael/.config/broot/launcher/bash/br
-
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
