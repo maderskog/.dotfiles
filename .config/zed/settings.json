@@ -11,6 +11,7 @@
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_size": 16,
   "current_line_highlight": "all",
+  "cursor_shape": "block",
   "terminal": {
     "shell": "system",
     "dock": "bottom",
