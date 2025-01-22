@@ -83,14 +83,15 @@ alias vi='nvim'
 alias json='fx'
 
 # Path
-export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
-export PATH="$PATH:/Users/michael/bin"
-export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH:$HOME/bin"
+# export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
+# export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
-export PATH="$PATH:/Users/michael/Library/Application Support/edgedb/bin"
+# export PATH="$PATH:/Users/michael/Library/Application Support/edgedb/bin"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
@@ -111,6 +112,16 @@ function path() {
   echo $PATH | tr ':' '\n'
 }
 
+# GO
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
+# Node version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
@@ -120,9 +131,8 @@ esac
 
 # Completions
 source <(kubectl completion zsh)
-source <(op completion zsh)
+# source <(op completion zsh)
 source <(fzf --zsh)
-source /Users/michael/.config/broot/launcher/bash/br
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
