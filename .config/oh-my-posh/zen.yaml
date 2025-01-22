@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
 transient_prompt:
-  template: "<d><#009051>\ue200</></d>  "
+  template: "<d><#009051>\ue285</></d>  "
 blocks:
   - type: prompt
     alignment: left
