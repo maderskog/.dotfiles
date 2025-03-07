@@ -2,4 +2,7 @@ font-family = "JetBrainsMonoNL Nerd Font Mono"
 theme = Wez
 background-opacity = 0.9
 cursor-style = block
-
+font-size = 18
+window-width = 140
+window-height = 40
+copy-on-select = true
