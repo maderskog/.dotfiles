@@ -131,8 +131,19 @@ esac
 
 # Completions
 source <(kubectl completion zsh)
-# source <(op completion zsh)
+source <(op completion zsh)
 source <(fzf --zsh)
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+source <(supabase completion zsh)
+source <(docker completion zsh)
+
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
+zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+
+# bun completions
+[ -s "/Users/michael/.bun/_bun" ] && source "/Users/michael/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
