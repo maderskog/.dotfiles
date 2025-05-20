@@ -30,7 +30,7 @@ blocks:
           fetch_status: true
           fetch_upstream_icon: true
           fetch_worktree_count: true
-        template: "{{ .UpstreamIcon }}{{ .HEAD }}{{ if .BranchStatus }}<#fffb00> {{ .BranchStatus }}</>{{ end }}{{ if .StashCount }}<#0433ff> \uf097 {{ .StashCount }}</>{{ end }}{{ if .Working.Changed }}<f><#ff9500> \uf044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900>\uf046 {{ .Staging.String }}</></f>{{ end }} "
+        template: "{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }}<#fffb00> {{ .BranchStatus }}</>{{ end }}{{ if .StashCount }}<#0433ff> \uf097 {{ .StashCount }}</>{{ end }}{{ if .Working.Changed }}<f><#ff9500> \uf044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900>\uf046 {{ .Staging.String }}</></f>{{ end }} "
         foreground: "#ee79d1"
         type: git
         style: plain
