@@ -9,10 +9,11 @@
 {
   "theme": "Elixir Theme",
   "buffer_font_family": "JetBrainsMono Nerd Font",
-  "buffer_font_size": 16,
+  "buffer_font_size": 18,
   "current_line_highlight": "all",
   "cursor_shape": "block",
   "terminal": {
+    "max_scroll_history_lines": 10000,
     "shell": "system",
     "dock": "bottom",
     "default_width": 640,
