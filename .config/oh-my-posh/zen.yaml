@@ -13,10 +13,10 @@ blocks:
   - type: rprompt
     alignment: right
     segments:
-      - template: " <#fefefe></> {{ .FormattedMs }} "
+      - template: " <#ffd500>\uf253</> {{ .FormattedMs }} "
         type: executiontime
         style: plain
-      - template: "{{ if ne .Code 0 }}<f><#ff2600> \U000f02a0 </></f><d><#941100>{{ reason .Code }}</></d>{{ end }} "
+      - template: "{{ if ne .Code 0 }}<f><#ff2600>\ueefe </></f><d><#941100>{{ reason .Code }}</></d>{{ end }} "
         type: status
         style: plain
       - properties:

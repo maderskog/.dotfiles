@@ -18,7 +18,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit ice wait lucid
 # Add in zsh plugins
 zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
@@ -147,3 +146,4 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
