@@ -16,7 +16,7 @@ blocks:
       - template: "<#ffd500>\uf253</> {{ .FormattedMs }}"
         type: executiontime
         style: plain
-      - template: "{{ if ne .Code 0 }}<f><#ff2600>\ueefe </></f><d><#941100>{{ reason .Code }}</></d>{{ end }}"
+      - template: " {{ if ne .Code 0 }}<f><#ff2600>\ueefe </></f><d><#941100>{{ reason .Code }}</></d>{{ end }}"
         type: status
         style: plain
       - properties:
@@ -37,7 +37,7 @@ blocks:
       - template: " <#af52de>\ue62d {{ .Full }}</> "
         type: elixir
         style: plain
-      - template: "{{ if .Error }}{{ .Error }}{{ else }} {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }} \ue235 {{ .Full }}{{ end }} "
+      - template: "{{ if .Error }}{{ .Error }}{{ else }} {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }} \ue606 {{ .Full }}{{ end }} "
         foreground: "#FFD43B"
         type: python
         style: plain
