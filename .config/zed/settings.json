@@ -12,6 +12,7 @@
   "buffer_font_size": 18,
   "current_line_highlight": "all",
   "cursor_shape": "block",
+  "minimap": { "show": "always" },
   "terminal": {
     "max_scroll_history_lines": 10000,
     "shell": "system",
