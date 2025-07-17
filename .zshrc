@@ -125,7 +125,7 @@ export NVM_DIR="$HOME/.nvm"
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *) export PATH="$PATH:$PNPM_HOME" ;;
 esac
 
 # Completions
@@ -140,10 +140,9 @@ zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 
-# bun completions
 [ -s "/Users/michael/.bun/_bun" ] && source "/Users/michael/.bun/_bun"
 
-# bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$PATH:$BUN_INSTALL/bin"
+
 
