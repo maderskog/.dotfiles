@@ -6,7 +6,7 @@ blocks:
   - type: prompt
     alignment: left
     segments:
-      - template: "\ue285 "
+      - template: "\ue285"
         foreground: "#00f900"
         type: text
         style: plain
