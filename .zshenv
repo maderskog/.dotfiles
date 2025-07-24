@@ -55,5 +55,6 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
-eval "$(zoxide init zsh --cmd 'z')"
+# Zoxide
+eval "$(zoxide init zsh)"
 
