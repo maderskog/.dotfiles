@@ -41,6 +41,9 @@ export PATH="$PATH:$BUN_INSTALL/bin"
 # JetBrains Toolbox
 export PATH="$PATH:/Users/michael/Library/Application Support/JetBrains/Toolbox/scripts"
 
+# FZF Configuration (for fzf-tab)
+# export FZF_DEFAULT_COMMAND='fd --hidden'
+
 # Environment Variables
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -53,7 +56,6 @@ export CFLAGS="-I$(brew --prefix zbar)/include"
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 # Zoxide
 eval "$(zoxide init zsh)"
