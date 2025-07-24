@@ -53,4 +53,7 @@ export CFLAGS="-I$(brew --prefix zbar)/include"
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
+eval "$(zoxide init zsh --cmd 'z')"
 

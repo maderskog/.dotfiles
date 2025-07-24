@@ -48,6 +48,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias c='clear'
+alias cd='z'
 alias grep='grep --color="always"'
 alias cat="bat"
 alias ls="lsd --classify"
@@ -66,7 +67,7 @@ function y() {
     yazi --cwd-file="$tmp"
     if [ -f "$tmp" ]; then
         if [ "$(cat -- "$tmp")" != "$(pwd)" ]; then
-            cd -- "$(cat -- "$tmp")"
+            z "$(cat -- "$tmp")"
         fi
         rm -f -- "$tmp"
     fi
