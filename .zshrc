@@ -32,6 +32,8 @@ export CFLAGS="-O2 -g"
 export LDFLAGS="-L$(brew --prefix zbar)/lib"
 export CFLAGS="-I$(brew --prefix zbar)/include"
 export POETRY_VIRTUALENVS_IN_PROJECT=true
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 launchctl setenv PATH ${PATH}
 
@@ -118,7 +120,20 @@ if [[ -o interactive ]]; then
   function path() {
     echo $PATH | tr ':' '\n'
   }
-
+ 
+  function y() {
+    local tmp="$(mktemp -t "yazi-cd.XXX")"
+    
+    yazi --cwd-file="$tmp"
+    
+    if [ -f "$tmp" ]; then
+        if [ "$(cat -- "$tmp")" != "$(pwd)" ]; then
+            cd -- "$(cat -- "$tmp")"
+        fi
+        rm -f -- "$tmp"
+    fi
+  }
+  
   # Completions
   source <(kubectl completion zsh)
   source <(op completion zsh)
