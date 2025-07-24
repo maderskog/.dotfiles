@@ -1,0 +1,22 @@
+[opener]
+fx = [
+    { run = 'fx "$@"', block = true },
+]
+bat = [
+    { run = 'bat --paging=always "$@"', block = true },
+]
+macos_open = [
+    { run = 'open "$@"' },
+]
+nvim = [
+    { run = '$EDITOR "$@"', block = true },
+]
+
+[open]
+rules = [
+    { name = "*.json",         use = "fx" },
+    { name = "*.{yml,yaml}",   use = "bat" },
+    { mime = "image/*",        use = "macos_open" },
+    { mime = "text/*",         use = "nvim" }, # Fallback for all other textfiles
+]
+

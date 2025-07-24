@@ -1,0 +1,4 @@
+[[mgr.prepend_keymap]]
+on = [ "e" ]
+run = "shell '$EDITOR \"$@\"' --block"
+desc = "Edit file(s) with $EDITOR"
