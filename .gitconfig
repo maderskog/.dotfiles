@@ -1,0 +1,79 @@
+[include]
+	path = ~/.gitconfig.local
+
+[core]
+	excludesfile = ~/.gitignore.global
+	pager = delta
+
+[init]
+	defaultBranch = main
+
+[delta]
+	navigate = true
+	side-by-side = true
+
+[alias]
+	st = status
+	cam = commit -a -m
+	wd = diff --word-diff
+	who = shortlog -s --
+	br = branch
+
+	lol = "!git log --all --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -- | fzf --ansi --no-sort --reverse --tiebreak=index --bind 'enter:execute(git show --color=always {1} | delta)'"
+
+	b = "!f() { git branch -a --color=always | grep -v '/HEAD\\s' | sort | uniq | fzf --ansi --header='Select a branch to checkout' --preview 'git log --oneline --graph --date=short --color=always {2}' | sed 's/^..//' | xargs -r git checkout; }; f"
+
+	sync = "!f() { current_branch=$(git symbolic-ref --short HEAD); git checkout main && git pull --rebase && git checkout \"$current_branch\" && git rebase main; }; f"
+
+	rewrite-author = "!f() { git filter-repo --name-map <(echo \"$1\") --email-map <(echo \"$1\"); }; f"
+
+[color]
+	ui = auto
+
+[fetch]
+	prune = true
+
+[push]
+	default = simple
+	autoSetupRemote = true
+
+[pull]
+	rebase = true
+
+[rerere]
+	enabled = true
+
+[blame]
+	ignoreRevsFile = .git-blame-ignore-revs
+
+[diff]
+	colorMoved = default
+	tool = Kaleidoscope
+
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+[difftool]
+	prompt = false
+	trustExitCode = true
+
+[merge]
+	tool = Kaleidoscope
+
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+
+[mergetool]
+	prompt = false
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+
