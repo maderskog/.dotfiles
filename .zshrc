@@ -33,6 +33,9 @@ source <(carapace _carapace)
 
 compinit -C
 
+# Enable FZF shell integration BEFORE fzf-tab
+source <(fzf --zsh)
+
 # Need to load fzf-tab AFTER completions and carapace
 zinit light Aloxaf/fzf-tab
 
@@ -40,12 +43,16 @@ zinit cdreplay -q
 
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
+
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
+
 # set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
 # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
+
 # Smart preview: show file content for files, directory content for directories
 local smart_preview='[[ -f $realpath ]] && bat --color=always --style=numbers --line-range=:500 $realpath || lsd --color=always --classify --group-directories-first $realpath'
 
@@ -56,8 +63,9 @@ zstyle ':fzf-tab:complete:bat:*' fzf-preview $smart_preview
 zstyle ':fzf-tab:complete:lsd:*' fzf-preview $smart_preview
 zstyle ':fzf-tab:complete:rm:*' fzf-preview $smart_preview
 
-# custom fzf flags
-zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# custom fzf flags with explicit sizing
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept --preview-window=right:50%:wrap --height=50% --min-height=20
+
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
