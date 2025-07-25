@@ -76,22 +76,24 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 # Initialize oh-my-posh
 eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/zen.yaml)"
 
-# History
-HISTSIZE=5000
+# History Configuration
+HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTDUP=erase
+
+# History behavior
 setopt appendhistory
 setopt sharehistory
+setopt extended_history
+setopt inc_append_history
+setopt hist_expire_dups_first
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
-setopt HIST_VERIFY
-setopt EXTENDED_HISTORY
-setopt INC_APPEND_HISTORY 
-setopt HIST_EXPIRE_DUPS_FIRST
+setopt hist_verify
+setopt hist_reduce_blanks
 
 # Aliases
 alias c='clear'
