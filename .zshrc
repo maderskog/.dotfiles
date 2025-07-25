@@ -88,6 +88,10 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+setopt HIST_VERIFY
+setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY 
+setopt HIST_EXPIRE_DUPS_FIRST
 
 # Aliases
 alias c='clear'
