@@ -6,9 +6,10 @@
 ## Contents
 -   **`Brewfile`**: Declares all system-level utilities and GUI applications. Managed by **`brew`**.
 -   **`.tool-versions`**: Declares all language runtimes and development CLIs. Managed by **`asdf`**.
--   **`.config`** Config files for `ghostty`, `oh-my-posh` and `zed`
--   **`.zshrc`** Needs no further introduction.
+-   **`.config`** Config files for `ghostty`, `oh-my-posh`, `zed` and `zsh`
+-   **`.zshrc`, `.zshenv` and `.zprofile`** All things zsh
 -   **`.iex.exs`** For all the Elixir lovers out there!
+-   **`.gitconfig` and `.gitignore.global`** Git stuff :) 
 
 
 ## Setup
