@@ -4,7 +4,7 @@ function path() {
   echo $PATH | tr ':' '\n'
 }
 
-function y() {
+function f() {
     local tmp="$(mktemp -t "yazi-cd.XXX")"
     yazi --cwd-file="$tmp"
     if [ -f "$tmp" ]; then
