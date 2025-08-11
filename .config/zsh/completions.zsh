@@ -9,8 +9,11 @@ source <(op completion zsh)
 source <(supabase completion zsh)
 source <(docker completion zsh)
 
+# Bun completions
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+
 # Carapace BEFORE fzf-tab
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+export CARAPACE_BRIDGES='zsh,bash'
 source <(carapace _carapace)
 
 compinit -C
