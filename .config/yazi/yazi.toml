@@ -1,3 +1,7 @@
+[mgr]
+# Proportional widths: [parent, current, preview] should add up to 8
+ratio = [1, 3, 4]
+
 [opener]
 fx = [
     { run = 'fx "$@"', block = true },
@@ -15,7 +19,7 @@ nvim = [
 [open]
 rules = [
     { name = "*.json",         use = "fx" },
-    { name = "*.{yml,yaml}",   use = "bat" },
+    { name = "*.{yml,yaml}",   use = "fx" },
     { mime = "image/*",        use = "macos_open" },
     { mime = "text/*",         use = "nvim" }, # Fallback for all other textfiles
 ]
