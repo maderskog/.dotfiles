@@ -1,2 +1,3 @@
 .config/zed/prompts/*
 .config/zed/conversations/*
+.config/yazi/yazi.toml-*
