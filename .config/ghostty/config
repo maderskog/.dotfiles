@@ -1,8 +1,9 @@
 font-family = "JetBrainsMonoNL Nerd Font Mono"
-theme = carbonfox
+theme = TokyoNight
 background-opacity = 0.9
 cursor-style = block
 font-size = 18
 window-width = 161
 window-height = 44
 copy-on-select = clipboard
+macos-option-as-alt = left
