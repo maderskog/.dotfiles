@@ -1,5 +1,5 @@
-# asdf Version Manager
-source "$(brew --prefix asdf)/libexec/asdf.sh"
+# mise
+eval "$(mise activate zsh)"
 
 # Go
 export GOPATH=$HOME/go

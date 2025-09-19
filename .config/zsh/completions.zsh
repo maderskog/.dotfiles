@@ -6,7 +6,6 @@ autoload -Uz compinit && compinit
 # Source Completions BEFORE fzf-tab
 source <(kubectl completion zsh)
 source <(op completion zsh)
-source <(supabase completion zsh)
 source <(docker completion zsh)
 
 # Bun completions
