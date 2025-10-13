@@ -23,3 +23,4 @@ export PATH="$PATH:$BUN_INSTALL/bin"
 # Elixir/Erlang
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=$(brew --prefix openssl@3)"
 
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
