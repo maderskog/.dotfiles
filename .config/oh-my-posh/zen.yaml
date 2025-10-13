@@ -55,9 +55,5 @@ blocks:
         foreground: "#FE4A49"
         type: npm
         style: plain
-      - template: "\uf019 {{ .Current }} \uf061 {{ .Latest }} "
-        foreground: "#d780d6"
-        type: upgrade
-        style: plain
 version: 3
 final_space: true
