@@ -6,3 +6,4 @@ source ~/.config/zsh/zshenv/development.zsh
 source ~/.config/zsh/zshenv/fzf.zsh
 source ~/.config/zsh/zshenv/zoxide.zsh
 source ~/.config/zsh/zshenv/environment.zsh
+
