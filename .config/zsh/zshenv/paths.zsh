@@ -18,4 +18,3 @@ path=(
 )
 
 export PATH
-

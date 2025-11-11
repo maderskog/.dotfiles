@@ -10,4 +10,3 @@ zinit snippet OMZP::command-not-found
 zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::dotenv
 zinit snippet OMZP::sbt
-

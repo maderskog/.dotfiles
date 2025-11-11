@@ -24,4 +24,3 @@ source <(fzf --zsh)
 zinit light Aloxaf/fzf-tab
 
 zinit cdreplay -q
-

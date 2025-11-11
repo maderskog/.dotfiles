@@ -11,4 +11,3 @@ export FZF_DEFAULT_OPTS='
 
 export FZF_CTRL_R_OPTS='--sort --exact'
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=numbers --line-range=:500 {}"'
-

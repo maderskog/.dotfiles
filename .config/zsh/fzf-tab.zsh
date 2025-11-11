@@ -36,4 +36,3 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 # Other completion styles
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
-

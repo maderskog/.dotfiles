@@ -8,4 +8,3 @@ export CFLAGS="-I$(brew --prefix zbar)/include ${CFLAGS}"
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-

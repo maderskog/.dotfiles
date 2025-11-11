@@ -11,4 +11,3 @@ alias la="lsd --long --almost-all --classify --group-directories-first"
 alias tree="tree -C -a -I .git"
 alias vi='nvim'
 alias json='fx'
-
