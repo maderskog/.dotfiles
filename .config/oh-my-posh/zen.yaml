@@ -1,59 +1,49 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
 transient_prompt:
-  template: "<d><#009051>\ue285</></d> "
+    template: '<d><#009051></></d> '
 blocks:
-  - type: prompt
-    alignment: left
-    segments:
-      - template: "\ue285"
-        foreground: "#00f900"
-        type: text
-        style: plain
-  - type: rprompt
-    alignment: right
-    segments:
-      - template: "<#ffd500>\uf253</> {{ .FormattedMs }}"
-        type: executiontime
-        style: plain
-      - template: " {{ if ne .Code 0 }}<f><#ff2600>\ueefe </></f><d><#941100>{{ reason .Code }}</></d>{{ end }}"
-        type: status
-        style: plain
-      - properties:
-          style: unique
-        foreground: "#15C2CB"
-        type: path
-        style: plain
-      - properties:
-          branch_icon: "\ue725 "
-          fetch_stash_count: true
-          fetch_status: true
-          fetch_upstream_icon: true
-          fetch_worktree_count: true
-        template: "{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }}<#fffb00> {{ .BranchStatus }}</>{{ end }}{{ if .StashCount }}<#0433ff> \uf097 {{ .StashCount }}</>{{ end }}{{ if .Working.Changed }}<f><#ff9500> \uf044 {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900>\uf046 {{ .Staging.String }}</></f>{{ end }} "
-        foreground: "#ee79d1"
-        type: git
-        style: plain
-      - template: " <#af52de>\ue62d {{ .Full }}</> "
-        type: elixir
-        style: plain
-      - template: "{{ if .Error }}{{ .Error }}{{ else }} {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }} \ue606 {{ .Full }}{{ end }} "
-        foreground: "#FFD43B"
-        type: python
-        style: plain
-      - template: "{{if .Version}}<#F3EFF5>is</> \uf487 {{.Version}} {{end}}"
-        foreground: "#5EADF2"
-        type: project
-        style: plain
-      - properties:
-          fetch_version: true
-        template: "<#F3EFF5>via</> \ue718 {{ .Full }} "
-        foreground: "#44FFD2"
-        type: node
-        style: plain
-      - template: "<#F3EFF5>and</> \ue71e {{.Full}} "
-        foreground: "#FE4A49"
-        type: npm
-        style: plain
-version: 3
+    - type: prompt
+      alignment: left
+      segments:
+        - template: 
+          foreground: '#00f900'
+          type: text
+          style: plain
+    - type: rprompt
+      alignment: right
+      segments:
+        - template: <#ffd500></> {{ .FormattedMs }}
+          type: executiontime
+          style: plain
+        - template: ' {{ if ne .Code 0 }}<f><#ff2600> </></f><d><#941100>{{ reason .Code }}</></d>{{ end }}'
+          type: status
+          style: plain
+        - foreground: '#15C2CB'
+          type: path
+          style: plain
+        - template: '{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }}<#fffb00> {{ .BranchStatus }}</>{{ end }}{{ if .StashCount }}<#0433ff>  {{ .StashCount }}</>{{ end }}{{ if .Working.Changed }}<f><#ff9500>  {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900> {{ .Staging.String }}</></f>{{ end }} '
+          foreground: '#ee79d1'
+          type: git
+          style: plain
+        - template: ' <#af52de> {{ .Full }}</> '
+          type: elixir
+          style: plain
+        - template: '{{ if .Error }}{{ .Error }}{{ else }} {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }}  {{ .Full }}{{ end }} '
+          foreground: '#FFD43B'
+          type: python
+          style: plain
+        - template: '{{if .Version}}<#F3EFF5>is</>  {{.Version}} {{end}}'
+          foreground: '#5EADF2'
+          type: project
+          style: plain
+        - template: '<#F3EFF5>via</>  {{ .Full }} '
+          foreground: '#44FFD2'
+          type: node
+          style: plain
+        - template: '<#F3EFF5>and</>  {{.Full}} '
+          foreground: '#FE4A49'
+          type: npm
+          style: plain
+version: 4
 final_space: true
