@@ -1,5 +1,5 @@
 font-family = "JetBrainsMonoNL Nerd Font Mono"
-theme = Carbonfox
+theme = "Catppuccin Mocha"
 background-opacity = 0.9
 cursor-style = block
 font-size = 18
