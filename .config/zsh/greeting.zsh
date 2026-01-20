@@ -3,5 +3,9 @@ if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
   ghosttime --color ${ghostcolors[$(($RANDOM % ${#ghostcolors[@]} + 1))]}
 fi
 if [[ -n "$(command -v fastfetch)" ]]; then
-  fastfetch
+  if [[ -n "$(command -v lolcat)" ]]; then
+    fastfetch | lolcat
+  else
+    fastfetch
+  fi
 fi
