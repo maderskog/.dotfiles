@@ -59,3 +59,41 @@ function mkcd() {
 function fkill() {
   ps aux | fzf | awk '{print $2}' | xargs kill -9
 }
+
+function secrets() {
+  source ~/.config/zsh/zshenv/secrets.zsh
+}
+
+# Testing functions
+function check-url() {
+    local url=""
+    local wait=5
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --wait)
+                wait="$2"
+                shift 2
+                ;;
+            *)
+                url="$1"
+                shift
+                ;;
+        esac
+    done
+
+    if [[ -z "$url" ]]; then
+        echo "Usage: check_url <url> [--wait <seconds>]" >&2
+        return 1
+    fi
+
+    while true; do
+        local ts="$(date '+%F %T')"
+        if curl -sSfk -o /dev/null "$url"; then
+            echo "$ts SUCCESS: $url"
+        else
+            echo "$ts FAIL:    $url"
+        fi
+        sleep "$wait"
+    done
+}
