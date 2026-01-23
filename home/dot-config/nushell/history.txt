@@ -1,0 +1,10 @@
+ls
+ls | where type == file
+rm report.md
+rm report.pdf
+rm temp_report.html
+cat test.md
+ls
+nu
+ls
+södlk

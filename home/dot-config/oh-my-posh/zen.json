@@ -15,6 +15,11 @@
       "alignment": "left",
       "segments": [
         {
+          "foreground": "#15C2CB",
+          "type": "path",
+          "style": "plain"
+        },
+        {
           "template": "\ue285",
           "foreground": "#00f900",
           "type": "text",
@@ -34,11 +39,6 @@
         {
           "template": " {{ if ne .Code 0 }}<f><#ff2600>\ueefe </></f><d><#941100>{{ reason .Code }}</></d>{{ end }}",
           "type": "status",
-          "style": "plain"
-        },
-        {
-          "foreground": "#15C2CB",
-          "type": "path",
           "style": "plain"
         },
         {

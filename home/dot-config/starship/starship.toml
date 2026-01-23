@@ -1,0 +1,152 @@
+# General Settings
+add_newline = false
+command_timeout = 1000
+palette = "catppuccin_mocha"
+
+# ------------------------------------------------------------------------------
+# LAYOUT
+# ------------------------------------------------------------------------------
+
+# LEFT: Just the directory and the arrow
+format = """
+$directory\
+$character\
+"""
+
+# RIGHT: Time, Status, Git, then all languages
+right_format = """
+$cmd_duration\
+$status\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$elixir\
+$python\
+$nodejs\
+$package\
+$aws\
+$kubernetes\
+"""
+
+# ------------------------------------------------------------------------------
+# SYMBOLS & CHARACTERS
+# ------------------------------------------------------------------------------
+
+[character]
+# Using your OMP arrow symbol \ue285
+success_symbol = "[](bold green)"
+error_symbol = "[](bold red)"
+vicmd_symbol = "[❮](bold yellow)"
+
+[directory]
+style = "bold teal" # Matches your old #15C2CB
+truncation_length = 3
+truncation_symbol = "…/"
+
+# ------------------------------------------------------------------------------
+# RIGHT SIDE MODULES
+# ------------------------------------------------------------------------------
+
+[cmd_duration]
+min_time = 500
+# Coffee cup \uf253 + time, colored yellow (#ffd500)
+format = "[$duration  ](yellow) "
+
+[status]
+disabled = false
+symbol = "✘ "
+format = "[$symbol$status](red) "
+
+# --- GIT ---
+# Blending Omerxx's structure with your pink color scheme
+
+[git_branch]
+symbol = " "
+style = "pink" # Matches your old #ee79d1
+format = '[$symbol$branch(:$remote_branch)]($style) '
+
+[git_status]
+style = "pink"
+# Mimicking the OMP detailed counts
+format = '([$all_status$ahead_behind]($style) )'
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${count}⇣${count}"
+up_to_date = ""
+untracked = "?${count}"
+stashed = " "
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+# --- LANGUAGES ---
+
+[elixir]
+symbol = " "
+style = "mauve" # Matches your old #af52de (Purple)
+format = '[$symbol($version )]($style)'
+
+[python]
+symbol = ""
+style = "yellow" # Matches your old #FFD43B
+# Shows venv if active, else just version
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[nodejs]
+symbol = " "
+style = "green" # Matches your old #44FFD2
+format = '[$symbol($version )]($style)'
+
+[package]
+symbol = " "
+style = "blue" # Matches your old #5EADF2
+format = '[$symbol$version]($style) '
+
+# --- CLOUD (From Omerxx's config) ---
+
+[aws]
+format = '[$symbol(profile: "$profile" )(\(region: $region\) )]($style)'
+disabled = false
+style = 'bold blue'
+symbol = " "
+
+[kubernetes]
+symbol = '☸ '
+disabled = true
+detect_files = ['Dockerfile']
+format = '[$symbol$context( \($namespace\))]($style) '
+
+# ------------------------------------------------------------------------------
+# PALETTE (Omerxx's Catppuccin Mocha)
+# ------------------------------------------------------------------------------
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"

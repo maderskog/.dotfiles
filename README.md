@@ -33,7 +33,7 @@
 3.  **Link the configuration files**:
     ```bash
     cd ~/.dotfiles
-    stow -R .
+    stow home
     ```
 
 4.  **Install All Declared Tools**:

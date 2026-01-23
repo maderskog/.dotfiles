@@ -13,7 +13,7 @@ source <(docker completion zsh)
 
 # Carapace BEFORE fzf-tab
 export CARAPACE_BRIDGES='zsh,bash'
-source <(carapace _carapace)
+source <(carapace _carapace zsh)
 
 compinit -C
 

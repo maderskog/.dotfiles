@@ -1,5 +1,5 @@
 font-family = "JetBrainsMonoNL Nerd Font Mono"
-theme = "Catppuccin Mocha"
+theme = TokyoNight
 background-opacity = 0.9
 cursor-style = block
 font-size = 18
@@ -7,4 +7,3 @@ window-width = 161
 window-height = 44
 copy-on-select = clipboard
 macos-option-as-alt = left
-keybind = shift+enter=text:\x1b\r
