@@ -24,8 +24,7 @@ palette:
 
 var:
   Spacer: "\u00a0"
-  # Arrow: "\uf054"
-  Arrow: "\ue285"
+  Arrow: "\uf054"
   Truncation: "\u22ef"
   Error: "\uf2fe"
   Warning: "\uea6c"
@@ -40,7 +39,8 @@ var:
   GitStaged: "\uf046"
   GitStash: "\uf51e"
   Elixir: "\ue62d"
-  Python: "\ue73c"
+  # Python: "\ue73c"
+  Python: "\ue606"
   Package: "\uf487"
   Svelte: "\ue697"
   Node: "\U000F0399"
@@ -67,7 +67,6 @@ blocks:
         options:
           style: agnoster_short
           max_depth: 3
-          hide_root_location: true
           folder_icon: "{{ .Var.Truncation }}"
 
       - template: "{{ if eq .Code 0 }}<p:Green>{{ .Var.Arrow }}</>{{ else }}<p:Red>{{ .Var.Arrow }}</>{{ end }}"
@@ -130,7 +129,7 @@ blocks:
         options:
           fetch_stash_count: true
 
-      - template: "{{ if .UpstreamIcon }} <p:Magenta1>{{ .UpstreamIcon }}</>{{ end }}"
+      - template: "{{ if .UpstreamIcon }} <p:Magenta1>{{ .UpstreamIcon }} </>{{ end }}"
         type: git
         style: plain
         options:
@@ -180,7 +179,7 @@ blocks:
         type: aws
         style: plain
 
-      - template: '{{if eq "Discharging" .State.String}}  {{ .Icon }}{{ .Percentage }}%{{end}}'
+      - template: " {{ .Icon }}{{ .Percentage }}%"
         type: battery
         style: plain
 
