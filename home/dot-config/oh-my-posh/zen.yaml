@@ -17,15 +17,15 @@ palette:
   Magenta3: "#cc33cc"
   Magenta4: "#b32cb3"
   Magenta5: "#992699"
-  Py1: "#ffff00"
-  Py2: "#ffd700"
-  Py3: "#ffaa00"
+  Yellow1: "#ffff00"
+  Yellow2: "#ffd700"
+  Yellow3: "#ffaa00"
   Elixir: "#a674ff"
 
 var:
   Spacer: "\u00a0"
   # Arrow: "\uf054"
-  Arrow: "\u27eb"
+  Arrow: "\ue285"
   Truncation: "\u22ef"
   Error: "\uf2fe"
   Warning: "\uea6c"
@@ -130,7 +130,7 @@ blocks:
         options:
           fetch_stash_count: true
 
-      - template: "{{ if .UpstreamIcon }} <p:Magenta2>{{ .UpstreamIcon }}</>{{ end }}"
+      - template: "{{ if .UpstreamIcon }} <p:Magenta1>{{ .UpstreamIcon }}</>{{ end }}"
         type: git
         style: plain
         options:
@@ -152,15 +152,15 @@ blocks:
         type: elixir
         style: plain
 
-      - template: " {{ if .Error }}<p:Red>{{ .Var.Warning }} {{ .Error }}</>{{ else }}<p:Py1>{{ .Var.Python }} {{ .Major }}.{{ .Minor }}</>{{ end }}"
+      - template: " {{ if .Error }}<p:Red>{{ .Var.Warning }} {{ .Error }}</>{{ else }}<p:Yellow1>{{ .Var.Python }} {{ .Major }}.{{ .Minor }}</>{{ end }}"
         type: python
         style: plain
 
-      - template: "{{ if .Venv }} <p:Py2>{{ .Venv }}</>{{ end }}"
+      - template: "{{ if .Venv }} <p:Yellow2>{{ .Venv }}</>{{ end }}"
         type: python
         style: plain
 
-      - template: " {{if .Version}}<p:Py3>{{ .Var.Package }} {{.Version}}</>{{end}}"
+      - template: " {{if .Version}}<p:Yellow3>{{ .Var.Package }} {{.Version}}</>{{end}}"
         type: project
         style: plain
 
@@ -178,6 +178,10 @@ blocks:
 
       - template: " <p:Blue>{{ .Var.AWS }} {{.Profile}}{{if .Region}} ({{.Region}}){{end}}</>"
         type: aws
+        style: plain
+
+      - template: '{{if eq "Discharging" .State.String}}  {{ .Icon }}{{ .Percentage }}%{{end}}'
+        type: battery
         style: plain
 
       - template: "{{ .Var.Spacer }}"
