@@ -1,21 +1,16 @@
-# General Settings
+# ------------------------------------------------------------------------------
+# GLOBAL SETTINGS
+# ------------------------------------------------------------------------------
 add_newline = false
 command_timeout = 1000
-palette = "catppuccin_mocha"
+palette = "carbonfox_vibrant"
 
-# ------------------------------------------------------------------------------
-# LAYOUT
-# ------------------------------------------------------------------------------
-
-# LEFT: Just the directory and the arrow
 format = """
 $directory\
 $character\
 """
 
-# RIGHT: Time, Status, Git, then all languages
 right_format = """
-$cmd_duration\
 $status\
 $git_branch\
 $git_commit\
@@ -30,123 +25,120 @@ $kubernetes\
 """
 
 # ------------------------------------------------------------------------------
+# PROFILES (Used by Zsh hook for history)
+# ------------------------------------------------------------------------------
+[profiles]
+transient = "[$directory](56749c) [\uf054](1a854a) "
+
+# ------------------------------------------------------------------------------
 # SYMBOLS & CHARACTERS
 # ------------------------------------------------------------------------------
 
 [character]
-# Using your OMP arrow symbol \ue285
-success_symbol = "[](bold green)"
-error_symbol = "[](bold red)"
-vicmd_symbol = "[❮](bold yellow)"
+success_symbol = "[\uf054](bold green)"
+error_symbol = "[\uf054](bold red)"
+vicmd_symbol = "[\ue7c5](bold yellow)"
 
 [directory]
-style = "bold teal" # Matches your old #15C2CB
-truncation_length = 3
+style = "bold blue"
+truncation_length = 2
 truncation_symbol = "…/"
 
 # ------------------------------------------------------------------------------
 # RIGHT SIDE MODULES
 # ------------------------------------------------------------------------------
 
-[cmd_duration]
-min_time = 500
-# Coffee cup \uf253 + time, colored yellow (#ffd500)
-format = "[$duration  ](yellow) "
-
 [status]
 disabled = false
-symbol = "✘ "
-format = "[$symbol$status](red) "
+symbol = "\U000F02A0 "
+format = "[$symbol](blink red)[$status](bold red) "
 
 # --- GIT ---
-# Blending Omerxx's structure with your pink color scheme
 
 [git_branch]
-symbol = " "
-style = "pink" # Matches your old #ee79d1
-format = '[$symbol$branch(:$remote_branch)]($style) '
+symbol = "\uf418 "
+format = '[$symbol$branch](git_branch) '
 
 [git_status]
-style = "pink"
-# Mimicking the OMP detailed counts
-format = '([$all_status$ahead_behind]($style) )'
-conflicted = "="
+# Layout: [Changes] [Octocat] [Ahead/Behind]
+# Uses Double Quotes "" to fix the escape character bug
+format = "([$conflicted$modified$staged$renamed$deleted$untracked$stashed]($style) [\ueba1](git_remote) [$ahead_behind]($style) )"
+style = "git_remote"
+
+conflicted = "[ \ue727 ](bold red)"
 ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${count}⇣${count}"
 up_to_date = ""
-untracked = "?${count}"
-stashed = " "
-modified = "!${count}"
-staged = "+${count}"
-renamed = "»${count}"
-deleted = "✘${count}"
+
+# Status Counts with Gradient Colors
+modified = "[ \uf044 ${count}](git_modified)" # Step 2
+staged   = "[ \uf046 ${count}](git_staged)"   # Step 3
+renamed  = "[ »${count}](git_staged)"        # Step 3
+stashed  = "[ \uf51e ${count}](git_stash)"    # Step 4
+untracked = "[ ?${count}](git_stash)"        # Step 4
+deleted  = "[ ✘${count}](bold red)"
 
 # --- LANGUAGES ---
 
 [elixir]
-symbol = " "
-style = "mauve" # Matches your old #af52de (Purple)
+symbol = "\ue62d "
+style = "elixir_purple"
 format = '[$symbol($version )]($style)'
 
 [python]
-symbol = ""
-style = "yellow" # Matches your old #FFD43B
-# Shows venv if active, else just version
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = "\ue73c "
+format = '[${symbol}${version}](python_1) [${virtualenv}](python_2) '
 
 [nodejs]
-symbol = " "
-style = "green" # Matches your old #44FFD2
+symbol = "\ue718 "
+style = "blue"
 format = '[$symbol($version )]($style)'
 
 [package]
-symbol = " "
-style = "blue" # Matches your old #5EADF2
+symbol = "\uf487 "
+style = "python_3"
 format = '[$symbol$version]($style) '
 
-# --- CLOUD (From Omerxx's config) ---
+# --- CLOUD ---
 
 [aws]
 format = '[$symbol(profile: "$profile" )(\(region: $region\) )]($style)'
 disabled = false
 style = 'bold blue'
-symbol = " "
+symbol = "\ue7ad "
 
 [kubernetes]
-symbol = '☸ '
+symbol = "\u2388 "
 disabled = true
 detect_files = ['Dockerfile']
 format = '[$symbol$context( \($namespace\))]($style) '
 
 # ------------------------------------------------------------------------------
-# PALETTE (Omerxx's Catppuccin Mocha)
+# PALETTE (Vibrant High Contrast)
 # ------------------------------------------------------------------------------
 
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
+[palettes.carbonfox_vibrant]
+base = "#161616"
+bg = "#161616"
+text = "#f2f4f8"
+white = "#dfdfe0"
+blue = "#78a9ff"
+cyan = "#3ddbd9"
+green = "#25be6a"
+red = "#e94560"
+
+# Custom
+elixir_purple = "#a674ff"
+
+# Python Gradient (Yellows)
+python_1 = "#ffff00" # Max
+python_2 = "#ffd700" # Gold
+python_3 = "#ffaa00" # Amber
+
+# Git Gradient (Magentas)
+git_branch   = "#ff40ff" # Max
+git_remote   = "#e639e6" # Step 1 (Origin/Remote)
+git_modified = "#cc33cc" # Step 2 (Modified)
+git_staged   = "#b32cb3" # Step 3 (Staged)
+git_stash    = "#992699" # Step 4 (Stash)

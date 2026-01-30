@@ -7,11 +7,13 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "theme": "Elixir Theme",
+  "cursor_blink": true,
+  "ui_font_size": 18.0,
+  "theme": "Carbonfox",
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_size": 18,
   "current_line_highlight": "all",
-  "cursor_shape": "block",
+  "cursor_shape": "bar",
   "minimap": { "show": "always" },
   "terminal": {
     "max_scroll_history_lines": 10000,

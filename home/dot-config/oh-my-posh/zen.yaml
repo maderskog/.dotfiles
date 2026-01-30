@@ -1,49 +1,103 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
-transient_prompt:
-    template: '<d><#009051></></d> '
-blocks:
-    - type: prompt
-      alignment: left
-      segments:
-        - template: 
-          foreground: '#00f900'
-          type: text
-          style: plain
-    - type: rprompt
-      alignment: right
-      segments:
-        - template: <#ffd500></> {{ .FormattedMs }}
-          type: executiontime
-          style: plain
-        - template: ' {{ if ne .Code 0 }}<f><#ff2600> </></f><d><#941100>{{ reason .Code }}</></d>{{ end }}'
-          type: status
-          style: plain
-        - foreground: '#15C2CB'
-          type: path
-          style: plain
-        - template: '{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }}<#fffb00> {{ .BranchStatus }}</>{{ end }}{{ if .StashCount }}<#0433ff>  {{ .StashCount }}</>{{ end }}{{ if .Working.Changed }}<f><#ff9500>  {{ .Working.String }}</></f>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <f><#00f900> {{ .Staging.String }}</></f>{{ end }} '
-          foreground: '#ee79d1'
-          type: git
-          style: plain
-        - template: ' <#af52de> {{ .Full }}</> '
-          type: elixir
-          style: plain
-        - template: '{{ if .Error }}{{ .Error }}{{ else }} {{ if .Venv }}<d>{{ .Venv }}</d>{{ end }}  {{ .Full }}{{ end }} '
-          foreground: '#FFD43B'
-          type: python
-          style: plain
-        - template: '{{if .Version}}<#F3EFF5>is</>  {{.Version}} {{end}}'
-          foreground: '#5EADF2'
-          type: project
-          style: plain
-        - template: '<#F3EFF5>via</>  {{ .Full }} '
-          foreground: '#44FFD2'
-          type: node
-          style: plain
-        - template: '<#F3EFF5>and</>  {{.Full}} '
-          foreground: '#FE4A49'
-          type: npm
-          style: plain
 version: 4
 final_space: true
+
+# ------------------------------------------------------------------------------
+# GLOBAL SETTINGS
+# ------------------------------------------------------------------------------
+console_title_template: "{{ .PWD }} | {{ .Shell }}"
+
+# ------------------------------------------------------------------------------
+# TRANSIENT PROMPT
+# ------------------------------------------------------------------------------
+transient_prompt:
+  # Path: No leading space (Start of line)
+  # Arrow: Leading space " \uf054"
+  template: "<#56749c>{{ .PWD }}</> {{ if eq .Code 0 }}<#1a854a>\uf054</>{{ else }}<#942d3d>\uf054</>{{ end }} "
+
+# ------------------------------------------------------------------------------
+# SECONDARY PROMPT
+# ------------------------------------------------------------------------------
+secondary_prompt:
+  template: "<#56749c> > </>"
+  foreground: "#56749c"
+  background: "transparent"
+
+# ------------------------------------------------------------------------------
+# BLOCKS
+# ------------------------------------------------------------------------------
+blocks:
+  - type: prompt
+    alignment: left
+    segments:
+      # 1. PATH (Start of line, NO leading space)
+      - foreground: "#78a9ff"
+        type: path
+        style: plain
+        properties:
+          style: full
+          truncation_length: 2
+          truncation_symbol: ".../"
+
+      # 2. ARROW (Strict: Leading Space)
+      - template: " {{ if eq .Code 0 }}<#25be6a>\uf054</>{{ else }}<#e94560>\uf054</>{{ end }}"
+        type: text
+        style: plain
+
+  - type: rprompt
+    alignment: right
+    segments:
+      # 1. ERROR (Strict: Leading Space)
+      - template: " {{ if ne .Code 0 }}<f><#e94560>\U000F02A0</></f> <#e94560>{{ reason .Code }}</>{{ end }}"
+        type: status
+        style: plain
+
+      # 2. GIT (Strict: Every sub-block has a Leading Space)
+      # Branch: " \uf418 Name"
+      # Status: " \uIcon Count"
+      # Origin: " \uIcon"
+      # Sync:   " Text"
+      - template: " <#ff40ff>\uf418 {{ .HEAD }}</>{{ if gt .Working.Modified 0 }}<#cc33cc> \uf044 {{ .Working.Modified }}</>{{ end }}{{ if gt .Working.Deleted 0 }}<#cc33cc> \u2718 {{ .Working.Deleted }}</>{{ end }}{{ if gt .Working.Untracked 0 }}<#cc33cc> ?{{ .Working.Untracked }}</>{{ end }}{{ if gt .Staging.Modified 0 }}<#b32cb3> \uf046 {{ .Staging.Modified }}</>{{ end }}{{ if gt .Staging.Deleted 0 }}<#b32cb3> \uf046\u2718 {{ .Staging.Deleted }}</>{{ end }}{{ if gt .StashCount 0 }}<#992699> \uf51e {{ .StashCount }}</>{{ end }} <#e639e6>{{ .UpstreamIcon }}</>{{ if .BranchStatus }} <#e639e6>{{ .BranchStatus }}</>{{ end }}"
+        type: git
+        style: plain
+        properties:
+          fetch_status: true
+          fetch_stash_count: true
+          fetch_upstream_icon: true
+
+      # 3. LANGUAGES (Strict: Leading Space for all)
+
+      # Elixir
+      - template: " <#a674ff>\ue62d {{ .Full }}</>"
+        type: elixir
+        style: plain
+
+      # Python
+      - template: " {{ if .Error }}{{ .Error }}{{ else }}<#ffff00>\ue73c {{ .Major }}.{{ .Minor }}</>{{ if .Venv }} <#ffd700>{{ .Venv }}</>{{ end }}{{ end }}"
+        type: python
+        style: plain
+
+      # Project Version
+      - template: " {{if .Version}}<#00f900>\uf487 {{.Version}}</>{{end}}"
+        type: project
+        style: plain
+
+      # Node
+      - template: " <#78a9ff>\ue718 {{ .Full }}</>"
+        type: node
+        style: plain
+      # NPM
+      - template: " <#78a9ff>\ue71e {{.Full}}</>"
+        type: npm
+        style: plain
+
+      # 4. CLOUD (Strict: Leading Space)
+      - template: " <#78a9ff>\ue7ad {{.Profile}}{{if .Region}} ({{.Region}}){{end}}</>"
+        type: aws
+        style: plain
+
+      # 5. SPACER (Final padding for right edge)
+      - template: "<b> </b>"
+        type: text
+        style: plain
