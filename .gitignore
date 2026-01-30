@@ -1,4 +1,5 @@
-.config/zed/prompts/*
-.config/zed/conversations/*
-.config/yazi/yazi.toml-*
-.config/ghostty/*.bak
+home/dot-config/zed/prompts/*
+home/dot-config/zed/conversations/*
+home/dot-config/yazi/yazi.toml-*
+home/dot-config/ghostty/*.bak
+home/dot-config/nushell/*.txt
