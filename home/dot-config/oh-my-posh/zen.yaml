@@ -3,101 +3,111 @@
 version: 4
 final_space: true
 
-# ------------------------------------------------------------------------------
-# GLOBAL SETTINGS
-# ------------------------------------------------------------------------------
+palette:
+  Blue: "#78a9ff"
+  Green: "#25be6a"
+  Red: "#e94560"
+  MutedBlue: "#56749c"
+  MutedGreen: "#1a854a"
+  MutedRed: "#942d3d"
+  Git1: "#ff40ff"
+  Git2: "#e639e6"
+  Git3: "#cc33cc"
+  Git4: "#b32cb3"
+  Git5: "#992699"
+  Py1: "#ffff00"
+  Py2: "#ffd700"
+  Py3: "#ffaa00"
+  Elixir: "#a674ff"
+
+var:
+  Spacer: "\u00a0"
+  Arrow: "\uf054"
+  ErrorGhost: "\U000F02A0"
+  Truncation: "\u22ef"
+  GitBranch: "\uf418"
+  GitTag: "\uf02b"
+  GitWarning: "\u26a0"
+  GitAhead: "\u21e1"
+  GitBehind: "\u21e3"
+  GitModified: "\uf044"
+  GitDeleted: "\u2718"
+  GitUntracked: "?"
+  GitStaged: "\uf046"
+  GitStash: "\uf51e"
+  ElixirIcon: "\ue62d"
+  PythonIcon: "\ue73c"
+  PackageIcon: "\uf487"
+  NodeIcon: "\ue718"
+  NpmIcon: "\ue71e"
+  AWSIcon: "\ue7ad"
+
 console_title_template: "{{ .PWD }} | {{ .Shell }}"
 
-# ------------------------------------------------------------------------------
-# TRANSIENT PROMPT
-# ------------------------------------------------------------------------------
 transient_prompt:
-  # Path: No leading space (Start of line)
-  # Arrow: Leading space " \uf054"
-  template: "<#56749c>{{ .PWD }}</> {{ if eq .Code 0 }}<#1a854a>\uf054</>{{ else }}<#942d3d>\uf054</>{{ end }} "
+  template: "<p:MutedBlue>{{ .PWD }}</> {{ if eq .Code 0 }}<p:MutedGreen>{{ .Var.Arrow }}</>{{ else }}<p:MutedRed>{{ .Var.Arrow }}</>{{ end }} "
 
-# ------------------------------------------------------------------------------
-# SECONDARY PROMPT
-# ------------------------------------------------------------------------------
 secondary_prompt:
-  template: "<#56749c> > </>"
-  foreground: "#56749c"
+  template: "<p:MutedBlue> > </>"
+  foreground: "p:MutedBlue"
   background: "transparent"
 
-# ------------------------------------------------------------------------------
-# BLOCKS
-# ------------------------------------------------------------------------------
 blocks:
   - type: prompt
     alignment: left
     segments:
-      # 1. PATH (Start of line, NO leading space)
-      - foreground: "#78a9ff"
+      - foreground: "p:Blue"
         type: path
         style: plain
-        properties:
-          style: full
-          truncation_length: 2
-          truncation_symbol: ".../"
+        options:
+          style: agnoster_short
+          max_depth: 3
+          hide_root_location: true
+          folder_icon: "{{ .Var.Truncation }}"
 
-      # 2. ARROW (Strict: Leading Space)
-      - template: " {{ if eq .Code 0 }}<#25be6a>\uf054</>{{ else }}<#e94560>\uf054</>{{ end }}"
+      - template: " {{ if eq .Code 0 }}<p:Green>{{ .Var.Arrow }}</>{{ else }}<p:Red>{{ .Var.Arrow }}</>{{ end }}"
         type: text
         style: plain
 
   - type: rprompt
     alignment: right
     segments:
-      # 1. ERROR (Strict: Leading Space)
-      - template: " {{ if ne .Code 0 }}<f><#e94560>\U000F02A0</></f> <#e94560>{{ reason .Code }}</>{{ end }}"
+      - template: " {{ if ne .Code 0 }}<f><p:Red>{{ .Var.ErrorGhost }}</></f> <p:Red>{{ reason .Code }}</>{{ end }}"
         type: status
         style: plain
 
-      # 2. GIT (Strict: Every sub-block has a Leading Space)
-      # Branch: " \uf418 Name"
-      # Status: " \uIcon Count"
-      # Origin: " \uIcon"
-      # Sync:   " Text"
-      - template: " <#ff40ff>\uf418 {{ .HEAD }}</>{{ if gt .Working.Modified 0 }}<#cc33cc> \uf044 {{ .Working.Modified }}</>{{ end }}{{ if gt .Working.Deleted 0 }}<#cc33cc> \u2718 {{ .Working.Deleted }}</>{{ end }}{{ if gt .Working.Untracked 0 }}<#cc33cc> ?{{ .Working.Untracked }}</>{{ end }}{{ if gt .Staging.Modified 0 }}<#b32cb3> \uf046 {{ .Staging.Modified }}</>{{ end }}{{ if gt .Staging.Deleted 0 }}<#b32cb3> \uf046\u2718 {{ .Staging.Deleted }}</>{{ end }}{{ if gt .StashCount 0 }}<#992699> \uf51e {{ .StashCount }}</>{{ end }} <#e639e6>{{ .UpstreamIcon }}</>{{ if .BranchStatus }} <#e639e6>{{ .BranchStatus }}</>{{ end }}"
+      - template: " <p:Git1>{{ .Var.GitBranch }} {{ .HEAD }}</>{{ if gt .Working.Modified 0 }}<p:Git3> {{ .Var.GitModified }} {{ .Working.Modified }}</>{{ end }}{{ if gt .Working.Deleted 0 }}<p:Git3> {{ .Var.GitDeleted }} {{ .Working.Deleted }}</>{{ end }}{{ if gt .Working.Untracked 0 }}<p:Git3> {{ .Var.GitUntracked }}{{ .Working.Untracked }}</>{{ end }}{{ if gt .Staging.Modified 0 }}<p:Git4> {{ .Var.GitStaged }} {{ .Staging.Modified }}</>{{ end }}{{ if gt .Staging.Deleted 0 }}<p:Git4> {{ .Var.GitStaged }}{{ .Var.GitDeleted }} {{ .Staging.Deleted }}</>{{ end }}{{ if gt .StashCount 0 }}<p:Git5> {{ .Var.GitStash }} {{ .StashCount }}</>{{ end }} <p:Git2>{{ .UpstreamIcon }}</>{{ if .BranchStatus }} <p:Git2>{{ .BranchStatus }}</>{{ end }}"
         type: git
         style: plain
-        properties:
+        options:
           fetch_status: true
           fetch_stash_count: true
           fetch_upstream_icon: true
 
-      # 3. LANGUAGES (Strict: Leading Space for all)
-
-      # Elixir
-      - template: " <#a674ff>\ue62d {{ .Full }}</>"
+      - template: " <p:Elixir>{{ .Var.ElixirIcon }} {{ .Full }}</>"
         type: elixir
         style: plain
 
-      # Python
-      - template: " {{ if .Error }}{{ .Error }}{{ else }}<#ffff00>\ue73c {{ .Major }}.{{ .Minor }}</>{{ if .Venv }} <#ffd700>{{ .Venv }}</>{{ end }}{{ end }}"
+      - template: " {{ if .Error }}{{ .Error }}{{ else }}<p:Py1>{{ .Var.PythonIcon }} {{ .Major }}.{{ .Minor }}</>{{ if .Venv }} <p:Py2>{{ .Venv }}</>{{ end }}{{ end }}"
         type: python
         style: plain
 
-      # Project Version
-      - template: " {{if .Version}}<#00f900>\uf487 {{.Version}}</>{{end}}"
+      - template: " {{if .Version}}<p:Py3>{{ .Var.PackageIcon }} {{.Version}}</>{{end}}"
         type: project
         style: plain
 
-      # Node
-      - template: " <#78a9ff>\ue718 {{ .Full }}</>"
+      - template: " <p:Blue>{{ .Var.NodeIcon }} {{ .Full }}</>"
         type: node
         style: plain
-      # NPM
-      - template: " <#78a9ff>\ue71e {{.Full}}</>"
+
+      - template: " <p:Blue>{{ .Var.NpmIcon }} {{ .Full }}</>"
         type: npm
         style: plain
 
-      # 4. CLOUD (Strict: Leading Space)
-      - template: " <#78a9ff>\ue7ad {{.Profile}}{{if .Region}} ({{.Region}}){{end}}</>"
+      - template: " <p:Blue>{{ .Var.AWSIcon }} {{.Profile}}{{if .Region}} ({{.Region}}){{end}}</>"
         type: aws
         style: plain
 
-      # 5. SPACER (Final padding for right edge)
-      - template: "<b> </b>"
+      - template: "{{ .Var.Spacer }}"
         type: text
         style: plain
