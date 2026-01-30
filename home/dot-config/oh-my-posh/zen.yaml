@@ -7,6 +7,7 @@ palette:
   Blue: "#78a9ff"
   Green: "#25be6a"
   Red: "#e94560"
+  Time: "#e09142"
   MutedBlue: "#56749c"
   MutedGreen: "#1a854a"
   MutedRed: "#942d3d"
@@ -23,11 +24,12 @@ palette:
 var:
   Spacer: "\u00a0"
   Arrow: "\uf054"
-  ErrorGhost: "\U000F02A0"
   Truncation: "\u22ef"
-  GitBranch: "\uf418"
-  GitTag: "\uf02b"
-  GitWarning: "\u26a0"
+  Error: "\U000F02A0"
+  Warning: "\u26a0"
+  Execution: "\uf252"
+  Branch: "\uf418"
+  Tag: "\uf02b"
   GitAhead: "\u21e1"
   GitBehind: "\u21e3"
   GitModified: "\uf044"
@@ -35,11 +37,11 @@ var:
   GitUntracked: "?"
   GitStaged: "\uf046"
   GitStash: "\uf51e"
-  ElixirIcon: "\ue62d"
-  PythonIcon: "\ue73c"
-  PackageIcon: "\uf487"
-  NodeIcon: "\ue718"
-  NpmIcon: "\ue71e"
+  Elixir: "\ue62d"
+  Python: "\ue73c"
+  Package: "\uf487"
+  Node: "\ue718"
+  Npm: "\ue71e"
   AWSIcon: "\ue7ad"
 
 console_title_template: "{{ .PWD }} | {{ .Shell }}"
@@ -65,46 +67,109 @@ blocks:
           hide_root_location: true
           folder_icon: "{{ .Var.Truncation }}"
 
-      - template: " {{ if eq .Code 0 }}<p:Green>{{ .Var.Arrow }}</>{{ else }}<p:Red>{{ .Var.Arrow }}</>{{ end }}"
+      - template: "{{ if eq .Code 0 }}<p:Green>{{ .Var.Arrow }}</>{{ else }}<p:Red>{{ .Var.Arrow }}</>{{ end }}"
         type: text
         style: plain
 
   - type: rprompt
     alignment: right
     segments:
-      - template: " {{ if ne .Code 0 }}<f><p:Red>{{ .Var.ErrorGhost }}</></f> <p:Red>{{ reason .Code }}</>{{ end }}"
+      - template: "{{ if ne .Code 0 }}<f><p:Red>{{ .Var.Error }}</></f> <p:Red>{{ reason .Code }}</>{{ end }}"
         type: status
         style: plain
 
-      - template: " <p:Git1>{{ .Var.GitBranch }} {{ .HEAD }}</>{{ if gt .Working.Modified 0 }}<p:Git3> {{ .Var.GitModified }} {{ .Working.Modified }}</>{{ end }}{{ if gt .Working.Deleted 0 }}<p:Git3> {{ .Var.GitDeleted }} {{ .Working.Deleted }}</>{{ end }}{{ if gt .Working.Untracked 0 }}<p:Git3> {{ .Var.GitUntracked }}{{ .Working.Untracked }}</>{{ end }}{{ if gt .Staging.Modified 0 }}<p:Git4> {{ .Var.GitStaged }} {{ .Staging.Modified }}</>{{ end }}{{ if gt .Staging.Deleted 0 }}<p:Git4> {{ .Var.GitStaged }}{{ .Var.GitDeleted }} {{ .Staging.Deleted }}</>{{ end }}{{ if gt .StashCount 0 }}<p:Git5> {{ .Var.GitStash }} {{ .StashCount }}</>{{ end }} <p:Git2>{{ .UpstreamIcon }}</>{{ if .BranchStatus }} <p:Git2>{{ .BranchStatus }}</>{{ end }}"
+      - template: " <p:Time>{{ .Var.Execution }} {{ .FormattedMs }}</>"
+        type: executiontime
+        style: plain
+        options:
+          threshold: 1000
+          style: "austin"
+
+      - template: " <p:Git1>{{ .Var.Branch }} {{ .HEAD }}</>"
         type: git
         style: plain
         options:
           fetch_status: true
+
+      - template: "{{ if gt .Working.Modified 0 }} <p:Git3>{{ .Var.GitModified }}{{ .Working.Modified }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Working.Deleted 0 }} <p:Git3>{{ .Var.GitDeleted }}{{ .Working.Deleted }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Working.Untracked 0 }} <p:Git3>{{ .Var.GitUntracked }}{{ .Working.Untracked }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Staging.Modified 0 }} <p:Git4>{{ .Var.GitStaged }}{{ .Staging.Modified }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Staging.Deleted 0 }} <p:Git4>{{ .Var.GitStaged }}{{ .Var.GitDeleted }} {{ .Staging.Deleted }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .StashCount 0 }} <p:Git5>{{ .Var.GitStash }}{{ .StashCount }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
           fetch_stash_count: true
+
+      - template: "{{ if .UpstreamIcon }} <p:Git2>{{ .UpstreamIcon }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
           fetch_upstream_icon: true
 
-      - template: " <p:Elixir>{{ .Var.ElixirIcon }} {{ .Full }}</>"
+      - template: "{{ if gt .Ahead 0 }} <p:Git2>{{ .Var.GitAhead }}{{ .Ahead }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Behind 0 }} <p:Git3>{{ .Var.GitBehind }}{{ .Behind }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: " <p:Elixir>{{ .Var.Elixir }} {{ .Full }}</>"
         type: elixir
         style: plain
 
-      - template: " {{ if .Error }}{{ .Error }}{{ else }}<p:Py1>{{ .Var.PythonIcon }} {{ .Major }}.{{ .Minor }}</>{{ if .Venv }} <p:Py2>{{ .Venv }}</>{{ end }}{{ end }}"
+      - template: " {{ if .Error }}<p:Red>{{ .Var.Warning }} {{ .Error }}</>{{ else }}<p:Py1>{{ .Var.Python }} {{ .Major }}.{{ .Minor }}</>{{ end }}"
         type: python
         style: plain
 
-      - template: " {{if .Version}}<p:Py3>{{ .Var.PackageIcon }} {{.Version}}</>{{end}}"
+      - template: "{{ if .Venv }} <p:Py2>{{ .Venv }}</>{{ end }}"
+        type: python
+        style: plain
+
+      - template: " {{if .Version}}<p:Py3>{{ .Var.Package }} {{.Version}}</>{{end}}"
         type: project
         style: plain
 
-      - template: " <p:Blue>{{ .Var.NodeIcon }} {{ .Full }}</>"
+      - template: " <p:Blue>{{ .Var.Node }} {{ .Full }}</>"
         type: node
         style: plain
 
-      - template: " <p:Blue>{{ .Var.NpmIcon }} {{ .Full }}</>"
+      - template: " <p:Blue>{{ .Var.Npm }} {{ .Full }}</>"
         type: npm
         style: plain
 
-      - template: " <p:Blue>{{ .Var.AWSIcon }} {{.Profile}}{{if .Region}} ({{.Region}}){{end}}</>"
+      - template: " <p:Blue>{{ .Var.AWS }} {{.Profile}}{{if .Region}} ({{.Region}}){{end}}</>"
         type: aws
         style: plain
 
