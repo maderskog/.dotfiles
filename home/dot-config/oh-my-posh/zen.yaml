@@ -7,15 +7,16 @@ palette:
   Blue: "#78a9ff"
   Green: "#25be6a"
   Red: "#e94560"
+  BrightRed: "#ff2600"
   Time: "#e09142"
   MutedBlue: "#56749c"
   MutedGreen: "#1a854a"
   MutedRed: "#942d3d"
-  Git1: "#ff40ff"
-  Git2: "#e639e6"
-  Git3: "#cc33cc"
-  Git4: "#b32cb3"
-  Git5: "#992699"
+  Magenta1: "#ff40ff"
+  Magenta2: "#e639e6"
+  Magenta3: "#cc33cc"
+  Magenta4: "#b32cb3"
+  Magenta5: "#992699"
   Py1: "#ffff00"
   Py2: "#ffd700"
   Py3: "#ffaa00"
@@ -23,12 +24,13 @@ palette:
 
 var:
   Spacer: "\u00a0"
-  Arrow: "\uf054"
+  # Arrow: "\uf054"
+  Arrow: "\u27eb"
   Truncation: "\u22ef"
-  Error: "\U000F02A0"
-  Warning: "\u26a0"
+  Error: "\uf2fe"
+  Warning: "\uea6c"
   Execution: "\uf252"
-  Branch: "\uf418"
+  Git: "\ue702"
   Tag: "\uf02b"
   GitAhead: "\u21e1"
   GitBehind: "\u21e3"
@@ -40,8 +42,9 @@ var:
   Elixir: "\ue62d"
   Python: "\ue73c"
   Package: "\uf487"
-  Node: "\ue718"
-  Npm: "\ue71e"
+  Svelte: "\ue697"
+  Node: "\U000F0399"
+  Npm: "\ue616"
   AWSIcon: "\ue7ad"
 
 console_title_template: "{{ .PWD }} | {{ .Shell }}"
@@ -85,61 +88,61 @@ blocks:
           threshold: 1000
           style: "austin"
 
-      - template: " <p:Git1>{{ .Var.Branch }} {{ .HEAD }}</>"
+      - template: " <p:Magenta1>{{ .Var.Git }} {{ .HEAD }}</>"
         type: git
         style: plain
         options:
           fetch_status: true
 
-      - template: "{{ if gt .Working.Modified 0 }} <p:Git3>{{ .Var.GitModified }}{{ .Working.Modified }}</>{{ end }}"
+      - template: "{{ if gt .Working.Modified 0 }} <p:Magenta3>{{ .Var.GitModified }}{{ .Working.Modified }}</>{{ end }}"
         type: git
         style: plain
         options:
           fetch_status: true
 
-      - template: "{{ if gt .Working.Deleted 0 }} <p:Git3>{{ .Var.GitDeleted }}{{ .Working.Deleted }}</>{{ end }}"
+      - template: "{{ if gt .Working.Deleted 0 }} <p:Magenta3>{{ .Var.GitDeleted }}{{ .Working.Deleted }}</>{{ end }}"
         type: git
         style: plain
         options:
           fetch_status: true
 
-      - template: "{{ if gt .Working.Untracked 0 }} <p:Git3>{{ .Var.GitUntracked }}{{ .Working.Untracked }}</>{{ end }}"
+      - template: "{{ if gt .Working.Untracked 0 }} <p:Magenta3>{{ .Var.GitUntracked }}{{ .Working.Untracked }}</>{{ end }}"
         type: git
         style: plain
         options:
           fetch_status: true
 
-      - template: "{{ if gt .Staging.Modified 0 }} <p:Git4>{{ .Var.GitStaged }}{{ .Staging.Modified }}</>{{ end }}"
+      - template: "{{ if gt .Staging.Modified 0 }} <p:Magenta4>{{ .Var.GitStaged }}{{ .Staging.Modified }}</>{{ end }}"
         type: git
         style: plain
         options:
           fetch_status: true
 
-      - template: "{{ if gt .Staging.Deleted 0 }} <p:Git4>{{ .Var.GitStaged }}{{ .Var.GitDeleted }} {{ .Staging.Deleted }}</>{{ end }}"
+      - template: "{{ if gt .Staging.Deleted 0 }} <p:Magenta4>{{ .Var.GitStaged }}{{ .Var.GitDeleted }} {{ .Staging.Deleted }}</>{{ end }}"
         type: git
         style: plain
         options:
           fetch_status: true
 
-      - template: "{{ if gt .StashCount 0 }} <p:Git5>{{ .Var.GitStash }}{{ .StashCount }}</>{{ end }}"
+      - template: "{{ if gt .StashCount 0 }} <p:Magenta5>{{ .Var.GitStash }}{{ .StashCount }}</>{{ end }}"
         type: git
         style: plain
         options:
           fetch_stash_count: true
 
-      - template: "{{ if .UpstreamIcon }} <p:Git2>{{ .UpstreamIcon }}</>{{ end }}"
+      - template: "{{ if .UpstreamIcon }} <p:Magenta2>{{ .UpstreamIcon }}</>{{ end }}"
         type: git
         style: plain
         options:
           fetch_upstream_icon: true
 
-      - template: "{{ if gt .Ahead 0 }} <p:Git2>{{ .Var.GitAhead }}{{ .Ahead }}</>{{ end }}"
+      - template: "{{ if gt .Ahead 0 }} <p:Magenta2>{{ .Var.GitAhead }}{{ .Ahead }}</>{{ end }}"
         type: git
         style: plain
         options:
           fetch_status: true
 
-      - template: "{{ if gt .Behind 0 }} <p:Git3>{{ .Var.GitBehind }}{{ .Behind }}</>{{ end }}"
+      - template: "{{ if gt .Behind 0 }} <p:Magenta3>{{ .Var.GitBehind }}{{ .Behind }}</>{{ end }}"
         type: git
         style: plain
         options:
@@ -167,6 +170,10 @@ blocks:
 
       - template: " <p:Blue>{{ .Var.Npm }} {{ .Full }}</>"
         type: npm
+        style: plain
+
+      - template: " <p:BrightRed>{{ .Var.Svelte }} {{ .Full }} "
+        type: svelte
         style: plain
 
       - template: " <p:Blue>{{ .Var.AWS }} {{.Profile}}{{if .Region}} ({{.Region}}){{end}}</>"
