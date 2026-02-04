@@ -1,7 +1,11 @@
 font-family = "JetBrainsMonoNL Nerd Font Mono"
 theme = "Catppuccin Mocha"
 background-opacity = 0.9
-cursor-style = block
+cursor-style = bar
+cursor-style-blink = true
+cursor-color = #00fdff
+adjust-cursor-thickness = 3
+adjust-icon-height = 50%
 font-size = 18
 window-width = 161
 window-height = 44
