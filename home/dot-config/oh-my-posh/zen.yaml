@@ -179,10 +179,7 @@ blocks:
         type: aws
         style: plain
 
-      - template: " {{ .Icon }}{{ .Percentage }}%"
-        type: battery
-        style: plain
-
       - template: "{{ .Var.Spacer }}"
         type: text
         style: plain
+
