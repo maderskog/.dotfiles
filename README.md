@@ -42,8 +42,6 @@
     # Install all applications and tools from the Brewfile
     brew bundle install
     
-    # Install all language/runtime versions from .tool-versions
-    asdf install
     ```
 
 Your machine should now match the state declared in this repository.
@@ -85,55 +83,3 @@ Your machine should now match the state declared in this repository.
     git add Brewfile
     git commit -m "refactor: Remove unused-tool"
     ```
-
-### Add a new `asdf` tool
-
-1.  **Find and add the plugin**:
-    ```bash
-    asdf plugin list all | grep "<new-tool>"
-    asdf plugin add <correct-plugin-name>
-    ```
-
-2.  **Update `.tool-versions`**:
-    Edit `~/.dotfiles/.tool-versions` and add a new line, pinning it to a specific version.
-    ```
-    # Find the latest version
-    asdf latest <correct-plugin-name>
-    
-    # Add to .tool-versions file
-    <correct-plugin-name> <version>
-    ```
-
-3.  **Install the tool**:
-    ```bash
-    asdf install <correct-plugin-name>
-    ```
-
-4.  **Commit the change**:
-    ```bash
-    git add .tool-versions
-    git commit -m "feat: Add new-tool-name v1.2.3"
-    ```
-
-### Remove an `asdf` tool
-
-1.  **Edit `.tool-versions`**:
-    Open `~/.dotfiles/.tool-versions` and delete the line(s) for the tool.
-
-2.  **Uninstall the specific versions**:
-    ```bash
-    asdf list <tool-name> # See which versions are installed
-    asdf uninstall <tool-name> <version-to-remove>
-    ```
-
-3.  **Remove the Plugin**:
-    ```bash
-    asdf plugin remove <tool-name>
-    ```
-
-4.  **Commit the change**:
-    ```bash
-    git add .tool-versions
-    git commit -m "refactor: Remove unused-asdf-tool"
-    ```
-
