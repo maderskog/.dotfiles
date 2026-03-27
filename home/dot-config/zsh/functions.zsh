@@ -1,18 +1,42 @@
 # Functions Configuration
 
-# k9s wrapper: automatically switches to a red danger skin when the
-# active kubectl context contains "prod" (case-insensitive).
+# k9s wrapper: automatically applies the red prod-danger skin to any
+# cluster config whose path contains "prod" (case-insensitive).
+# This covers both the initial launch context AND switching contexts
+# inside k9s, since k9s reads per-cluster configs on context switch.
 function k9s() {
+    local k9s_dir="$HOME/.config/k9s"
+    local k9s_config="$k9s_dir/config.yaml"
+
+    # Set global skin based on current kubectl context
     local ctx
     ctx="$(command kubectl config current-context 2>/dev/null)"
-
-    local k9s_config="$HOME/.config/k9s/config.yaml"
-
     if [[ "${ctx:l}" == *prod* ]]; then
         sed -i '' 's/skin: .*/skin: prod-danger/' "$k9s_config"
     else
         sed -i '' 's/skin: .*/skin: transparant/' "$k9s_config"
     fi
+
+    # Inject skin overrides into every per-cluster config so that
+    # switching contexts inside k9s also triggers the right skin.
+    local cluster_cfg
+    for cluster_cfg in "$k9s_dir"/clusters/*/*/config.yaml(N); do
+        local lower_path="${cluster_cfg:l}"
+        if [[ "$lower_path" == *prod* ]]; then
+            # Add skin if missing, or update if present
+            if grep -q '^\s*skin:' "$cluster_cfg" 2>/dev/null; then
+                sed -i '' 's/^\(\s*\)skin: .*/\1skin: prod-danger/' "$cluster_cfg"
+            else
+                sed -i '' '/^k9s:$/a\
+\  skin: prod-danger' "$cluster_cfg"
+            fi
+        else
+            # Remove any leftover skin override for non-prod (let global apply)
+            if grep -q '^\s*skin:' "$cluster_cfg" 2>/dev/null; then
+                sed -i '' '/^\s*skin: .*/d' "$cluster_cfg"
+            fi
+        fi
+    done
 
     command k9s "$@"
 }
