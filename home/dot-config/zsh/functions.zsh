@@ -31,9 +31,12 @@ function k9s() {
 \  skin: prod-danger' "$cluster_cfg"
             fi
         else
-            # Remove any leftover skin override for non-prod (let global apply)
+            # Explicitly set default skin so switching from prod resets the theme
             if grep -q '^\s*skin:' "$cluster_cfg" 2>/dev/null; then
-                sed -i '' '/^\s*skin: .*/d' "$cluster_cfg"
+                sed -i '' 's/^\(\s*\)skin: .*/\1skin: transparant/' "$cluster_cfg"
+            else
+                sed -i '' '/^k9s:$/a\
+\  skin: transparant' "$cluster_cfg"
             fi
         fi
     done
