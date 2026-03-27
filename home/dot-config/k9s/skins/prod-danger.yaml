@@ -1,0 +1,100 @@
+# =============================================================================
+# Prod Danger Skin for K9s
+# A high-visibility red theme to remind you that you're in production!
+# Optimized for transparent terminals
+# =============================================================================
+
+foreground: &foreground "#f2f4f8"
+background: &background "default"
+current_line: &current_line "#2a2a2a"
+selection: &selection "#3a1a1a"
+comment: &comment "#7b7c7e"
+red: &red "#ff4444"
+dark_red: &dark_red "#cc2222"
+bright_red: &bright_red "#ff6666"
+orange: &orange "#ff8c00"
+yellow: &yellow "#ffcc00"
+white: &white "#ffffff"
+muted: &muted "#888888"
+
+k9s:
+  body:
+    fgColor: *foreground
+    bgColor: *background
+    logoColor: *red
+  prompt:
+    fgColor: *foreground
+    bgColor: *background
+    suggestColor: *orange
+  info:
+    fgColor: *red
+    sectionColor: *foreground
+  dialog:
+    fgColor: *foreground
+    bgColor: *background
+    buttonFgColor: *white
+    buttonBgColor: *dark_red
+    buttonFocusFgColor: *white
+    buttonFocusBgColor: *red
+    labelFgColor: *orange
+    fieldFgColor: *foreground
+  frame:
+    border:
+      fgColor: *red
+      focusColor: *bright_red
+    menu:
+      fgColor: *foreground
+      keyColor: *red
+      numKeyColor: *red
+    crumbs:
+      fgColor: *white
+      bgColor: *dark_red
+      activeColor: *red
+    status:
+      newColor: *orange
+      modifyColor: *yellow
+      addColor: *orange
+      errorColor: *bright_red
+      highlightColor: *yellow
+      killColor: *comment
+      completedColor: *comment
+    title:
+      fgColor: *foreground
+      bgColor: *background
+      highlightColor: *red
+      counterColor: *red
+      filterColor: *orange
+  views:
+    charts:
+      bgColor: *background
+      defaultDialColors:
+        - *red
+        - *dark_red
+      defaultChartColors:
+        - *red
+        - *dark_red
+    table:
+      fgColor: *foreground
+      bgColor: *background
+      header:
+        fgColor: *white
+        bgColor: *dark_red
+        sorterColor: *yellow
+    xray:
+      fgColor: *foreground
+      bgColor: *background
+      cursorColor: *current_line
+      graphicColor: *red
+      showIcons: false
+    yaml:
+      keyColor: *red
+      colonColor: *orange
+      valueColor: *foreground
+    logs:
+      fgColor: *foreground
+      bgColor: *background
+      indicator:
+        fgColor: *red
+        bgColor: *background
+        toggleOnColor: *orange
+        toggleOffColor: *comment

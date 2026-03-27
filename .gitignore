@@ -3,3 +3,8 @@ home/dot-config/zed/conversations/*
 home/dot-config/yazi/yazi.toml-*
 home/dot-config/ghostty/*.bak
 home/dot-config/nushell/*.txt
+home/dot-config/k9s/clusters/
+home/dot-config/k9s/benchmarks/
+home/dot-config/k9s/screen-dumps/
+
+*.log

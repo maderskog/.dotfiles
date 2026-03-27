@@ -1,5 +1,22 @@
 # Functions Configuration
 
+# k9s wrapper: automatically switches to a red danger skin when the
+# active kubectl context contains "prod" (case-insensitive).
+function k9s() {
+    local ctx
+    ctx="$(command kubectl config current-context 2>/dev/null)"
+
+    local k9s_config="$HOME/.config/k9s/config.yaml"
+
+    if [[ "${ctx:l}" == *prod* ]]; then
+        sed -i '' 's/skin: .*/skin: prod-danger/' "$k9s_config"
+    else
+        sed -i '' 's/skin: .*/skin: transparant/' "$k9s_config"
+    fi
+
+    command k9s "$@"
+}
+
 function path() {
   echo $PATH | tr ':' '\n'
 }
@@ -12,6 +29,29 @@ function f() {
             z "$(cat -- "$tmp")"
         fi
         rm -f -- "$tmp"
+    fi
+}
+
+function zj() {
+    local active_sessions=$(zellij list-sessions -n 2>/dev/null)
+
+    local count=$(echo "$active_sessions" | grep -v "^$" | wc -l)
+
+    if [[ $count -eq 0 ]]; then
+        echo "No active sessions. Starting 'main'..."
+        zellij -s main
+
+    elif [[ $count -eq 1 ]]; then
+        local session_name=$(echo "$active_sessions" | awk '{print $1}')
+        zellij attach "$session_name"
+
+    else
+        local choice=$(echo "$active_sessions" | fzf --prompt="Select Session: " --header="Multiple sessions found")
+
+        if [[ -n "$choice" ]]; then
+            local session_name=$(echo "$choice" | awk '{print $1}')
+            zellij attach "$session_name"
+        fi
     fi
 }
 
@@ -64,7 +104,20 @@ function secrets() {
   source ~/.config/zsh/zshenv/secrets.zsh
 }
 
-# Testing functions
+function brew-history() {
+    local LOG_DIR="$HOME/brew/logs"
+
+    if [[ -z "$1" ]]; then
+        echo "Usage: brew-history <search_term>"
+        return 1
+    fi
+
+    rg -i "$1" "$LOG_DIR" --sort path
+}
+
+function ghost() {
+    ghosttime --no-focus-pause --color ${ghostcolors[$(($RANDOM % ${#ghostcolors[@]} + 1))]}
+}
 function check-url() {
     local url=""
     local wait=5
