@@ -13,7 +13,7 @@ window-padding-x = 15
 window-padding-y = 15
 copy-on-select = clipboard
 macos-option-as-alt = left
-keybind = shift+enter=text:\x1b\r
+keybind = shift+space=text:\x1b\x20
 
 # Create new splits
 keybind = cmd+shift+h=new_split:left
@@ -34,4 +34,3 @@ keybind = cmd+alt+k=goto_split:up
 keybind = cmd+alt+up=goto_split:up
 keybind = cmd+alt+l=goto_split:right
 keybind = cmd+alt+right=goto_split:right
-
