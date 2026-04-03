@@ -8,5 +8,6 @@ source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/keybindings.zsh
 source ~/.config/zsh/zoxide.zsh
 source ~/.config/zsh/wt.zsh
+source ~/.config/zsh/kiro.zsh
 source ~/.config/zsh/oh-my-posh.zsh
 source ~/.config/zsh/greeting.zsh
