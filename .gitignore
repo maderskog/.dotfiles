@@ -17,6 +17,9 @@ home/dot-config/k9s/clusters/
 home/dot-config/k9s/benchmarks/
 home/dot-config/k9s/screen-dumps/
 
+# Tmux — plugins are managed by TPM at runtime
+home/dot-config/tmux/plugins/
+
 # Television — Python bytecode
 home/dot-config/television/scripts/__pycache__/
 
