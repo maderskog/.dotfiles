@@ -2,84 +2,101 @@
 
 > These are my dotfiles. There are many like them, but these are mine.
 
-
 ## Contents
--   **`Brewfile`**: Declares all system-level utilities and GUI applications. Managed by **`brew`**.
--   **`.tool-versions`**: Declares all language runtimes and development CLIs. Managed by **`asdf`**.
--   **`.config`** Config files for `ghostty`, `oh-my-posh`, `zed` and `zsh`
--   **`.zshrc`, `.zshenv` and `.zprofile`** All things zsh
--   **`.iex.exs`** For all the Elixir lovers out there!
--   **`.gitconfig` and `.gitignore.global`** Git stuff :) 
 
+| File / Directory | What it is |
+|---|---|
+| `Brewfile` | All system tools and GUI apps, managed by `brew bundle` |
+| `dot-zshrc` / `dot-zshenv` / `dot-zprofile` | Zsh entrypoints — each just sources files from `dot-config/zsh/` |
+| `dot-config/zsh/` | Zsh config split by concern: aliases, functions, keybindings, plugins, etc. |
+| `dot-config/ghostty/` | Terminal emulator config |
+| `dot-config/nvim/` | Neovim config (LazyVim) |
+| `dot-config/tmux/` | Tmux config and popup scripts (plugins managed by TPM at runtime) |
+| `dot-config/zed/` | Zed editor settings and custom theme |
+| `dot-config/yazi/` | File manager config and plugins |
+| `dot-config/zellij/` | Zellij layout and theme |
+| `dot-config/television/` | `tv` config, custom cable channels, and helper scripts |
+| `dot-config/sesh/` | Session manager config |
+| `dot-config/mise/` | Runtime version manager config (replaces asdf) |
+| `dot-config/k9s/` | Kubernetes TUI config and skins |
+| `dot-config/oh-my-posh/` | Prompt theme |
+| `dot-config/starship/` | Starship prompt config |
+| `dot-config/nushell/` | Nushell config |
+| `dot-gitconfig` | Git config — identity lives in `~/.gitconfig.local` (not tracked) |
+| `dot-gitignore.global` | Global gitignore |
+| `dot-iex.exs` | IEx (Elixir REPL) config |
 
 ## Setup
 
+### 1. Install prerequisites
 
-1.  **Install prerequisites**:
-    ```bash
-    # Install Homebrew
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    
-    # Install Stow
-    brew install stow
-    ```
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install stow
+```
 
-2.  **Clone this repo**:
-    ```bash
-    cd ~
-    git clone https://github.com/maderskog/.dotfiles.git
-    ```
+### 2. Clone and link
 
-3.  **Link the configuration files**:
-    ```bash
-    cd ~/.dotfiles
-    stow home
-    ```
+```bash
+mkdir -p ~/src/maderskog
+git clone https://github.com/maderskog/.dotfiles.git ~/src/maderskog/.dotfiles
+cd ~/src/maderskog/.dotfiles
+stow home
+```
 
-4.  **Install All Declared Tools**:
-    ```bash
-    cd ~
-    # Install all applications and tools from the Brewfile
-    brew bundle install
-    
-    ```
+### 3. Install tools
 
-Your machine should now match the state declared in this repository.
+```bash
+brew bundle install
+```
 
+### 4. Install language runtimes
 
+```bash
+mise install
+```
 
-### Add a new brew package
+### 5. Install Neovim plugins
 
-1.  **Install the new package**:
-    ```bash
-    brew install <new-package>
-    ```
+Open `nvim` — LazyVim will bootstrap itself on first launch.
 
-2.  **Update the `Brewfile`**:
-    ```bash
-    cd ~/.dotfiles
-    brew bundle dump --force
-    ```
+### 6. Install tmux plugins
 
-3.  **Commit the change**:
-    ```bash
-    git add Brewfile
-    git commit -m "feat: Add <new-package>"
-    ```
+Start tmux and press `<prefix> I` to install plugins via TPM.
+
+---
+
+## Machine-local config
+
+Git identity and any machine-specific settings go in `~/.gitconfig.local` (not tracked):
+
+```ini
+[user]
+    name = Your Name
+    email = you@example.com
+    signingkey = <your-key>
+
+[commit]
+    gpgsign = true
+```
+
+---
+
+## Managing packages
+
+### Add a brew package
+
+```bash
+brew install <package>
+cd ~/src/maderskog/.dotfiles
+brew bundle dump --force
+git add home/Brewfile
+git commit -m "feat: add <package>"
+```
 
 ### Remove a brew package
 
-1.  **Edit the `Brewfile`**:
-    Open `~/.dotfiles/Brewfile` and delete the line for the package you want to remove.
-
-2.  **Apply the change**:
-    ```bash
-    cd ~/.dotfiles
-    brew bundle cleanup --force
-    ```
-
-3.  **Commit the change**:
-    ```bash
-    git add Brewfile
-    git commit -m "refactor: Remove unused-tool"
-    ```
+```bash
+# Remove the line from home/Brewfile, then:
+brew bundle cleanup --force
+```
