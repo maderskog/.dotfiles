@@ -1,0 +1,38 @@
+[metadata]
+name = "rtfm"
+description = '''Browse command help.
+
+The first source lists human-friendly commands with man pages.
+The second source lists command pages from sections 1 and 8.
+The third source lists all manual pages.
+
+Preview prefers tldr when available and falls back to man.
+Press `ctrl-s` to cycle sources.
+Press `ctrl-e` to open the selected man page in your pager.
+'''
+requirements = ["python3", "man"]
+
+[source]
+command = [
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/man_pages.py list human",
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/man_pages.py list commands",
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/man_pages.py list all",
+]
+ansi = true
+display = "{split:\t:0} ({split:\t:1})"
+output = "{split:\t:0}"
+frecency = false
+
+[preview]
+command = "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/man_pages.py preview '{split:\t:0}' '{split:\t:1}'"
+
+[keybindings]
+ctrl-e = "actions:open"
+
+[actions.open]
+description = "Open the selected man page with colored man"
+command = "zsh ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/open_colored_man.zsh '{split:\t:1}' '{split:\t:0}'"
+mode = "execute"
+
+[ui]
+preview_panel = { header = "{split:\t:0} ({split:\t:1})" }

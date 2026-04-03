@@ -1,0 +1,40 @@
+[metadata]
+name = "channels"
+description = '''Select a television channel from curated groups.
+
+Source order
+1. core
+2. code
+3. infra
+4. tooling
+5. all
+
+Press `ctrl-s` to cycle groups.
+'''
+requirements = ["python3", "tv"]
+
+[source]
+command = [
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/channel_groups.py list core",
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/channel_groups.py list code",
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/channel_groups.py list infra",
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/channel_groups.py list tooling",
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/channel_groups.py list all",
+]
+display = "{split:\t:0}"
+output = "{split:\t:0}"
+frecency = false
+
+[preview]
+command = "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/channel_groups.py preview '{split:\t:0}'"
+
+[keybindings]
+enter = "actions:channel-enter"
+
+[actions.channel-enter]
+description = "Enter a television channel"
+command = "tv {split:\t:0}"
+mode = "execute"
+
+[ui]
+preview_panel = { header = "{split:\t:0}" }

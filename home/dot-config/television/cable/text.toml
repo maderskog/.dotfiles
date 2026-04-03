@@ -1,0 +1,36 @@
+[metadata]
+name = "text"
+description = "A channel to find and select text from files"
+requirements = ["rg", "bat"]
+
+[source]
+command = [
+  "rg . --no-heading --line-number --colors 'match:fg:white' --colors 'path:fg:blue' --color=always",
+  "rg . --no-heading --line-number --hidden --colors 'match:fg:white' --colors 'path:fg:blue' --color=always",
+]
+ansi = true
+output = "{strip_ansi|split:\\::..2}"
+
+[preview]
+command = "bat -n --color=always '{strip_ansi|split:\\::0}'"
+env = { BAT_THEME = "ansi" }
+offset = '{strip_ansi|split:\::1}'
+
+[ui]
+preview_panel = { header = '{strip_ansi|split:\::..2}' }
+
+[keybindings]
+enter = "actions:select_for_pane"
+f12 = "actions:edit"
+
+[actions.select_for_pane]
+description = "Select match (for tmux pane opener)"
+command = "printf '%s\n%s' '{strip_ansi|split:\\::0}' '{strip_ansi|split:\\::1}' > /tmp/tv-selected"
+shell = "bash"
+mode = "execute"
+
+[actions.edit]
+description = "Open at line in editor (inside current terminal)"
+command = "${EDITOR:-nvim} '+{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'"
+shell = "bash"
+mode = "execute"

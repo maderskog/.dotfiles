@@ -1,0 +1,44 @@
+# macOS system
+Library/
+.Trash/
+
+# Language package caches
+.cargo/
+.rustup/
+.mix/
+.hex/
+.npm/
+.pnpm-store/
+.yarn/
+.bundle/
+.gem/
+.rbenv/
+.pyenv/
+
+# Application data
+.local/share/
+.cache/
+
+# Build artifacts
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.class
+*.beam
+target/
+dist/
+build/
+.next/
+.nuxt/
+.output/
+
+# IDE
+.idea/
+.vscode/
+
+# Misc
+.DS_Store
+*.swp
+*.swo

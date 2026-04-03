@@ -1,0 +1,340 @@
+[metadata]
+name = "tmux-cheatsheet"
+description = "Interactive tmux keybinding reference"
+
+[source]
+command = [
+  '''python3 -c "
+import tomllib, sys
+with open(sys.argv[1], 'rb') as f:
+    data = tomllib.load(f)
+for e in data['entries']:
+    d = f\"{e['icon']:<2}  {e['desc']:<33}  \u21e7Spc {e['key']}\"
+    print(f\"{d}\t{e['action']}\")
+" ~/.config/television/cable/tmux-cheatsheet.toml''',
+  '''python3 -c "
+import tomllib, sys
+with open(sys.argv[1], 'rb') as f:
+    data = tomllib.load(f)
+for e in data.get('info_entries', []):
+    d = f\"{e['icon']:<2}  {e['desc']:<33}  {e['key']}\"
+    print(f\"{d}\t\")
+" ~/.config/television/cable/tmux-cheatsheet.toml''',
+]
+display = "{split:\t:0}"
+output  = "{split:\t:1}"
+
+[ui]
+preview_panel = { hidden = true }
+
+# ── Prefix bindings ─────────────────────────────────────────────────
+[[entries]]
+icon   = "◉"
+desc   = "Sessions (sesh + zoxide)"
+key    = "s"
+action = "sessions"
+
+[[entries]]
+icon   = ""
+desc   = "Windows (switch/new/kill)"
+key    = "w"
+action = "windows"
+
+[[entries]]
+icon   = "≡"
+desc   = "Files → open in nvim"
+key    = "f"
+action = "files"
+
+[[entries]]
+icon   = "⊘"
+desc   = "Grep → open at line"
+key    = "/"
+action = "grep"
+
+[[entries]]
+icon   = "◇"
+desc   = "Git log / branches"
+key    = "g"
+action = "git"
+
+[[entries]]
+icon   = "⬡"
+desc   = "Open URL from pane"
+key    = "u"
+action = "urls"
+
+[[entries]]
+icon   = "⇄"
+desc   = "Last session"
+key    = "b"
+action = "last"
+
+[[entries]]
+icon   = "✦"
+desc   = "This cheat sheet"
+key    = "?"
+action = "cheatsheet"
+
+[[entries]]
+icon   = "│"
+desc   = "Split vertical"
+key    = "\\"
+action = "vsplit"
+
+[[entries]]
+icon   = "─"
+desc   = "Split horizontal"
+key    = "-"
+action = "hsplit"
+
+[[entries]]
+icon   = "←"
+desc   = "Pane left"
+key    = "h"
+action = "pane-left"
+
+[[entries]]
+icon   = "↓"
+desc   = "Pane down"
+key    = "j"
+action = "pane-down"
+
+[[entries]]
+icon   = "↑"
+desc   = "Pane up"
+key    = "k"
+action = "pane-up"
+
+[[entries]]
+icon   = "→"
+desc   = "Pane right"
+key    = "l"
+action = "pane-right"
+
+[[entries]]
+icon   = "◁"
+desc   = "Resize left"
+key    = "H"
+action = "resize-left"
+
+[[entries]]
+icon   = "▽"
+desc   = "Resize down"
+key    = "J"
+action = "resize-down"
+
+[[entries]]
+icon   = "△"
+desc   = "Resize up"
+key    = "K"
+action = "resize-up"
+
+[[entries]]
+icon   = "▷"
+desc   = "Resize right"
+key    = "L"
+action = "resize-right"
+
+[[entries]]
+icon   = "⊡"
+desc   = "Zoom pane toggle"
+key    = "z"
+action = "zoom"
+
+[[entries]]
+icon   = "✕"
+desc   = "Kill pane"
+key    = "x"
+action = "kill-pane"
+
+[[entries]]
+icon   = "⊕"
+desc   = "New window"
+key    = "c"
+action = "new-window"
+
+[[entries]]
+icon   = "›"
+desc   = "Next window"
+key    = "n"
+action = "next-window"
+
+[[entries]]
+icon   = "‹"
+desc   = "Previous window"
+key    = "p"
+action = "prev-window"
+
+[[entries]]
+icon   = "①"
+desc   = "Window 1"
+key    = "1"
+action = "window-1"
+
+[[entries]]
+icon   = "②"
+desc   = "Window 2"
+key    = "2"
+action = "window-2"
+
+[[entries]]
+icon   = "③"
+desc   = "Window 3"
+key    = "3"
+action = "window-3"
+
+[[entries]]
+icon   = "④"
+desc   = "Window 4"
+key    = "4"
+action = "window-4"
+
+[[entries]]
+icon   = "⑤"
+desc   = "Window 5"
+key    = "5"
+action = "window-5"
+
+[[entries]]
+icon   = "≪"
+desc   = "Move window left"
+key    = "<"
+action = "move-window-left"
+
+[[entries]]
+icon   = "≫"
+desc   = "Move window right"
+key    = ">"
+action = "move-window-right"
+
+[[entries]]
+icon   = "✎"
+desc   = "Rename window"
+key    = ","
+action = "rename-window"
+
+[[entries]]
+icon   = "⊗"
+desc   = "Kill window"
+key    = "X"
+action = "kill-window"
+
+[[entries]]
+icon   = "✏"
+desc   = "Rename session"
+key    = "$"
+action = "rename-session"
+
+[[entries]]
+icon   = "⏏"
+desc   = "Detach"
+key    = "d"
+action = "detach"
+
+[[entries]]
+icon   = "⎘"
+desc   = "Enter copy mode"
+key    = "["
+action = "copy-mode"
+
+[[entries]]
+icon   = "↺"
+desc   = "Reload config"
+key    = "r"
+action = "reload"
+
+[[entries]]
+icon   = "⌫"
+desc   = "Clear screen"
+key    = "^L"
+action = "clear"
+
+[[entries]]
+icon   = "⬚"
+desc   = "Floating shell"
+key    = "F"
+action = "float"
+
+# ── Picker internals ─────────────────────────────────────────────────
+[[info_entries]]
+icon = "↵"
+desc = "Confirm / execute"
+key  = "Enter"
+
+[[info_entries]]
+icon = "⌃"
+desc = "Action picker"
+key  = "Ctrl+X"
+
+[[info_entries]]
+icon = "⌃"
+desc = "Cycle sources"
+key  = "Ctrl+S"
+
+[[info_entries]]
+icon = "⌃"
+desc = "Kill / delete + refresh"
+key  = "Ctrl+D"
+
+[[info_entries]]
+icon = "⌃"
+desc = "New item"
+key  = "Ctrl+N"
+
+[[info_entries]]
+icon = "⌃"
+desc = "Toggle remote channel"
+key  = "Ctrl+T"
+
+[[info_entries]]
+icon = "⌃"
+desc = "Toggle preview panel"
+key  = "Ctrl+O"
+
+[[info_entries]]
+icon = "⎋"
+desc = "Cancel"
+key  = "Esc"
+
+# ── Copy mode ────────────────────────────────────────────────────────
+[[info_entries]]
+icon = "◻"
+desc = "Begin selection"
+key  = "v"
+
+[[info_entries]]
+icon = "▣"
+desc = "Rectangle selection toggle"
+key  = "Ctrl+v"
+
+[[info_entries]]
+icon = "✓"
+desc = "Copy selection & exit"
+key  = "y"
+
+[[info_entries]]
+icon = "✗"
+desc = "Exit copy mode"
+key  = "q"
+
+# ── From shell ───────────────────────────────────────────────────────
+[[info_entries]]
+icon = "▶"
+desc = "Session picker"
+key  = "t"
+
+[[info_entries]]
+icon = "▶"
+desc = "Create / connect session"
+key  = "t [name]"
+
+[[info_entries]]
+icon = "⌃"
+desc = "tv autocomplete"
+key  = "Ctrl+T"
+
+[[info_entries]]
+icon = "⌃"
+desc = "History search"
+key  = "Ctrl+R"

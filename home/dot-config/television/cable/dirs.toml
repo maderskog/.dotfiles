@@ -1,0 +1,36 @@
+[metadata]
+name = "dirs"
+description = '''Browse directories.
+
+Source order
+1. current directory (hidden dirs included, .gitignore respected)
+2. zoxide history
+
+Preview shows a tree of the selected directory.
+Press `ctrl-s` to cycle sources.
+'''
+requirements = ["fd", "zoxide"]
+
+[source]
+command = [
+  "fd -H -t d -E .git -E node_modules -E __pycache__ 2>/dev/null",
+  "zoxide query -l",
+]
+
+[preview]
+command = "bash ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/preview_dir.sh '{}'"
+
+[keybindings]
+shortcut = "f2"
+enter = "actions:cd"
+ctrl-d = "actions:remove"
+
+[actions.cd]
+description = "Change to the selected directory"
+command = "cd '{}' && $SHELL"
+mode = "execute"
+
+[actions.remove]
+description = "Remove from zoxide"
+command = "zoxide remove '{}'"
+mode = "fork"

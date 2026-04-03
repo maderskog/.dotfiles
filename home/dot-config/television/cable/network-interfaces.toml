@@ -1,0 +1,32 @@
+[metadata]
+name = "network-interfaces"
+description = '''List the host's network interfaces and inspect detailed info in preview.
+
+The first source shows physical interfaces only.
+The second source shows all interfaces, including tunnels and internal ones.
+
+Legend
+★ default route
+● has an IP address
+○ no IP address
+
+Press `ctrl-s` to cycle sources.
+'''
+requirements = ["python3"]
+
+[source]
+command = [
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/network_interfaces.py list physical",
+  "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/network_interfaces.py list all",
+]
+display = "{split:\t:1}"
+output = "{split:\t:0}"
+no_sort = true
+frecency = false
+
+[preview]
+command = "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/network_interfaces.py preview '{split:\t:0}'"
+
+[ui]
+layout = "portrait"
+preview_panel = { size = 62, header = "{split:\t:0}" }
