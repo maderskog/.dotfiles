@@ -1,5 +1,11 @@
 # Functions Configuration
 
+# tmux-window-name: trigger rename on directory change
+function _tmux_window_name_chpwd() {
+  [[ -n "$TMUX" ]] && ($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+}
+add-zsh-hook chpwd _tmux_window_name_chpwd
+
 
 function path() {
   echo $PATH | tr ':' '\n'
