@@ -8,8 +8,9 @@ alias cat="bat"
 alias ls="lsd --classify"
 alias l="lsd --long --classify --group-directories-first"
 alias la="lsd --long --almost-all --classify --group-directories-first"
-alias tree="tree -C -a -I .git"
+alias tree="eza --tree --long --icons --git"
 alias vi='nvim'
+alias k9s='~/bin/k9s-patched'
 
 # Suffix aliases
 alias -s json='jless'
@@ -35,4 +36,3 @@ alias -g F='| fx'
 
 # Copy output to clipboard (macOS)
 alias -g C='| pbcopy'
-

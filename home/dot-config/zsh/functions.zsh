@@ -1,48 +1,5 @@
 # Functions Configuration
 
-# k9s wrapper: automatically applies the red prod-danger skin to any
-# cluster config whose path contains "prod" (case-insensitive).
-# This covers both the initial launch context AND switching contexts
-# inside k9s, since k9s reads per-cluster configs on context switch.
-function k9s() {
-    local k9s_dir="$HOME/.config/k9s"
-    local k9s_config="$k9s_dir/config.yaml"
-
-    # Set global skin based on current kubectl context
-    local ctx
-    ctx="$(command kubectl config current-context 2>/dev/null)"
-    if [[ "${ctx:l}" == *prod* ]]; then
-        sed -i '' 's/skin: .*/skin: prod-danger/' "$k9s_config"
-    else
-        sed -i '' 's/skin: .*/skin: transparant/' "$k9s_config"
-    fi
-
-    # Inject skin overrides into every per-cluster config so that
-    # switching contexts inside k9s also triggers the right skin.
-    local cluster_cfg
-    for cluster_cfg in "$k9s_dir"/clusters/*/*/config.yaml(N); do
-        local lower_path="${cluster_cfg:l}"
-        if [[ "$lower_path" == *prod* ]]; then
-            # Add skin if missing, or update if present
-            if grep -q '^\s*skin:' "$cluster_cfg" 2>/dev/null; then
-                sed -i '' 's/^\(\s*\)skin: .*/\1skin: prod-danger/' "$cluster_cfg"
-            else
-                sed -i '' '/^k9s:$/a\
-\  skin: prod-danger' "$cluster_cfg"
-            fi
-        else
-            # Explicitly set default skin so switching from prod resets the theme
-            if grep -q '^\s*skin:' "$cluster_cfg" 2>/dev/null; then
-                sed -i '' 's/^\(\s*\)skin: .*/\1skin: transparant/' "$cluster_cfg"
-            else
-                sed -i '' '/^k9s:$/a\
-\  skin: transparant' "$cluster_cfg"
-            fi
-        fi
-    done
-
-    command k9s "$@"
-}
 
 function path() {
   echo $PATH | tr ':' '\n'
@@ -59,27 +16,17 @@ function f() {
     fi
 }
 
-function zj() {
-    local active_sessions=$(zellij list-sessions -n 2>/dev/null)
-
-    local count=$(echo "$active_sessions" | grep -v "^$" | wc -l)
-
-    if [[ $count -eq 0 ]]; then
-        echo "No active sessions. Starting 'main'..."
-        zellij -s main
-
-    elif [[ $count -eq 1 ]]; then
-        local session_name=$(echo "$active_sessions" | awk '{print $1}')
-        zellij attach "$session_name"
-
-    else
-        local choice=$(echo "$active_sessions" | fzf --prompt="Select Session: " --header="Multiple sessions found")
-
-        if [[ -n "$choice" ]]; then
-            local session_name=$(echo "$choice" | awk '{print $1}')
-            zellij attach "$session_name"
-        fi
-    fi
+# tmux + sesh session launcher
+#   t        → open sesh picker (tmux + zoxide + configured sessions)
+#   t <name> → connect to / create a named session via sesh
+function t() {
+  if [[ $# -eq 0 ]]; then
+    local result
+    result=$(sesh list -tczd | tv)
+    [[ -n "$result" ]] && sesh connect "$result"
+  else
+    sesh connect "$1"
+  fi
 }
 
 # Directory bookmarks

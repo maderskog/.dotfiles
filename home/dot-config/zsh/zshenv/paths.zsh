@@ -13,7 +13,6 @@ path=(
   "/Applications/Postgres.app/Contents/Versions/latest/bin"
   "/Users/michael/Library/Application Support/JetBrains/Toolbox/scripts"
   # Homebrew path is typically added by 'brew shellenv'
-  # asdf shims are added by its own script
   $path
 )
 
