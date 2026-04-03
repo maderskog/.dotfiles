@@ -1,6 +1,6 @@
-autoload -Uz compinit
+autoload -Uz compinit && compinit
 
-# Source completions — must come before compinit
+# Source completions — these use compdef, must come after compinit
 source <(kubectl completion zsh)
 source <(op completion zsh)
 source <(docker completion zsh)
@@ -11,8 +11,6 @@ source <(docker completion zsh)
 # Carapace — must come before fzf-tab
 export CARAPACE_BRIDGES='zsh,bash'
 source <(carapace _carapace zsh)
-
-compinit -C
 
 # FZF shell integration — must come before fzf-tab
 source <(fzf --zsh)
