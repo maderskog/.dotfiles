@@ -1,10 +1,22 @@
 # Functions Configuration
 
-# tmux-window-name: trigger rename on directory change
-function _tmux_window_name_chpwd() {
-  [[ -n "$TMUX" ]] && ($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+# Rename tmux window to the running command; restore auto-rename on return to prompt
+function _tmux_preexec() {
+  [[ -z "$TMUX" ]] && return
+  local cmd="${1%% *}"
+  local -A icons=([pi]="π")
+  tmux set-window-option automatic-rename off
+  tmux rename-window "${icons[$cmd]:-$cmd}"
 }
-add-zsh-hook chpwd _tmux_window_name_chpwd
+
+function _tmux_precmd() {
+  [[ -z "$TMUX" ]] && return
+  tmux set-window-option automatic-rename on
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook preexec _tmux_preexec
+add-zsh-hook precmd _tmux_precmd
 
 
 function path() {
