@@ -11,7 +11,11 @@ function _tmux_preexec() {
 
 function _tmux_precmd() {
   [[ -z "$TMUX" ]] && return
-  tmux set-window-option automatic-rename on
+  if [[ "$PWD" == "$HOME" ]]; then
+    tmux rename-window "~"
+  else
+    tmux rename-window "${PWD##*/}"
+  fi
 }
 
 autoload -Uz add-zsh-hook
@@ -39,9 +43,7 @@ function f() {
 #   t <name> → connect to / create a named session via sesh
 function t() {
   if [[ $# -eq 0 ]]; then
-    local result
-    result=$(sesh list -tczd | tv)
-    [[ -n "$result" ]] && sesh connect "$result"
+    tv sesh
   else
     sesh connect "$1"
   fi
