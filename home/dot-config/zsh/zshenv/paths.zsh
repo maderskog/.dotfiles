@@ -11,7 +11,7 @@ path=(
   "$HOME/.cargo/bin"
   "$HOME/go/bin"
   "/Applications/Postgres.app/Contents/Versions/latest/bin"
-  "/Users/michael/Library/Application Support/JetBrains/Toolbox/scripts"
+  "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
   # Homebrew path is typically added by 'brew shellenv'
   $path
 )
