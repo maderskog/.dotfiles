@@ -1,26 +1,28 @@
-# mise
-eval "$(mise activate zsh)"
-
 # Go
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
 
-# pnpm
+# Node / pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PATH:$PNPM_HOME" ;;
-esac
 
-# bun
+# Bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$PATH:$BUN_INSTALL/bin"
 
 # Rust/Cargo
-[ -s "$HOME/.cargo/env" ] && \. "$HOME/.cargo/env"
+[[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 # Elixir/Erlang
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=$(brew --prefix openssl@3)"
+export ERL_AFLAGS="-kernel shell_history enabled"
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+# Python
+export POETRY_VIRTUALENVS_IN_PROJECT=true
+
+# zbar (QR/barcode native extension) — only if installed
+if brew --prefix zbar &>/dev/null; then
+    export LDFLAGS="-L$(brew --prefix zbar)/lib ${LDFLAGS}"
+    export CFLAGS="-I$(brew --prefix zbar)/include ${CFLAGS}"
+fi
+
+# Kubernetes
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+export K9S_CONFIG_DIR="${HOME}/.config/k9s"

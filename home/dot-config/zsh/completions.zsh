@@ -1,28 +1,23 @@
-# Completion Configuration
+autoload -Uz compinit
 
-# Load completions
-autoload -Uz compinit && compinit
-
-# Source Completions BEFORE fzf-tab
+# Source completions — must come before compinit
 source <(kubectl completion zsh)
 source <(op completion zsh)
 source <(docker completion zsh)
 
 # Bun completions
-[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
-# Carapace BEFORE fzf-tab
+# Carapace — must come before fzf-tab
 export CARAPACE_BRIDGES='zsh,bash'
 source <(carapace _carapace zsh)
 
 compinit -C
 
-# Enable FZF shell integration BEFORE fzf-tab
+# FZF shell integration — must come before fzf-tab
 source <(fzf --zsh)
 
-# Load fzf-tab AFTER completions and carapace
+# fzf-tab — must come after compinit and fzf
 zinit light Aloxaf/fzf-tab
 
 zinit cdreplay -q
-
-source <(tv init zsh)
