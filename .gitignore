@@ -1,10 +1,26 @@
+# Zed — runtime state, not config
 home/dot-config/zed/prompts/*
 home/dot-config/zed/conversations/*
+
+# Yazi — backups and timestamped copies
 home/dot-config/yazi/yazi.toml-*
+home/dot-config/yazi/*.bak
+
+# Ghostty — backups
 home/dot-config/ghostty/*.bak
+
+# Nushell — history is machine-local
 home/dot-config/nushell/*.txt
+
+# K9s — cluster state and runtime files
 home/dot-config/k9s/clusters/
 home/dot-config/k9s/benchmarks/
 home/dot-config/k9s/screen-dumps/
+
+# Television — Python bytecode
+home/dot-config/television/scripts/__pycache__/
+
+# macOS
+.DS_Store
 
 *.log
