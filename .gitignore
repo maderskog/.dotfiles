@@ -28,3 +28,6 @@ __pycache__/
 
 # ── Television — machine-local config ─────────────────────────────────
 **/television/agent-files.toml
+
+# ── Neovim — plugin lockfile, managed by Lazy ─────────────────────────
+**/nvim/lazy-lock.json
