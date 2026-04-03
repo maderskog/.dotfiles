@@ -38,9 +38,8 @@ brew install stow
 ### 2. Clone and link
 
 ```bash
-mkdir -p ~/src/maderskog
-git clone https://github.com/maderskog/.dotfiles.git ~/src/maderskog/.dotfiles
-cd ~/src/maderskog/.dotfiles
+git clone https://github.com/maderskog/.dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
 stow home
 ```
 
@@ -56,11 +55,15 @@ brew bundle install
 mise install
 ```
 
-### 5. Install Neovim plugins
+### 5. Restore your personal agent files list
+
+Create `~/.config/television/agent-files.toml` with your own project entries (see the script for the format). This file is intentionally not tracked.
+
+### 6. Install Neovim plugins
 
 Open `nvim` — LazyVim will bootstrap itself on first launch.
 
-### 6. Install tmux plugins
+### 7. Install tmux plugins
 
 Start tmux and press `<prefix> I` to install plugins via TPM.
 
@@ -88,7 +91,7 @@ Git identity and any machine-specific settings go in `~/.gitconfig.local` (not t
 
 ```bash
 brew install <package>
-cd ~/src/maderskog/.dotfiles
+cd ~/.dotfiles
 brew bundle dump --force
 git add home/Brewfile
 git commit -m "feat: add <package>"

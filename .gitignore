@@ -20,7 +20,8 @@ home/dot-config/k9s/screen-dumps/
 # Tmux — plugins are managed by TPM at runtime
 home/dot-config/tmux/plugins/
 
-# Television — Python bytecode
+# Television — machine-local files
+home/dot-config/television/agent-files.toml
 home/dot-config/television/scripts/__pycache__/
 
 # macOS

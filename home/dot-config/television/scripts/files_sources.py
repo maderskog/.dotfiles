@@ -6,10 +6,17 @@ import signal
 import subprocess
 import sys
 
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib  # type: ignore[no-redef]
+
 
 HOME = Path.home()
 CONFIG_DIR = HOME / ".config"
 DOWNLOADS_DIR = HOME / "Downloads"
+AGENT_FILES_CONFIG = CONFIG_DIR / "television" / "agent-files.toml"
+
 COMMON_EXCLUDES = [
     ".git",
     "node_modules",
@@ -27,34 +34,16 @@ COMMON_EXCLUDES = [
     "dist",
     "build",
 ]
-AGENT_FILES = [
-    (HOME / "AGENTS.md", "~/AGENTS.md — Shared principles, standards, git rules"),
-    (HOME / "AGENT-MAP.md", "~/AGENT-MAP.md — Map of all agent files and what loads when"),
-    (HOME / ".agents/skills/elixir/SKILL.md", "skill: elixir — Phoenix, LiveView, Ecto, HEEx"),
-    (HOME / ".agents/skills/python/SKILL.md", "skill: python — Style, tooling, pytest"),
-    (HOME / ".agents/skills/agent-browser/SKILL.md", "skill: agent-browser — Browser automation"),
-    (HOME / ".pi/agent/extensions/git-commit-guard.ts", "extension: git-commit-guard"),
-    (HOME / ".pi/agent/settings.json", "pi settings (model, thinking level)"),
-    (HOME / "src/kontali/AGENTS.md", "kontali/ — Work project listing"),
-    (HOME / "src/kontali/edge/AGENTS.md", "kontali/edge — SvelteKit, auth, architecture"),
-    (HOME / "src/maderskog/AGENTS.md", "maderskog/ — Private project listing"),
-    (HOME / "src/maderskog/find-bambi/CLAUDE.md", "maderskog/find-bambi — SvelteKit + Supabase"),
-    (HOME / "src/kontali-guides/commercial-api.md", "guide: commercial-api (Python/FastAPI)"),
-    (HOME / "src/kontali-guides/curve-service.md", "guide: curve-service (Go)"),
-    (HOME / "src/kontali-guides/edge-sharp.md", "guide: edge-sharp (Svelte/Node)"),
-    (HOME / "src/kontali-guides/etl.md", "guide: ETL (Python)"),
-    (HOME / "src/kontali-guides/kontali-api.md", "guide: kontali-api (Python/FastAPI)"),
-    (HOME / "src/kontali-guides/kontali-auth.md", "guide: kontali-auth (Python/FastAPI)"),
-    (HOME / "src/kontali-guides/kontali-py.md", "guide: kontali-py (Python)"),
-    (HOME / "src/kontali-guides/notification-service.md", "guide: notification-service (Go)"),
-    (HOME / "src/kontali-guides/publications.md", "guide: publications (Phoenix/Elixir)"),
-    (HOME / "src/kontali-guides/stats-collector.md", "guide: stats-collector (Python)"),
-    (HOME / "src/kontali-guides/subscription-service.md", "guide: subscription-service (Python)"),
-    (HOME / "src/maderskog-guides/activity_tracker.md", "guide: activity_tracker (Phoenix/Elixir)"),
-    (HOME / "src/maderskog-guides/club_log.md", "guide: club_log (Phoenix/Elixir)"),
-    (HOME / "src/maderskog-guides/find-bambi.md", "guide: find-bambi (Svelte/TS)"),
-    (HOME / "src/maderskog-guides/test-codex.md", "guide: test-codex (Python)"),
-]
+
+
+def load_agent_files() -> list[tuple[Path, str]]:
+    if not AGENT_FILES_CONFIG.exists():
+        return []
+    data = tomllib.loads(AGENT_FILES_CONFIG.read_text())
+    return [
+        (Path(entry["path"].replace("~", str(HOME))), entry["label"])
+        for entry in data.get("file", [])
+    ]
 
 
 def run_command(command: list[str]) -> list[str]:
@@ -147,7 +136,7 @@ def list_downloads() -> int:
 
 
 def list_agent_files() -> int:
-    for path, label in AGENT_FILES:
+    for path, label in load_agent_files():
         if path.exists():
             print_entry(str(path), label)
     return 0
