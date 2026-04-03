@@ -7,6 +7,28 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "agent": {
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "always_allow": [
+            {
+              "pattern": "^pnpm\\s+check(\\s|$)"
+            }
+          ]
+        }
+      }
+    },
+    "use_modifier_to_send": false,
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-6",
+      "enable_thinking": true,
+      "effort": "high"
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
   "cursor_blink": true,
   "ui_font_size": 18.0,
   "theme": "Carbonfox",
