@@ -1,0 +1,36 @@
+font-family = "JetBrainsMonoNL Nerd Font Mono"
+theme = "Catppuccin Mocha"
+background-opacity = 0.9
+cursor-style = bar
+cursor-style-blink = true
+cursor-color = #00fdff
+adjust-cursor-thickness = 3
+adjust-icon-height = 50%
+font-size = 18
+window-width = 161
+window-height = 44
+window-padding-x = 15
+window-padding-y = 15
+copy-on-select = clipboard
+macos-option-as-alt = left
+keybind = shift+space=text:\x1b\x20
+
+# Create new splits
+keybind = cmd+shift+h=new_split:left
+keybind = cmd+shift+left=new_split:left
+keybind = cmd+shift+j=new_split:down
+keybind = cmd+shift+down=new_split:down
+keybind = cmd+shift+k=new_split:up
+keybind = cmd+shift+up=new_split:up
+keybind = cmd+shift+l=new_split:right
+keybind = cmd+shift+right=new_split:right
+
+# Move focus between existing splits
+keybind = cmd+alt+h=goto_split:left
+keybind = cmd+alt+left=goto_split:left
+keybind = cmd+alt+j=goto_split:down
+keybind = cmd+alt+down=goto_split:down
+keybind = cmd+alt+k=goto_split:up
+keybind = cmd+alt+up=goto_split:up
+keybind = cmd+alt+l=goto_split:right
+keybind = cmd+alt+right=goto_split:right

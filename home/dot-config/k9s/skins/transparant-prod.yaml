@@ -1,0 +1,51 @@
+# -----------------------------------------------------------------------------
+# Transparent Prod skin
+# Transparent background with bright red accents to signal production
+# -----------------------------------------------------------------------------
+
+k9s:
+  body:
+    bgColor: default
+    logoColor: "#ff4444"
+  prompt:
+    bgColor: default
+  info:
+    fgColor: orange
+    sectionColor: "#ff4444"
+  dialog:
+    bgColor: default
+    labelFgColor: default
+    fieldFgColor: default
+  frame:
+    border:
+      fgColor: "#ff4444"
+      focusColor: "#ff6666"
+    crumbs:
+      fgColor: "#ffffff"
+      bgColor: "#cc2222"
+      activeColor: "#ff4444"
+    title:
+      bgColor: default
+      counterColor: "#ff4444"
+      highlightColor: "#ff4444"
+    menu:
+      fgColor: default
+  views:
+    charts:
+      bgColor: default
+    table:
+      bgColor: default
+      header:
+        fgColor: default
+        bgColor: default
+    xray:
+      bgColor: default
+    logs:
+      bgColor: default
+      indicator:
+        bgColor: default
+        toggleOnColor: default
+        toggleOffColor: default
+    yaml:
+      colonColor: default
+      valueColor: default

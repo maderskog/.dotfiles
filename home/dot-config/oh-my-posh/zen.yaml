@@ -1,0 +1,190 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version: 4
+final_space: true
+
+palette:
+  Blue: "#78a9ff"
+  Green: "#25be6a"
+  Red: "#e94560"
+  BrightRed: "#ff2600"
+  Time: "#e09142"
+  MutedBlue: "#56749c"
+  MutedGreen: "#1a854a"
+  MutedRed: "#942d3d"
+  Magenta1: "#ff40ff"
+  Magenta2: "#e639e6"
+  Magenta3: "#cc33cc"
+  Magenta4: "#b32cb3"
+  Magenta5: "#992699"
+  Yellow1: "#ffff00"
+  Yellow2: "#ffd700"
+  Yellow3: "#ffaa00"
+  Elixir: "#a674ff"
+
+var:
+  Spacer: "\u00a0"
+  Arrow: "\ue285"
+  Truncation: "\u22ef"
+  Error: "\ueefe"
+  Warning: "\uea6c"
+  Execution: "\uf252"
+  Git: "\uefa0"
+  Tag: "\uf02b"
+  GitAhead: "\u21e1"
+  GitBehind: "\u21e3"
+  GitModified: "\uf044"
+  GitDeleted: "\u2718"
+  GitUntracked: "?"
+  GitStaged: "\uf046"
+  GitStash: "\uf51e"
+  Elixir: "\ue62d"
+  # Python: "\ue73c"
+  Python: "\ue606"
+  Package: "\uf487"
+  Svelte: "\ue697"
+  NodeJS: "\ue781"
+  NodeTS: "\ue628"
+  Node: "\ued0d"
+  Npm: "\ue71e"
+  AWSIcon: "\ue7ad"
+
+console_title_template: "{{ .PWD }} | {{ .Shell }}"
+
+transient_prompt:
+  template: "<p:MutedBlue>{{ .PWD }}</> {{ if eq .Code 0 }}<p:MutedGreen>{{ .Var.Arrow }}</>{{ else }}<p:MutedRed>{{ .Var.Arrow }}</>{{ end }} "
+
+secondary_prompt:
+  template: "<p:MutedBlue> > </>"
+  foreground: "p:MutedBlue"
+  background: "transparent"
+
+blocks:
+  - type: prompt
+    alignment: left
+    segments:
+      - foreground: "p:Blue"
+        type: path
+        style: plain
+        options:
+          style: agnoster_short
+          max_depth: 2
+          folder_icon: "{{ .Var.Truncation }}"
+
+      - template: "{{ if eq .Code 0 }}<p:Green>{{ .Var.Arrow }}</>{{ else }}<p:Red>{{ .Var.Arrow }}</>{{ end }}"
+        type: text
+        style: plain
+
+  - type: rprompt
+    alignment: right
+    segments:
+      - template: "{{ if ne .Code 0 }}<f><p:Red>{{ .Var.Error }}</></f> <p:Red>{{ reason .Code }}</>{{ end }}"
+        type: status
+        style: plain
+
+      - template: " <p:Time>{{ .Var.Execution }} {{ .FormattedMs }}</>"
+        type: executiontime
+        style: plain
+        options:
+          threshold: 1000
+          style: "austin"
+
+      - template: " <p:Magenta1>{{ .HEAD }}</>"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Working.Modified 0 }} <p:Magenta3>{{ .Var.GitModified }}{{ .Working.Modified }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Working.Deleted 0 }} <p:Magenta3>{{ .Var.GitDeleted }}{{ .Working.Deleted }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Working.Untracked 0 }} <p:Magenta3>{{ .Var.GitUntracked }}{{ .Working.Untracked }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Staging.Modified 0 }} <p:Magenta4>{{ .Var.GitStaged }}{{ .Staging.Modified }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Staging.Deleted 0 }} <p:Magenta4>{{ .Var.GitStaged }}{{ .Var.GitDeleted }} {{ .Staging.Deleted }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .StashCount 0 }} <p:Magenta5>{{ .Var.GitStash }}{{ .StashCount }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_stash_count: true
+
+      - template: "{{ if .UpstreamIcon }} <p:Magenta1>{{ .UpstreamIcon }} </>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_upstream_icon: true
+
+      - template: "{{ if gt .Ahead 0 }} <p:Magenta2>{{ .Var.GitAhead }}{{ .Ahead }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: "{{ if gt .Behind 0 }} <p:Magenta3>{{ .Var.GitBehind }}{{ .Behind }}</>{{ end }}"
+        type: git
+        style: plain
+        options:
+          fetch_status: true
+
+      - template: " <p:Elixir>{{ .Var.Elixir }} {{ .Full }}</>"
+        type: elixir
+        style: plain
+
+      - template: " {{ if .Error }}<p:Red>{{ .Var.Warning }} {{ .Error }}</>{{ else }}<p:Yellow1>{{ .Var.Python }} {{ .Major }}.{{ .Minor }}</>{{ end }}"
+        type: python
+        style: plain
+
+      - template: "{{ if .Venv }} <p:Yellow2>{{ .Venv }}</>{{ end }}"
+        type: python
+        style: plain
+
+      - template: " {{if .Version}}<p:Yellow3>{{ .Var.Package }} {{.Version}}</>{{end}}"
+        type: project
+        style: plain
+
+      - template: ' <p:Blue>{{ .Var.Node }} {{ if glob "tsconfig.json" }}{{ .Var.NodeTS }}{{ else }}{{ .Var.NodeJS }}{{ end }} {{ .Full }}</>'
+        type: node
+        style: plain
+
+      #      - template: " <p:MutedBlue>{{ .Var.Npm }} {{ .Full }}</>"
+      #        type: npm
+      #        style: plain
+
+      #      - template: "  {{ .Full }} "
+      #        type: pnpm
+      #        style: plain
+
+      - template: " <p:BrightRed>{{ .Var.Svelte }} {{ .Full }}</>"
+        type: svelte
+        style: plain
+
+      - template: " <p:Blue>{{ .Var.AWS }} {{.Profile}}{{if .Region}} ({{.Region}}){{end}}</>"
+        type: aws
+        style: plain
+
+      - template: "{{ .Var.Spacer }}"
+        type: text
+        style: plain

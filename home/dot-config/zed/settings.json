@@ -1,0 +1,76 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "agent": {
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "always_allow": [
+            {
+              "pattern": "^pnpm\\s+check(\\s|$)"
+            }
+          ]
+        }
+      }
+    },
+    "use_modifier_to_send": false,
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-6",
+      "enable_thinking": true,
+      "effort": "high"
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "cursor_blink": true,
+  "ui_font_size": 18.0,
+  "theme": "Carbonfox",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 18,
+  "current_line_highlight": "all",
+  "cursor_shape": "bar",
+  "minimap": { "show": "always" },
+  "terminal": {
+    "max_scroll_history_lines": 10000,
+    "shell": "system",
+    "dock": "bottom",
+    "default_width": 640,
+    "default_height": 320,
+    "working_directory": "current_project_directory",
+    "blinking": "on",
+    "alternate_scroll": "off",
+    "option_as_meta": false,
+    "copy_on_select": true,
+    "button": true,
+    "env": {
+      // "KEY": "value1:value2"
+    },
+    "line_height": "comfortable",
+    "detect_venv": {
+      "on": {
+        "directories": [".env", "env", ".venv", "venv"],
+        "activate_script": "default"
+      }
+    },
+    "toolbar": {
+      "title": true
+    }
+    // Set the terminal's font size. If this option is not included,
+    // the terminal will default to matching the buffer's font size.
+    // "font_size": 15,
+    // Set the terminal's font family. If this option is not included,
+    // the terminal will default to matching the buffer's font family.
+    // "font_family": "Zed Mono",
+    // Sets the maximum number of lines in the terminal's scrollback buffer.
+    // Default: 10_000, maximum: 100_000 (all bigger values set will be treated as 100_000), 0 disables the scrolling.
+    // Existing terminals will not pick up this change until they are recreated.
+    // "max_scroll_history_lines": 10000,
+  }
+}

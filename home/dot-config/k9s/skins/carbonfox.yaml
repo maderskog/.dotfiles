@@ -1,0 +1,103 @@
+# Carbonfox Skin for K9s
+# Optimized for Transparent Terminals
+
+# Palette Definitions
+foreground: &foreground "#f2f4f8"
+background: &background "default" # Vital for transparency
+current_line: &current_line "#2a2a2a"
+selection: &selection "#2a2a2a"
+comment: &comment "#7b7c7e"
+cyan: &cyan "#33b1ff"
+green: &green "#25be6a"
+orange: &orange "#3ddbd9"
+pink: &pink "#ee5396"
+purple: &purple "#be95ff"
+blue: &blue "#78a9ff"
+red: &red "#ee5396"
+
+k9s:
+  body:
+    fgColor: *foreground
+    bgColor: *background
+    logoColor: *pink
+  prompt:
+    fgColor: *foreground
+    bgColor: *background
+    suggestColor: *blue
+  info:
+    fgColor: *pink
+    sectionColor: *foreground
+  dialog:
+    fgColor: *foreground
+    bgColor: *background
+    buttonFgColor: *foreground
+    buttonBgColor: *blue
+    buttonFocusFgColor: *background
+    buttonFocusBgColor: *pink
+    labelFgColor: *orange
+    fieldFgColor: *foreground
+  frame:
+    border:
+      fgColor: *comment # Subtle border
+      focusColor: *blue # Bright border when focused
+    menu:
+      fgColor: *foreground
+      keyColor: *pink
+      numKeyColor: *pink
+
+    # THE BADGE TRICK
+    # This creates the solid bar look for context/breadcrumbs
+    crumbs:
+      fgColor: "#161616" # Dark text (Carbonfox bg color)
+      bgColor: *blue # Solid Blue Background
+      activeColor: *pink # Solid Pink for active item
+
+    status:
+      newColor: *cyan
+      modifyColor: *blue
+      addColor: *green
+      errorColor: *red
+      highlightColor: *orange
+      killColor: *comment
+      completedColor: *comment
+    title:
+      fgColor: *foreground
+      bgColor: *background
+      highlightColor: *pink
+      counterColor: *blue
+      filterColor: *purple
+  views:
+    charts:
+      bgColor: *background
+      defaultDialColors:
+        - *blue
+        - *pink
+      defaultChartColors:
+        - *blue
+        - *pink
+    table:
+      fgColor: *foreground
+      bgColor: *background
+      # This header setting makes the column titles pop
+      header:
+        fgColor: "#161616" # Dark Text
+        bgColor: *pink # Pink Header Bar
+        sorterColor: *cyan
+    xray:
+      fgColor: *foreground
+      bgColor: *background
+      cursorColor: *current_line
+      graphicColor: *blue
+      showIcons: false
+    yaml:
+      keyColor: *pink
+      colonColor: *purple
+      valueColor: *foreground
+    logs:
+      fgColor: *foreground
+      bgColor: *background
+      indicator:
+        fgColor: *pink
+        bgColor: *background
+        toggleOnColor: *green
+        toggleOffColor: *comment

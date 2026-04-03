@@ -1,0 +1,43 @@
+[mgr]
+# Proportional widths: [parent, current, preview] should add up to 8
+ratio = [2, 3, 3]
+
+[opener]
+fx = [
+    { run = 'fx "$@"', block = true },
+]
+bat = [
+    { run = 'bat --paging=always "$@"', block = true },
+]
+macos_open = [
+    { run = 'open "$@"' },
+]
+nvim = [
+    { run = '$EDITOR "$@"', block = true },
+]
+otree = [
+    { run = 'otree "$@"', block = true },
+]
+
+[open]
+rules = [
+    { name = "*.json",         use = "fx" },
+    { name = "*.toml",         use = "fx" },
+    { name = "*.{yml,yaml}",   use = "fx" },
+    { mime = "image/*",        use = "macos_open" },
+    { mime = "text/*",         use = "nvim" },
+]
+
+
+[[plugin.prepend_previewers]]
+url = "*.md"
+run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"'
+
+[[plugin.prepend_previewers]]
+url = "*/"
+run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"'
+
+[[plugin.prepend_previewers]]
+url = "*.csv"
+run = 'piper -- bat -p --color=always "$1"'
+
