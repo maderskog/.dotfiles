@@ -24,12 +24,12 @@ palette:
 
 var:
   Spacer: "\u00a0"
-  Arrow: "\uf054"
+  Arrow: "\ue285"
   Truncation: "\u22ef"
-  Error: "\uf2fe"
+  Error: "\ueefe"
   Warning: "\uea6c"
   Execution: "\uf252"
-  Git: "\ue702"
+  Git: "\uefa0"
   Tag: "\uf02b"
   GitAhead: "\u21e1"
   GitBehind: "\u21e3"
@@ -43,8 +43,10 @@ var:
   Python: "\ue606"
   Package: "\uf487"
   Svelte: "\ue697"
-  Node: "\U000F0399"
-  Npm: "\ue616"
+  NodeJS: "\ue781"
+  NodeTS: "\ue628"
+  Node: "\ued0d"
+  Npm: "\ue71e"
   AWSIcon: "\ue7ad"
 
 console_title_template: "{{ .PWD }} | {{ .Shell }}"
@@ -66,7 +68,7 @@ blocks:
         style: plain
         options:
           style: agnoster_short
-          max_depth: 3
+          max_depth: 2
           folder_icon: "{{ .Var.Truncation }}"
 
       - template: "{{ if eq .Code 0 }}<p:Green>{{ .Var.Arrow }}</>{{ else }}<p:Red>{{ .Var.Arrow }}</>{{ end }}"
@@ -87,7 +89,7 @@ blocks:
           threshold: 1000
           style: "austin"
 
-      - template: " <p:Magenta1>{{ .Var.Git }} {{ .HEAD }}</>"
+      - template: " <p:Magenta1>{{ .HEAD }}</>"
         type: git
         style: plain
         options:
@@ -163,15 +165,19 @@ blocks:
         type: project
         style: plain
 
-      - template: " <p:Blue>{{ .Var.Node }} {{ .Full }}</>"
+      - template: ' <p:Blue>{{ .Var.Node }} {{ if glob "tsconfig.json" }}{{ .Var.NodeTS }}{{ else }}{{ .Var.NodeJS }}{{ end }} {{ .Full }}</>'
         type: node
         style: plain
 
-      - template: " <p:Blue>{{ .Var.Npm }} {{ .Full }}</>"
-        type: npm
-        style: plain
+      #      - template: " <p:MutedBlue>{{ .Var.Npm }} {{ .Full }}</>"
+      #        type: npm
+      #        style: plain
 
-      - template: " <p:BrightRed>{{ .Var.Svelte }} {{ .Full }} "
+      #      - template: "  {{ .Full }} "
+      #        type: pnpm
+      #        style: plain
+
+      - template: " <p:BrightRed>{{ .Var.Svelte }} {{ .Full }}</>"
         type: svelte
         style: plain
 
@@ -182,4 +188,3 @@ blocks:
       - template: "{{ .Var.Spacer }}"
         type: text
         style: plain
-
