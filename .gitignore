@@ -1,30 +1,30 @@
-# Zed — runtime state, not config
-home/dot-config/zed/prompts/*
-home/dot-config/zed/conversations/*
-
-# Yazi — backups and timestamped copies
-home/dot-config/yazi/yazi.toml-*
-home/dot-config/yazi/*.bak
-
-# Ghostty — backups
-home/dot-config/ghostty/*.bak
-
-# Nushell — history is machine-local
-home/dot-config/nushell/*.txt
-
-# K9s — cluster state and runtime files
-home/dot-config/k9s/clusters/
-home/dot-config/k9s/benchmarks/
-home/dot-config/k9s/screen-dumps/
-
-# Tmux — plugins are managed by TPM at runtime
-home/dot-config/tmux/plugins/
-
-# Television — machine-local files
-home/dot-config/television/agent-files.toml
-home/dot-config/television/scripts/__pycache__/
-
-# macOS
+# ── Universal ─────────────────────────────────────────────────────────
 .DS_Store
-
+*.bak
 *.log
+*.wasm
+__pycache__/
+
+# ── Oh-my-posh — auto-generated schema ────────────────────────────────
+**/oh-my-posh/schema.json
+
+# ── Zed — runtime state, not config ───────────────────────────────────
+**/zed/prompts/
+**/zed/conversations/
+
+# ── Yazi — timestamped auto-backups ───────────────────────────────────
+**/yazi/yazi.toml-*
+
+# ── Nushell — history is machine-local ────────────────────────────────
+**/nushell/history.txt
+
+# ── K9s — cluster state and runtime files ─────────────────────────────
+**/k9s/clusters/
+**/k9s/benchmarks/
+**/k9s/screen-dumps/
+
+# ── Tmux — plugins managed by TPM at runtime ──────────────────────────
+**/tmux/plugins/
+
+# ── Television — machine-local config ─────────────────────────────────
+**/television/agent-files.toml
