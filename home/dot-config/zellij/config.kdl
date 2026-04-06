@@ -6,27 +6,6 @@
 
 keybinds {
     normal {
-        // FOCUS PANES - Direct actions (fast!)
-        bind "Ctrl h" { MoveFocus "Left"; }
-        bind "Ctrl j" { MoveFocus "Down"; }
-        bind "Ctrl k" { MoveFocus "Up"; }
-        bind "Ctrl l" { MoveFocus "Right"; }
-        bind "Ctrl Left" { MoveFocus "Left"; }
-        bind "Ctrl Down" { MoveFocus "Down"; }
-        bind "Ctrl Up" { MoveFocus "Up"; }
-        bind "Ctrl Right" { MoveFocus "Right"; }
-
-        // MOVE PANES
-        bind "Ctrl Shift h" { MovePane "Left"; }
-        bind "Ctrl Shift j" { MovePane "Down"; }
-        bind "Ctrl Shift k" { MovePane "Up"; }
-        bind "Ctrl Shift l" { MovePane "Right"; }
-        bind "Ctrl Shift Left" { MovePane "Left"; }
-        bind "Ctrl Shift Down" { MovePane "Down"; }
-        bind "Ctrl Shift Up" { MovePane "Up"; }
-        bind "Ctrl Shift Right" { MovePane "Right"; }
-
-        // QUICK NAVIGATION - Option key
         bind "Alt h" { MoveFocusOrTab "Left"; }
         bind "Alt j" { MoveFocus "Down"; }
         bind "Alt k" { MoveFocus "Up"; }
@@ -36,54 +15,25 @@ keybinds {
         bind "Alt Up" { MoveFocus "Up"; }
         bind "Alt Right" { MoveFocusOrTab "Right"; }
 
-        // PANE MANAGEMENT - Direct actions
-        bind "Ctrl n" { NewPane; }
-        bind "Ctrl -" { NewPane "Down"; }
-        bind "Ctrl \\" { NewPane "Right"; }
-        bind "Ctrl x" { CloseFocus; }
-        bind "Ctrl f" { ToggleFocusFullscreen; }
-        bind "Alt f" { ToggleFloatingPanes; }
-        bind "Ctrl z" { TogglePaneFrames; }
-        bind "Alt p" { TogglePaneInGroup; }
+        bind "Alt p" { SwitchToMode "pane"; }
+        bind "Alt t" { SwitchToMode "tab"; }
+        bind "Alt r" { SwitchToMode "resize"; }
+        bind "Alt b" { SwitchToMode "scroll"; }
+        bind "Alt s" { SwitchToMode "session"; }
+        bind "Alt g" { SwitchToMode "locked"; }
 
-        // TAB NAVIGATION - Direct actions
-        bind "Alt n" { NewTab; }
-        bind "Ctrl ," { GoToPreviousTab; }
-        bind "Ctrl ." { GoToNextTab; }
-        bind "Alt Shift Left" { GoToPreviousTab; }
-        bind "Alt Shift Right" { GoToNextTab; }
-        bind "Ctrl 1" { GoToTab 1; }
-        bind "Ctrl 2" { GoToTab 2; }
-        bind "Ctrl 3" { GoToTab 3; }
-        bind "Ctrl 4" { GoToTab 4; }
-        bind "Ctrl 5" { GoToTab 5; }
-        bind "Ctrl 6" { GoToTab 6; }
-        bind "Ctrl 7" { GoToTab 7; }
-        bind "Ctrl 8" { GoToTab 8; }
-        bind "Ctrl 9" { GoToTab 9; }
-        bind "Alt Tab" { ToggleTab; }
-
-        // MODE ENTRY - For discoverable help hints
-        bind "Ctrl p" { SwitchToMode "pane"; }
-        bind "Ctrl t" { SwitchToMode "tab"; }
-        bind "Ctrl r" { SwitchToMode "resize"; }
-        bind "Ctrl s" { SwitchToMode "scroll"; }
-        bind "Ctrl o" { SwitchToMode "session"; }
-        bind "Ctrl g" { SwitchToMode "locked"; }
-
-        // QUICK RESIZE
-        bind "Alt =" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
-
-        // SEARCH
-        bind "Ctrl Shift f" { SwitchToMode "entersearch"; SearchInput 0; }
-
-        // QUIT
-        bind "Ctrl q" { Quit; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
     }
 
     pane {
-        // FOCUS - Show hints in status bar
         bind "h" { MoveFocus "Left"; }
         bind "j" { MoveFocus "Down"; }
         bind "k" { MoveFocus "Up"; }
@@ -93,41 +43,36 @@ keybinds {
         bind "Up" { MoveFocus "Up"; }
         bind "Right" { MoveFocus "Right"; }
 
-        // CREATE
+        bind "Shift h" { MovePane "Left"; }
+        bind "Shift j" { MovePane "Down"; }
+        bind "Shift k" { MovePane "Up"; }
+        bind "Shift l" { MovePane "Right"; }
+        bind "Shift Left" { MovePane "Left"; }
+        bind "Shift Down" { MovePane "Down"; }
+        bind "Shift Up" { MovePane "Up"; }
+        bind "Shift Right" { MovePane "Right"; }
+
         bind "n" { NewPane; SwitchToMode "normal"; }
-        bind "d" { NewPane "Down"; SwitchToMode "normal"; }
-        bind "r" { NewPane "Right"; SwitchToMode "normal"; }
-        bind "-" { NewPane "Down"; SwitchToMode "normal"; }
-        bind "\\" { NewPane "Right"; SwitchToMode "normal"; }
-
-        // CLOSE
+        bind "s" { NewPane "Down"; SwitchToMode "normal"; }
+        bind "v" { NewPane "Right"; SwitchToMode "normal"; }
         bind "x" { CloseFocus; SwitchToMode "normal"; }
-
-        // TOGGLE
         bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
         bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
         bind "p" { TogglePaneInGroup; SwitchToMode "normal"; }
+        bind "Tab" { SwitchFocus; }
 
-        // SWITCH FOCUS
-        bind "s" { SwitchFocus; }
-
-        // EXIT MODE
         bind "Esc" { SwitchToMode "normal"; }
         bind "Enter" { SwitchToMode "normal"; }
-        bind "Ctrl p" { SwitchToMode "normal"; }
+        bind "Alt p" { SwitchToMode "normal"; }
     }
 
     tab {
-        // NAVIGATE - Show hints in status bar
         bind "h" { GoToPreviousTab; }
         bind "l" { GoToNextTab; }
         bind "Left" { GoToPreviousTab; }
         bind "Right" { GoToNextTab; }
-        bind "," { GoToPreviousTab; }
-        bind "." { GoToNextTab; }
 
-        // DIRECT ACCESS
         bind "1" { GoToTab 1; SwitchToMode "normal"; }
         bind "2" { GoToTab 2; SwitchToMode "normal"; }
         bind "3" { GoToTab 3; SwitchToMode "normal"; }
@@ -138,26 +83,16 @@ keybinds {
         bind "8" { GoToTab 8; SwitchToMode "normal"; }
         bind "9" { GoToTab 9; SwitchToMode "normal"; }
 
-        // CREATE/CLOSE
         bind "n" { NewTab; SwitchToMode "normal"; }
         bind "x" { CloseTab; SwitchToMode "normal"; }
-
-        // TOGGLE
-        bind "Tab" { ToggleTab; }
+        bind "Tab" { ToggleTab; SwitchToMode "normal"; }
         bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
-
-        // RENAME
         bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
-
-        // BREAK PANE TO NEW TAB
         bind "b" { BreakPane; SwitchToMode "normal"; }
-        bind "[" { BreakPaneLeft; SwitchToMode "normal"; }
-        bind "]" { BreakPaneRight; SwitchToMode "normal"; }
 
-        // EXIT MODE
         bind "Esc" { SwitchToMode "normal"; }
         bind "Enter" { SwitchToMode "normal"; }
-        bind "Ctrl t" { SwitchToMode "normal"; }
+        bind "Alt t" { SwitchToMode "normal"; }
     }
 
     renametab {
@@ -182,12 +117,9 @@ keybinds {
         bind "Shift Down" { Resize "Decrease Down"; }
         bind "Shift Up" { Resize "Decrease Up"; }
         bind "Shift Right" { Resize "Decrease Right"; }
-        bind "=" { Resize "Increase"; }
-        bind "+" { Resize "Increase"; }
-        bind "-" { Resize "Decrease"; }
         bind "Enter" { SwitchToMode "normal"; }
         bind "Esc" { SwitchToMode "normal"; }
-        bind "Ctrl r" { SwitchToMode "normal"; }
+        bind "Alt r" { SwitchToMode "normal"; }
     }
 
     scroll {
@@ -209,7 +141,7 @@ keybinds {
         bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
         bind "e" { EditScrollback; SwitchToMode "normal"; }
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
-        bind "Ctrl s" { SwitchToMode "normal"; }
+        bind "Alt b" { SwitchToMode "normal"; }
         bind "Esc" { SwitchToMode "normal"; }
         bind "q" { SwitchToMode "normal"; }
     }
@@ -233,6 +165,12 @@ keybinds {
 
     session {
         bind "d" { Detach; }
+        bind "r" {
+            Run "zsh" "-c" "printf 'Rename session: ' && read name && zellij action rename-session \"$name\"" {
+                floating true
+            }
+            SwitchToMode "normal"
+        }
         bind "w" {
             LaunchOrFocusPlugin "session-manager" {
                 floating true
@@ -254,11 +192,13 @@ keybinds {
             }
             SwitchToMode "normal"
         }
+        bind "q" { Quit; }
         bind "Esc" { SwitchToMode "normal"; }
-        bind "Ctrl o" { SwitchToMode "normal"; }
+        bind "Alt s" { SwitchToMode "normal"; }
     }
 
     locked {
+        bind "Alt g" { SwitchToMode "normal"; }
         bind "Ctrl g" { SwitchToMode "normal"; }
     }
 }

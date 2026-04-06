@@ -1,12 +1,7 @@
 layout {
     default_tab_template {
-        // Main workspace (all your panes / Neovim etc.)
-        children
-
-        // 2-line status bar at the bottom using zjstatus
-        pane size=2 borderless=true {
+        pane size=1 borderless=true {
             plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-                // --- Colors (tuned for dark / Catppuccin-ish themes) ---
                 color_bg        "#1e2030"
                 color_surface0  "#313244"
                 color_text      "#cdd6f4"
@@ -16,56 +11,66 @@ layout {
                 color_yellow    "#f9e2af"
                 color_pink      "#f5c2e7"
 
-                // --- Overall layout of the bar ---
-                // Left: mode + hints + tabs
-                // Center: Zellij label
-                // Right: datetime
-                format_left   "{mode} {tabs}"
-                format_center " #[bg=$surface0,fg=$blue]#[bg=$blue,fg=$bg,bold] Zellij #[bg=$surface0,fg=$blue]"
-                format_right  " #[bg=$surface0,fg=$pink]#[bg=$pink,fg=$bg,bold]{datetime} #[bg=$surface0,fg=$pink]"
+                format_left   "{tabs}"
+                format_center ""
+                format_right  ""
 
                 format_space              "#[bg=$surface0]"
                 format_hide_on_overlength "true"
                 format_precedence         "lrc"
 
-                // Thin line separating bar from panes
-                border_enabled  "true"
-                border_char     "─"
-                border_format   "#[fg=$blue]{char}"
-                border_position "top"
+                border_enabled  "false"
 
-                // --- Mode blocks with key hints --------------------------------
-                // NORMAL mode: show how to enter other modes, quit, etc.
-                mode_normal " #[bg=$green,fg=$bg,bold] NORMAL #[bg=$surface0,fg=$green]#[bg=$surface0,fg=$text]  Ctrl+p PANE  Ctrl+t TAB  Ctrl+r RESIZE  Ctrl+s SCROLL  Ctrl+o SESSION  Ctrl+g LOCK  Ctrl+q QUIT "
-
-                // Pane mode: pane-focused actions
-                mode_pane   " #[bg=$blue,fg=$bg,bold] PANE #[bg=$surface0,fg=$blue]#[bg=$surface0,fg=$text]  h/j/k/l move  n new  d/–/\\ split  x close  f fullscreen  w float  z frames  p group  Esc normal "
-
-                // Tab mode: tab navigation & management
-                mode_tab    " #[bg=$pink,fg=$bg,bold] TAB #[bg=$surface0,fg=$pink]#[bg=$surface0,fg=$text]  h/l prev/next  1–9 jump  n new  x close  Tab toggle  s sync  b/[/] break  Esc normal "
-
-                // Resize mode: resizing hints
-                mode_resize " #[bg=$yellow,fg=$bg,bold] RESIZE #[bg=$surface0,fg=$yellow]#[bg=$surface0,fg=$text]  h/j/k/l grow  Shift+h/j/k/l shrink  =/+ increase  - decrease  Esc normal "
-
-                // Scroll mode: scrollback/search hints
-                mode_scroll " #[bg=$red,fg=$bg,bold] SCROLL #[bg=$surface0,fg=$red]#[bg=$surface0,fg=$text]  j/k line  d/u half page  f/b page  / or s search  e edit  Ctrl+c bottom  Esc normal "
-
-                // Session mode: plugin / session management
-                mode_session " #[bg=$blue,fg=$bg,bold] SESSION #[bg=$surface0,fg=$blue]#[bg=$surface0,fg=$text]  d detach  w sessions  p plugins  c config  Esc normal "
-
-                // Locked mode
-                mode_locked " #[bg=$red,fg=$bg,bold] LOCKED  #[bg=$surface0,fg=$red]#[bg=$surface0,fg=$text]  Ctrl+g unlock "
-
-                // --- Tab styling: rounded, powerline-like ----------------------
-                tab_normal " #[bg=$surface0,fg=$blue]#[bg=$blue,fg=$bg,bold]{index} {name}#[bg=$surface0,fg=$surface0]"
-                tab_active " #[bg=$surface0,fg=$yellow]#[bg=$yellow,fg=$bg,bold]{index} {name}#[bg=$surface0,fg=$surface0]"
+                tab_normal " #[bg=$surface0,fg=$blue]#[bg=$blue,fg=$bg,bold] {index} {name} #[bg=$surface0,fg=$blue]"
+                tab_active " #[bg=$surface0,fg=$yellow]#[bg=$yellow,fg=$bg,bold] {index} {name} #[bg=$surface0,fg=$yellow]"
                 tab_separator " "
 
-                // Datetime widget
+                hide_frame_for_single_pane "false"
+
+                mode_normal  ""
+                mode_pane    ""
+                mode_tab     ""
+                mode_resize  ""
+                mode_scroll  ""
+                mode_session ""
+                mode_locked  ""
+            }
+        }
+
+        children
+
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                color_bg        "#1e2030"
+                color_surface0  "#313244"
+                color_text      "#cdd6f4"
+                color_blue      "#89b4fa"
+                color_green     "#a6e3a1"
+                color_red       "#f38ba8"
+                color_yellow    "#f9e2af"
+                color_pink      "#f5c2e7"
+
+                format_left   "{mode}"
+                format_center ""
+                format_right  " #[bg=$surface0,fg=$pink]#[bg=$pink,fg=$bg,bold] {datetime} #[bg=$surface0,fg=$pink]"
+
+                format_space              "#[bg=$surface0]"
+                format_hide_on_overlength "true"
+                format_precedence         "lrc"
+
+                border_enabled  "false"
+
+                mode_normal  " #[bg=$surface0,fg=$green]#[bg=$green,fg=$bg,bold] NORMAL #[bg=$surface0,fg=$green]#[bg=$surface0,fg=$text]  Alt+p PANE  Alt+t TAB  Alt+r RESIZE  Alt+b SCROLL  Alt+s SESSION  Alt+g LOCK "
+                mode_pane    " #[bg=$surface0,fg=$blue]#[bg=$blue,fg=$bg,bold] PANE #[bg=$surface0,fg=$blue]#[bg=$surface0,fg=$text]  h/j/k/l move  H/J/K/L shift  n new  s down  v right  x close  f fullscreen  w float  z frames  p group  Tab focus  Esc normal "
+                mode_tab     " #[bg=$surface0,fg=$pink]#[bg=$pink,fg=$bg,bold] TAB #[bg=$surface0,fg=$pink]#[bg=$surface0,fg=$text]  h/l prev/next  1–9 jump  n new  x close  Tab toggle  s sync  r rename  b break  Esc normal "
+                mode_resize  " #[bg=$surface0,fg=$yellow]#[bg=$yellow,fg=$bg,bold] RESIZE #[bg=$surface0,fg=$yellow]#[bg=$surface0,fg=$text]  h/j/k/l grow  Shift+h/j/k/l shrink  Esc normal "
+                mode_scroll  " #[bg=$surface0,fg=$red]#[bg=$red,fg=$bg,bold] SCROLL #[bg=$surface0,fg=$red]#[bg=$surface0,fg=$text]  j/k line  d/u half page  f/b page  / or s search  e edit  Ctrl+c bottom  Esc normal "
+                mode_session " #[bg=$surface0,fg=$blue]#[bg=$blue,fg=$bg,bold] SESSION #[bg=$surface0,fg=$blue]#[bg=$surface0,fg=$text]  d detach  r rename  w sessions  p plugins  c config  q quit  Esc normal "
+                mode_locked  " #[bg=$surface0,fg=$red]#[bg=$red,fg=$bg,bold] LOCKED  #[bg=$surface0,fg=$red]#[bg=$surface0,fg=$text]  Alt+g unlock "
+
                 datetime "{format}"
                 datetime_format "%Y-%m-%d %H:%M"
             }
         }
     }
 }
-
