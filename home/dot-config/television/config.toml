@@ -243,6 +243,7 @@ fallback_channel = "files"
 "git-log" = ["git log", "git show"]
 "docker-images" = ["docker run"]
 "git-repos" = ["nvim", "code", "hx", "git clone"]
+"zellij-sessions" = ["zj", "zellij attach", "zellij kill-session", "zellij delete-session"]
 
 
 [shell_integration.keybindings]

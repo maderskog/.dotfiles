@@ -1,0 +1,41 @@
+[metadata]
+name = "zellij-sessions"
+description = "List and manage Zellij sessions"
+requirements = ["zellij"]
+
+[source]
+command = "zellij list-sessions --no-formatting"
+display = "{}"
+output = "{split: :0}"
+
+[preview]
+command = "zellij list-sessions --no-formatting | grep '^{split: :0} '"
+
+[keybindings]
+ctrl-d = ["actions:kill", "reload_source"]
+ctrl-x = ["actions:delete", "reload_source"]
+
+[actions.attach]
+description = "Attach to the selected session"
+command = "zellij attach --force-run-commands '{split: :0}'"
+mode = "execute"
+
+[actions.new]
+description = "Create a new named session"
+command = "zellij --session '{}'"
+mode = "execute"
+
+[actions.kill]
+description = "Kill the selected session"
+command = "zellij kill-session '{split: :0}'"
+mode = "fork"
+
+[actions.delete]
+description = "Delete the selected session (remove saved state)"
+command = "zellij delete-session '{split: :0}'"
+mode = "fork"
+
+[actions.watch]
+description = "Watch the selected session (read-only)"
+command = "zellij watch '{split: :0}'"
+mode = "execute"
