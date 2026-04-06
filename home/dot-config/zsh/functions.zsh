@@ -18,9 +18,27 @@ function _tmux_precmd() {
   fi
 }
 
+function _zellij_preexec() {
+  [[ -z "$ZELLIJ" ]] && return
+  local cmd="${1%% *}"
+  local -A icons=([pi]="π")
+  zellij action rename-tab "${icons[$cmd]:-$cmd}"
+}
+
+function _zellij_precmd() {
+  [[ -z "$ZELLIJ" ]] && return
+  if [[ "$PWD" == "$HOME" ]]; then
+    zellij action rename-tab "~"
+  else
+    zellij action rename-tab "${PWD##*/}"
+  fi
+}
+
 autoload -Uz add-zsh-hook
 add-zsh-hook preexec _tmux_preexec
 add-zsh-hook precmd _tmux_precmd
+add-zsh-hook preexec _zellij_preexec
+add-zsh-hook precmd _zellij_precmd
 
 
 function path() {
@@ -47,6 +65,26 @@ function t() {
   else
     sesh connect "$1"
   fi
+}
+
+# zellij session launcher
+#   zj          → pick session via tv, attach or create
+#   zj <name>   → attach to or create named session
+function zj() {
+  if [[ -n "$ZELLIJ" ]]; then
+    echo "Already inside zellij. Use Alt+s → w for session manager."
+    return 1
+  fi
+
+  local session
+  if [[ $# -eq 0 ]]; then
+    session=$(tv zellij-sessions)
+    [[ -z "$session" ]] && return 0
+  else
+    session="$1"
+  fi
+
+  zellij attach --create --force-run-commands "$session"
 }
 
 # Directory bookmarks

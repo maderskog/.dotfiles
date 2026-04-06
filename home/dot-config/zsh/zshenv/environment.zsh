@@ -3,3 +3,5 @@ export LANG=en_US.UTF-8
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
+export LM_STUDIO_API_KEY="lm-studio"
