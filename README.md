@@ -13,8 +13,7 @@ sources files from `dot-config/zsh/` |
 | `dot-config/nushell/` | Nushell config |
 | `dot-config/nvim/` | Neovim config (LazyVim) |
 | `dot-config/oh-my-posh/` | Prompt theme |
-| `dot-config/television/` | `tv` config, custom cable channels, and helper 
-scripts |
+| `dot-config/television/` | `tv` config, custom cable channels, and helper scripts |
 | `dot-config/tmux/` | Tmux config and popup scripts (plugins managed by TPM at runtime) |
 | `dot-config/yazi/` | File manager config and plugins |
 | `dot-config/zed/` | Zed editor settings and custom theme |
