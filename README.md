@@ -6,25 +6,25 @@
 
 | File / Directory | What it is |
 |---|---|
-| `Brewfile` | All system tools and GUI apps, managed by `brew bundle` |
-| `dot-zshrc` / `dot-zshenv` / `dot-zprofile` | Zsh entrypoints — each just sources files from `dot-config/zsh/` |
-| `dot-config/zsh/` | Zsh config split by concern: aliases, functions, keybindings, plugins, etc. |
 | `dot-config/ghostty/` | Terminal emulator config |
-| `dot-config/nvim/` | Neovim config (LazyVim) |
-| `dot-config/tmux/` | Tmux config and popup scripts (plugins managed by TPM at runtime) |
-| `dot-config/zed/` | Zed editor settings and custom theme |
-| `dot-config/yazi/` | File manager config and plugins |
-| `dot-config/zellij/` | Zellij layout and theme |
-| `dot-config/television/` | `tv` config, custom cable channels, and helper scripts |
-| `dot-config/sesh/` | Session manager config |
-| `dot-config/mise/` | Runtime version manager config (replaces asdf) |
+sources files from `dot-config/zsh/` |
 | `dot-config/k9s/` | Kubernetes TUI config and skins |
-| `dot-config/oh-my-posh/` | Prompt theme |
-| `dot-config/starship/` | Starship prompt config |
+| `dot-config/mise/` | Runtime version manager config (replaces asdf) |
 | `dot-config/nushell/` | Nushell config |
+| `dot-config/nvim/` | Neovim config (LazyVim) |
+| `dot-config/oh-my-posh/` | Prompt theme |
+| `dot-config/television/` | `tv` config, custom cable channels, and helper 
+scripts |
+| `dot-config/tmux/` | Tmux config and popup scripts (plugins managed by TPM at runtime) |
+| `dot-config/yazi/` | File manager config and plugins |
+| `dot-config/zed/` | Zed editor settings and custom theme |
+| `dot-config/zellij/` | Zellij layout and theme |
+| `dot-config/zsh/` | Zsh config split by concern: aliases, functions, keybindings, plugins, etc. |
+| `Brewfile` | All system tools and GUI apps, managed by `brew bundle` |
 | `dot-gitconfig` | Git config — identity lives in `~/.gitconfig.local` (not tracked) |
 | `dot-gitignore.global` | Global gitignore |
 | `dot-iex.exs` | IEx (Elixir REPL) config |
+| `dot-zshrc` / `dot-zshenv` / `dot-zprofile` | Zsh entrypoints — each just 
 
 ## Setup
 
