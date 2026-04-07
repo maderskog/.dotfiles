@@ -1,27 +1,33 @@
 # -----------------------------------------------------------------------------
-# Carbonfox skin
-# Minimal — transparent background, carbonfox accent on crumbs
+# Carbonfox Prod skin
+# Transparent background with red danger accents to signal production
 # -----------------------------------------------------------------------------
 
 k9s:
   body:
     bgColor: default
+    logoColor: "#ff4444"
   prompt:
     bgColor: default
   info:
-    sectionColor: default
+    fgColor: orange
+    sectionColor: "#ff4444"
   dialog:
     bgColor: default
     labelFgColor: default
     fieldFgColor: default
   frame:
+    border:
+      fgColor: "#ff4444"
+      focusColor: "#ff6666"
     crumbs:
-      fgColor: "#161616"
-      bgColor: "#78a9ff"
-      activeColor: "#be95ff"
+      fgColor: "#ffffff"
+      bgColor: "#cc2222"
+      activeColor: "#ff4444"
     title:
       bgColor: default
-      counterColor: default
+      counterColor: "#ff4444"
+      highlightColor: "#ff4444"
     menu:
       fgColor: default
   views:

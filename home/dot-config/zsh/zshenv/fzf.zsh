@@ -5,6 +5,9 @@ export FZF_DEFAULT_OPTS='
   --layout=reverse
   --border
   --multi
+  --color=bg+:#282828,fg:#f2f4f8,fg+:#f2f4f8,hl:#ee5396,hl+:#ee5396
+  --color=info:#08bdba,prompt:#be95ff,pointer:#ee5396,marker:#25be6a
+  --color=spinner:#be95ff,header:#78a9ff,border:#484848
   --bind="ctrl-y:execute-silent(echo {} | pbcopy)"
   --bind="ctrl-o:execute(open {})"
   --bind="ctrl-e:execute(nvim {})"'
