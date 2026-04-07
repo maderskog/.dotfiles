@@ -7,7 +7,6 @@
 | File / Directory | What it is |
 |---|---|
 | `dot-config/ghostty/` | Terminal emulator config |
-sources files from `dot-config/zsh/` |
 | `dot-config/k9s/` | Kubernetes TUI config and skins |
 | `dot-config/mise/` | Runtime version manager config (replaces asdf) |
 | `dot-config/nushell/` | Nushell config |
@@ -23,7 +22,7 @@ sources files from `dot-config/zsh/` |
 | `dot-gitconfig` | Git config — identity lives in `~/.gitconfig.local` (not tracked) |
 | `dot-gitignore.global` | Global gitignore |
 | `dot-iex.exs` | IEx (Elixir REPL) config |
-| `dot-zshrc` / `dot-zshenv` / `dot-zprofile` | Zsh entrypoints — each just 
+| `dot-zshrc` / `dot-zshenv` / `dot-zprofile` | Zsh entrypoints — each just sources files from `dot-config/zsh/` |
 
 ## Setup
 
