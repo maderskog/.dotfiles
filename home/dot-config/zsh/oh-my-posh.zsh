@@ -1,2 +1,4 @@
 # Initialize oh-my-posh
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/zen.yaml)"
+if [[ -o interactive ]] && [[ -t 1 ]]; then
+  eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/zen.yaml)"
+fi

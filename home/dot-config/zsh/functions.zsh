@@ -124,6 +124,10 @@ function extract() {
   fi
 }
 
+function field() {
+  awk -F "${2:- }" "{ print \$${1:-1}}"
+}
+
 function mkcd() {
   mkdir -p "$1" && cd "$1"
 }
