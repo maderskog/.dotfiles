@@ -4,12 +4,13 @@ description = "List installed cargo crates"
 requirements = ["cargo"]
 
 [source]
-command = "cargo install --list 2>/dev/null | grep -v '^    ' | sed 's/:$//'"
+command = "bash -c 'if ! cargo install --list 2>/dev/null | grep -qE \"^[[:space:]]+[^[:space:]]+ v[0-9]\"; then echo \"__none__ __\"; exit 0; fi; cargo install --list 2>/dev/null | grep -E \"^[[:space:]]+[^[:space:]]+ v[0-9]\" | sed -E \"s/^[[:space:]]+//;s/:$//\" | while read -r n v _; do echo \"$n $v\"; done'"
+
 display = "{split: :0} {split: :1}"
 output = "{split: :0}"
 
 [preview]
-command = "cargo install --list 2>/dev/null | sed -n '/^{split: :0} /,/^[^ ]/p' | head -20"
+command = "bash -c \"case \\$1 in __none__) echo \\\"cargo install <crate>\\\";; *) cargo install --list 2>/dev/null | rg -n -F -- \\\"\\$1\\\" | head -30;; esac\" _ '{split: :0}'"
 
 [actions.uninstall]
 description = "Uninstall the selected crate"

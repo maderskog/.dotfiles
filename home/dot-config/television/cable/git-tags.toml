@@ -4,12 +4,12 @@ description = "Browse and checkout git tags"
 requirements = ["git"]
 
 [source]
-command = "git tag --sort=-creatordate"
+command = """bash -c 't=$(git tag --sort=-creatordate 2>/dev/null); if [[ -z "$t" ]]; then echo "__none__"; else printf "%s\\n" "$t"; fi'"""
 no_sort = true
 frecency = false
 
 [preview]
-command = "git show --color=always '{}'"
+command = """bash -c 'tag="{}"; if [[ "$tag" == "__none__" ]]; then echo "No tags in this repository."; else git show --color=always "$tag"; fi'"""
 
 [keybindings]
 enter = "actions:checkout"
@@ -17,10 +17,10 @@ ctrl-d = "actions:delete"
 
 [actions.checkout]
 description = "Checkout the selected tag"
-command = "git checkout '{}'"
+command = "bash -c 'tag=\"{}\"; [[ \"$tag\" != __none__ ]] && git checkout \"$tag\"'"
 mode = "execute"
 
 [actions.delete]
 description = "Delete the selected tag"
-command = "git tag -d '{}'"
+command = "bash -c 'tag=\"{}\"; [[ \"$tag\" != __none__ ]] && git tag -d \"$tag\"'"
 mode = "execute"

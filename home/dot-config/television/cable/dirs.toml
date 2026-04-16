@@ -7,6 +7,7 @@ Source order
 2. zoxide history
 
 Preview shows a tree of the selected directory.
+Enter confirms the selection and prints the path to tv stdout (e.g. `cd "$(tv dirs)"`). Do not override `enter` with a custom action for that — it breaks stdout capture. `ctrl-o` opens a new shell in the directory.
 Press `ctrl-s` to cycle sources.
 '''
 requirements = ["fd", "zoxide"]
@@ -16,17 +17,18 @@ command = [
   "fd -H -t d -E .git -E node_modules -E __pycache__ 2>/dev/null",
   "zoxide query -l",
 ]
+output = "{}"
 
 [preview]
 command = "bash ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/preview_dir.sh '{}'"
 
 [keybindings]
 shortcut = "f2"
-enter = "actions:cd"
+ctrl-o = "actions:cd"
 ctrl-d = "actions:remove"
 
 [actions.cd]
-description = "Change to the selected directory"
+description = "Open a new shell in the selected directory"
 command = "cd '{}' && $SHELL"
 mode = "execute"
 

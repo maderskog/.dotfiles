@@ -1,18 +1,18 @@
 [metadata]
 name = "tailscale-exit-node"
-description = "A channel to select a tailscale exit node"
-requirements = ["tailscale", "awk"]
+description = "Pick a Tailscale exit node (from tailscale exit-node list)"
+requirements = ["tailscale", "jq"]
 
 [source]
-command = "tailscale exit-node list | awk '/^[[:space:]]*[0-9]+\\./ {gsub(/^[[:space:]]+/, \"\"); print $1}'"
+command = "bash -c 'raw=$(tailscale exit-node list 2>/dev/null); if [[ -z \"$raw\" ]]; then echo \"(no exit nodes advertised)\"; else printf \"%s\\n\" \"$raw\"; fi'"
 
 [preview]
-command = "tailscale whois {}"
+command = "bash -c 'case $1 in \"(no exit\"*) echo \"No exit nodes (or tailscale error).\";; *) ip=${1%% *}; tailscale whois --json \"$ip\" 2>/dev/null | jq -C . || tailscale whois \"$ip\" 2>/dev/null;; esac' _ '{}'"
 
 [keybindings]
 enter = "actions:connect"
 
 [actions.connect]
 description = "Set selected host as exit node"
-command = "tailscale set --exit-node='{}'"
+command = "bash -c 'case $1 in \"(no exit\"*) exit 0;; *) ip=${1%% *}; exec tailscale set --exit-node=\"$ip\";; esac' _ '{}'"
 mode = "execute"

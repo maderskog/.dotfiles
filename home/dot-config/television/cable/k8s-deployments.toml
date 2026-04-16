@@ -2,36 +2,35 @@
 name = "k8s-deployments"
 description = '''List and preview Deployments in a Kubernetes Cluster.
 
-The first source lists only from the current namespace, while the second lists from all.
+Preview: `yq -C` (drops metadata.managedFields); fallback `bat -l yaml`.
+
+Source order: all namespaces first, then current namespace only.
 
 Keybindings
 
 Press `ctrl-d` to delete the selected Deployment.
 '''
-requirements = ["kubectl"]
+requirements = ["kubectl", "yq", "bat"]
 
 [source]
 command = [
   '''
-  kubectl get deployments -o go-template --template '{{range .items}}{{.metadata.namespace}} {{.metadata.name}}{{"\n"}}{{end}}'
+  kubectl get deployments -o go-template --template '{{range .items}}{{.metadata.namespace}}{{"\t"}}{{.metadata.name}}{{"\n"}}{{end}}' --all-namespaces
   ''',
   '''
-  kubectl get deployments -o go-template --template '{{range .items}}{{.metadata.namespace}} {{.metadata.name}}{{"\n"}}{{end}}' --all-namespaces
+  kubectl get deployments -o go-template --template '{{range .items}}{{.metadata.namespace}}{{"\t"}}{{.metadata.name}}{{"\n"}}{{end}}'
   ''',
 ]
-output = "{1}"
+display = "{split:\t:0}/{split:\t:1}"
+output = "{split:\t:0}\t{split:\t:1}"
 
 [preview]
-command = "kubectl describe -n {0} deployments/{1}"
-
-[ui]
-layout = "portrait"
-preview_panel = { size = 60 }
+command = "kubectl get deployment -n {split:\t:0} {split:\t:1} -o yaml 2>/dev/null | yq -C 'del(.metadata.managedFields)' 2>/dev/null || kubectl get deployment -n {split:\t:0} {split:\t:1} -o yaml 2>/dev/null | bat -p -l yaml --color=always"
 
 [keybindings]
 ctrl-d = "actions:delete"
 
 [actions.delete]
 description = "Delete the selected Deployment"
-command = "kubectl delete -n {0} deployments/{1}"
+command = "kubectl delete -n {split:\t:0} deployments/{split:\t:1}"
 mode = "execute"

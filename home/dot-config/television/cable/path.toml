@@ -7,7 +7,7 @@ requirements = ["fd", "bat"]
 command = "printf '%s\n' \"$PATH\" | tr ':' '\n'"
 
 [preview]
-command = "fd -tx -d1 . \"{}\" -X printf \"%s\n\" \"{/}\" | sort -f | bat -n --color=always"
+command = """L=$'\\033[36m'; R=$'\\033[0m'; D=$'\\033[2m'; dir='{}'; print -r -- "${L}Directory:${R} $dir"; if [[ ! -e $dir ]]; then print; print -r -- "${D}(missing)${R}"; exit 0; fi; if [[ ! -d $dir ]]; then print; print -r -- "${D}(not a directory)${R}"; exit 0; fi; print; print -r -- "${L}Summary:${R}"; total=$(fd -H -d 1 . "$dir" 2>/dev/null | wc -l | tr -d ' '); executables=$(fd -H -tx -d 1 . "$dir" 2>/dev/null | wc -l | tr -d ' '); print -r -- "  entries: $total"; print -r -- "  executables: $executables"; size=$(du -sh "$dir" 2>/dev/null | awk '{print $1}'); [[ -n $size ]] && print -r -- "  size: $size"; print; print -r -- "${L}Executables:${R}"; if (( executables == 0 )); then print -r -- "${D}(none)${R}"; else fd -H -tx -d 1 . "$dir" 2>/dev/null | awk -F/ '{print $NF}' | sort -f | head -80; fi"""
 
 [actions.cd]
 description = "Open a shell in the selected PATH directory"

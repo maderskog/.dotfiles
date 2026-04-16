@@ -4,17 +4,17 @@ description = "List and manage git submodules"
 requirements = ["git"]
 
 [source]
-command = "git submodule status | awk '{print $2}'"
+command = """bash -c 'm=$(git submodule status 2>/dev/null | awk '"'"'{print $2}'"'"'); if [[ -z "$m" ]]; then echo "__none__"; else printf "%s\\n" "$m"; fi'"""
 
 [preview]
-command = "git -C '{}' log --oneline -10 --color=always"
+command = """bash -c 'p="{}"; if [[ "$p" == "__none__" ]]; then echo "No submodules in this repository."; else git -C "$p" log --oneline -10 --color=always; fi'"""
 
 [actions.update]
 description = "Update the selected submodule"
-command = "git submodule update --init --recursive '{}'"
+command = "bash -c 'p=\"{}\"; [[ \"$p\" != __none__ ]] && git submodule update --init --recursive \"$p\"'"
 mode = "execute"
 
 [actions.sync]
 description = "Sync the selected submodule URL"
-command = "git submodule sync '{}'"
+command = "bash -c 'p=\"{}\"; [[ \"$p\" != __none__ ]] && git submodule sync \"$p\"'"
 mode = "execute"

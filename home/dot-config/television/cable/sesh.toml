@@ -1,24 +1,19 @@
-# Television channel for sesh session management
-# https://github.com/joshmedeski/sesh
-
 [metadata]
 name = "sesh"
-description = "Session manager integrating tmux sessions, zoxide directories, and config paths"
-requirements = ["sesh", "fd"]
+description = "Session manager (tmux sessions, zoxide dirs, sesh.toml) — requires https://github.com/joshmedeski/sesh"
+requirements = ["sesh"]
 
 [source]
-# Multiple source commands for cycling through different modes
-# Press Ctrl+S to cycle between sources
 command = [
-  "sesh list -t --icons",                       # tmux sessions only (default)
-  "sesh list -z --icons",                       # zoxide directories
-  "sesh list -c --icons",                       # configured sessions (sesh.toml)
+  """bash -c 'out=$(sesh list -t --icons 2>/dev/null); [[ -n "$out" ]] && printf "%s\\n" "$out" || echo "∅  (no tmux sessions — sesh list empty)"'""",
+  """bash -c 'out=$(sesh list -z --icons 2>/dev/null); [[ -n "$out" ]] && printf "%s\\n" "$out" || echo "∅  (no zoxide paths — sesh list empty)"'""",
+  """bash -c 'out=$(sesh list -c --icons 2>/dev/null); [[ -n "$out" ]] && printf "%s\\n" "$out" || echo "∅  (no configured sessions — sesh list empty)"'""",
 ]
 ansi = true
 output = "{strip_ansi|split: :1..|join: }"
 
 [preview]
-command = "sesh preview '{strip_ansi|split: :1..|join: }'"
+command = "bash -c 'line=\"{strip_ansi|split: :1..|join: }\"; if [[ \"$line\" == ∅* ]]; then echo \"Start tmux or configure sesh.\"; else sesh preview \"$line\" 2>/dev/null || echo \"(sesh preview failed)\"; fi'"
 
 [keybindings]
 enter = "actions:connect"
@@ -27,7 +22,7 @@ ctrl-d = [ "actions:kill_session", "reload_source" ]
 
 [actions.connect]
 description = "Connect to selected session"
-command = "sesh connect '{strip_ansi|split: :1..|join: }'"
+command = "bash -c 'line=\"{strip_ansi|split: :1..|join: }\"; [[ \"$line\" != ∅* ]] && sesh connect \"$line\"'"
 mode = "execute"
 
 [actions.new_session_here]
@@ -37,5 +32,5 @@ mode = "execute"
 
 [actions.kill_session]
 description = "Kill selected tmux session (press Ctrl+r to reload)"
-command = "tmux kill-session -t '{strip_ansi|split: :1..|join: }'"
+command = "bash -c 'line=\"{strip_ansi|split: :1..|join: }\"; [[ \"$line\" != ∅* ]] && tmux kill-session -t \"$line\"'"
 mode = "fork"

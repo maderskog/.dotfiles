@@ -10,10 +10,11 @@ command = [
 ]
 
 [preview]
-command = "brew info '{}'"
+command = [
+    "brew info '{}'",
+    "brew-history '{}'",
+]
 
-[ui]
-layout = "portrait"
 
 [keybindings]
 ctrl-u = "actions:upgrade"

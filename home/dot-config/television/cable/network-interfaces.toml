@@ -28,5 +28,4 @@ frecency = false
 command = "python3 ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/network_interfaces.py preview '{split:\t:0}'"
 
 [ui]
-layout = "portrait"
-preview_panel = { size = 62, header = "{split:\t:0}" }
+preview_panel = { header = "{split:\t:0}" }

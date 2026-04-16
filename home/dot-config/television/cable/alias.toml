@@ -1,14 +1,24 @@
 [metadata]
 name = "alias"
-description = "A channel to select from shell aliases"
+description = '''Pick zsh aliases by name.
+
+Sources (ctrl-s): command aliases · globals · suffix handlers.
+
+List shows the name only; preview shows the expansion and searches ~/.zshrc, ~/.config/zsh, and ~/.local/share/zinit for the defining line (ripgrep if available, else grep).'''
+requirements = ["zsh"]
 
 [source]
-# you may need to adjust the command depending on your shell
-command = "$SHELL -ic 'alias'"
-output = "{split:=:0}"
+command = [
+  "zsh ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/list_aliases.zsh regular",
+  "zsh ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/list_aliases.zsh global",
+  "zsh ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/list_aliases.zsh suffix",
+]
+display = "{split:\t:1}"
+output = "{split:\t:1}"
+frecency = false
 
 [preview]
-command = "$SHELL -ic 'alias' | grep -E '^(alias )?{split:=:0}='"
+command = "zsh ${XDG_CONFIG_HOME:-$HOME/.config}/television/scripts/alias_preview.sh '{}'"
 
-[ui.preview_panel]
-size = 30
+[ui]
+preview_panel = { header = "{split:\t:1} [{split:\t:0}]" }

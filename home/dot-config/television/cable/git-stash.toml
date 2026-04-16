@@ -4,17 +4,14 @@ description = "Browse and manage git stash entries"
 requirements = ["git"]
 
 [source]
-command = "git stash list --color=always"
+command = """bash -c 'o=$(git stash list --color=always --format="%gd %h %s" 2>/dev/null); if [[ -z "$o" ]]; then echo "__none__ (no stashes)"; else printf "%s\\n" "$o"; fi'"""
 ansi = true
-output = "{strip_ansi|split:\\::0}"
+output = "{split: :0}"
 no_sort = true
 frecency = false
 
 [preview]
-command = "git stash show -p --color=always '{strip_ansi|split:\\::0}'"
-
-[ui]
-layout = "portrait"
+command = """bash -c 'ref="{split: :0}"; if [[ "$ref" == __none__* ]]; then echo "No stash entries in this repository."; else git stash show -p --color=always "$ref"; fi'"""
 
 [keybindings]
 enter = "actions:apply"
@@ -23,15 +20,15 @@ ctrl-d = "actions:drop"
 
 [actions.apply]
 description = "Apply the selected stash"
-command = "git stash apply '{strip_ansi|split:\\::0}'"
+command = "bash -c 'ref=\"{split: :0}\"; [[ \"$ref\" != __none__* ]] && git stash apply \"$ref\"'"
 mode = "execute"
 
 [actions.pop]
 description = "Pop the selected stash (apply and remove)"
-command = "git stash pop '{strip_ansi|split:\\::0}'"
+command = "bash -c 'ref=\"{split: :0}\"; [[ \"$ref\" != __none__* ]] && git stash pop \"$ref\"'"
 mode = "execute"
 
 [actions.drop]
 description = "Drop the selected stash"
-command = "git stash drop '{strip_ansi|split:\\::0}'"
+command = "bash -c 'ref=\"{split: :0}\"; [[ \"$ref\" != __none__* ]] && git stash drop \"$ref\"'"
 mode = "execute"

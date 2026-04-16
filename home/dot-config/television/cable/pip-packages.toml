@@ -9,9 +9,6 @@ command = "pip list --format=freeze 2>/dev/null | cut -d= -f1"
 [preview]
 command = "pip show '{}'"
 
-[ui]
-layout = "portrait"
-
 [keybindings]
 ctrl-u = "actions:upgrade"
 ctrl-d = "actions:uninstall"

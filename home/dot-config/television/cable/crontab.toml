@@ -10,9 +10,6 @@ frecency = false
 [preview]
 command = '''echo 'Schedule: {split: :..5}' && echo '' && echo 'Command:' && echo '{split: :5..}' '''
 
-[ui]
-layout = "portrait"
-preview_panel = { size = 30 }
 
 [actions.edit]
 description = "Open crontab for editing"

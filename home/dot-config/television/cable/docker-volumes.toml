@@ -11,9 +11,6 @@ output = "{split:\t:0}"
 [preview]
 command = "docker volume inspect '{split:\t:0}' | jq -C '.[0]'"
 
-[ui]
-layout = "portrait"
-
 [actions.remove]
 description = "Remove the selected volume"
 command = "docker volume rm '{split:\t:0}'"

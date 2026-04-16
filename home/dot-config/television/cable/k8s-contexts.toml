@@ -9,9 +9,6 @@ command = "kubectl config get-contexts -o name"
 [preview]
 command = "kubectl config view --minify --context='{}' -o yaml"
 
-[ui]
-layout = "portrait"
-
 [keybindings]
 enter = "actions:use"
 ctrl-d = "actions:delete"

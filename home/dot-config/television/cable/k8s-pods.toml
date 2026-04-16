@@ -2,7 +2,9 @@
 name = "k8s-pods"
 description = '''List and preview Pods in a Kubernetes Cluster.
 
-The first source lists only from the current namespace, while the second lists from all.
+Preview: colored YAML via `yq -C` (drops metadata.managedFields); fallback `bat -l yaml`.
+
+Source order: all namespaces first, then current namespace only.
 
 Keybindings
 
@@ -10,25 +12,22 @@ Press `ctrl-e` to execute shell inside the selected Pod.
 Press `ctrl-d` to delete the selected Pod.
 Press `ctrl-l` to print and follow the logs of the selected Pod.
 '''
-requirements = ["kubectl"]
+requirements = ["kubectl", "yq", "bat"]
 
 [source]
 command = [
   '''
-  kubectl get pods -o go-template --template '{{range .items}}{{.metadata.namespace}} {{.metadata.name}}{{"\n"}}{{end}}'
+  kubectl get pods -o go-template --template '{{range .items}}{{.metadata.namespace}}{{"\t"}}{{.metadata.name}}{{"\n"}}{{end}}' --all-namespaces
   ''',
   '''
-  kubectl get pods -o go-template --template '{{range .items}}{{.metadata.namespace}} {{.metadata.name}}{{"\n"}}{{end}}' --all-namespaces
+  kubectl get pods -o go-template --template '{{range .items}}{{.metadata.namespace}}{{"\t"}}{{.metadata.name}}{{"\n"}}{{end}}'
   ''',
 ]
-output = "{1}"
+display = "{split:\t:0}/{split:\t:1}"
+output = "{split:\t:0}\t{split:\t:1}"
 
 [preview]
-command = "kubectl describe -n {0} pods/{1}"
-
-[ui]
-layout = "portrait"
-preview_panel = { size = 60 }
+command = "kubectl get pod -n {split:\t:0} {split:\t:1} -o yaml 2>/dev/null | yq -C 'del(.metadata.managedFields)' 2>/dev/null || kubectl get pod -n {split:\t:0} {split:\t:1} -o yaml 2>/dev/null | bat -p -l yaml --color=always"
 
 [keybindings]
 ctrl-d = "actions:delete"
@@ -37,15 +36,15 @@ ctrl-l = "actions:logs"
 
 [actions.exec]
 description = "Execute shell inside the selected Pod"
-command = "kubectl exec -i -t -n {0} pods/{1} -- /bin/sh"
+command = "kubectl exec -i -t -n {split:\t:0} pods/{split:\t:1} -- /bin/sh"
 mode = "execute"
 
 [actions.delete]
 description = "Delete the selected Pod"
-command = "kubectl delete -n {0} pods/{1}"
+command = "kubectl delete -n {split:\t:0} pods/{split:\t:1}"
 mode = "execute"
 
 [actions.logs]
 description = "Follow logs of the selected Pod"
-command = "kubectl logs -f -n {0} pods/{1}"
+command = "kubectl logs -f -n {split:\t:0} pods/{split:\t:1}"
 mode = "execute"

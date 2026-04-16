@@ -25,7 +25,6 @@ GROUPS = {
         "ssh-hosts",
         "tmux-sessions",
         "tmux-windows",
-        "zsh-history",
     ],
     "code": [
         "gh-issues",
@@ -40,7 +39,6 @@ GROUPS = {
         "git-submodules",
         "git-tags",
         "git-worktrees",
-        "just-recipes",
         "make-targets",
         "text",
         "todo-comments",

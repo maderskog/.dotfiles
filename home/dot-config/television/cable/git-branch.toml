@@ -8,7 +8,7 @@ command = "git --no-pager branch --all --format=\"%(refname:short)\""
 output = "{split: :0}"
 
 [preview]
-command = "git show -p --stat --pretty=fuller --color=always '{0}'"
+command = """L=$'\\033[36m'; R=$'\\033[0m'; D=$'\\033[2m'; branch='{0}'; print -r -- "${L}Branch:${R} $branch"; current=$(git symbolic-ref --short HEAD 2>/dev/null); if [[ -n $current && $current == $branch ]]; then print -r -- "${D}(current branch)${R}"; fi; upstream=$(git rev-parse --abbrev-ref --symbolic-full-name "${branch}@{upstream}" 2>/dev/null); if [[ -n $upstream ]]; then counts=$(git rev-list --left-right --count "${branch}...${upstream}" 2>/dev/null); ahead=$(print -r -- "$counts" | awk '{print $1}'); behind=$(print -r -- "$counts" | awk '{print $2}'); print -r -- "${L}Upstream:${R} $upstream"; print -r -- "${L}Ahead/Behind:${R} +${ahead:-0} / -${behind:-0}"; fi; print; print -r -- "${L}Last commit:${R}"; git --no-pager log -1 --pretty=format:'%C(yellow)%h%Creset %s%n%C(cyan)Author:%Creset %an%n%C(cyan)When:%Creset %cr' --color=always "$branch" 2>/dev/null; print; print; print -r -- "${L}Recent commits:${R}"; git --no-pager log --oneline --decorate --color=always -n 12 "$branch" 2>/dev/null"""
 
 [keybindings]
 enter = "actions:checkout"

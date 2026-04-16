@@ -1,21 +1,21 @@
 [metadata]
 name = "node-packages"
 description = "Browse local node_modules dependencies"
-requirements = ["node"]
+requirements = ["node", "jq"]
 
 [source]
-command = "ls -d node_modules/*/ 2>/dev/null | sed 's|node_modules/||;s|/$||' | grep -v '^\\.'"
+command = "bash -c 'if [[ -d node_modules ]]; then find node_modules -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sed \"s|^node_modules/||\"; else echo \"(no node_modules in $PWD)\"; fi'"
 output = "{}"
 
 [preview]
-command = "cat 'node_modules/{}/package.json' 2>/dev/null | jq -C '{name, version, description, license, homepage, main}'"
+command = "bash -c 'case $1 in \"(no node_modules\"*) echo \"Run npm/yarn/pnpm install in a project first.\";; *) jq -C \"[.name, .version, .description, .license, .homepage, .main]\" \"node_modules/$1/package.json\" 2>/dev/null;; esac' _ '{}'"
 
 [actions.readme]
 description = "View the package README"
-command = "cat node_modules/{}/README.md 2>/dev/null | less"
+command = "less node_modules/{}/README.md 2>/dev/null"
 mode = "execute"
 
 [actions.homepage]
 description = "Open the package homepage"
-command = "node -e \"const p=require('./node_modules/{}/package.json'); const u=p.homepage||'https://www.npmjs.com/package/'+p.name; require('child_process').exec('xdg-open '+u)\""
+command = "node -e \"const p=require('./node_modules/{}/package.json'); const u=p.homepage||'https://www.npmjs.com/package/'+p.name; require('child_process').exec((process.platform==='darwin'?'open ':'xdg-open ')+u)\""
 mode = "fork"

@@ -1,32 +1,60 @@
 [metadata]
 name = "docker-compose"
-description = "Manage Docker Compose services"
+description = "Docker Compose: services in cwd, or projects from docker compose ls"
 requirements = ["docker"]
 
 [source]
-command = "docker compose ps --format '{{.Name}}\t{{.Service}}\t{{.Status}}'"
+command = [
+  '''bash -c '
+    for f in compose.yaml compose.yml docker-compose.yaml docker-compose.yml; do
+      if [[ -f "$f" ]]; then
+        docker compose -f "$f" ps --format "{{.Name}}\\t{{.Service}}\\t{{.Status}}\\tcwd"
+        exit 0
+      fi
+    done
+    docker compose ls --format "{{.Name}}\\t-\\t{{.Status}}\\tproject" 2>/dev/null || printf "%s\\n" "(none)\\t-\\t(no projects)\\tproject"
+  ' ''',
+]
 display = "{split:\t:1} ({split:\t:2})"
-output = "{split:\t:1}"
+output = "{split:\t:0}\t{split:\t:1}\t{split:\t:3}"
 
 [preview]
-command = "docker compose logs --tail=30 --no-log-prefix '{split:\t:1}'"
+command = """bash -c '
+  name="{split:\t:0}"
+  svc="{split:\t:1}"
+  kind="{split:\t:3}"
+  if [[ "$kind" == "project" ]]; then
+    if [[ "$name" == "(none)" ]]; then
+      echo "No compose file in this directory and no compose projects, or docker compose ls failed."
+    else
+      docker compose -p "$name" ps 2>/dev/null | head -50
+    fi
+  else
+    for f in compose.yaml compose.yml docker-compose.yaml docker-compose.yml; do
+      if [[ -f "$f" ]]; then
+        docker compose -f "$f" logs --tail=40 --no-log-prefix "$svc" 2>/dev/null
+        exit 0
+      fi
+    done
+  fi
+'"""
 
 [actions.up]
-description = "Start the selected service"
-command = "docker compose up -d '{split:\t:1}'"
+description = "Start the selected service or project"
+command = "bash -c 'k=\"{split:\t:3}\"; n=\"{split:\t:0}\"; s=\"{split:\t:1}\"; if [[ \"$k\" == project ]]; then docker compose -p \"$n\" up -d; else for f in compose.yaml compose.yml docker-compose.yaml docker-compose.yml; do [[ -f \"$f\" ]] && exec docker compose -f \"$f\" up -d \"$s\"; done; fi'"
 mode = "fork"
 
 [actions.down]
-description = "Stop and remove the selected service"
-command = "docker compose down '{split:\t:1}'"
+description = "Stop compose project (when row is a project) or service"
+command = "bash -c 'k=\"{split:\t:3}\"; n=\"{split:\t:0}\"; s=\"{split:\t:1}\"; if [[ \"$k\" == project ]]; then docker compose -p \"$n\" down; else for f in compose.yaml compose.yml docker-compose.yaml docker-compose.yml; do [[ -f \"$f\" ]] && exec docker compose -f \"$f\" stop \"$s\"; done; fi'"
 mode = "fork"
 
 [actions.restart]
-description = "Restart the selected service"
-command = "docker compose restart '{split:\t:1}'"
+description = "Restart service or project"
+command = "bash -c 'k=\"{split:\t:3}\"; n=\"{split:\t:0}\"; s=\"{split:\t:1}\"; if [[ \"$k\" == project ]]; then docker compose -p \"$n\" restart; else for f in compose.yaml compose.yml docker-compose.yaml docker-compose.yml; do [[ -f \"$f\" ]] && exec docker compose -f \"$f\" restart \"$s\"; done; fi'"
 mode = "fork"
 
 [actions.logs]
-description = "Follow logs of the selected service"
-command = "docker compose logs -f '{split:\t:1}'"
+description = "Follow logs"
+command = "bash -c 'k=\"{split:\t:3}\"; n=\"{split:\t:0}\"; s=\"{split:\t:1}\"; if [[ \"$k\" == project ]]; then docker compose -p \"$n\" logs -f; else for f in compose.yaml compose.yml docker-compose.yaml docker-compose.yml; do [[ -f \"$f\" ]] && exec docker compose -f \"$f\" logs -f \"$s\"; done; fi'"
 mode = "execute"

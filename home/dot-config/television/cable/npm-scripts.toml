@@ -4,19 +4,17 @@ description = "List and run npm scripts from package.json"
 requirements = ["jq"]
 
 [source]
-command = "jq -r '.scripts | to_entries[] | \"\\(.key)\\t\\(.value)\"' package.json 2>/dev/null"
-display = "{split:\\t:0}"
+command = "bash -c 'if [[ -f package.json ]]; then jq -r \".scripts | to_entries[] | \\\"\\\\(.key)\\\\t\\\\(.value)\\\"\" package.json; else printf \"_\\t(no package.json in %s)\\n\" \"$PWD\"; fi'"
+
+display = "{split:\t:0}"
 
 [preview]
-command = "jq -r '.scripts[\"{split:\\t:0}\"]' package.json"
-
-[ui.preview_panel]
-size = 30
+command = "bash -c \"if [[ \\\"\\$1\\\" == \\\"_\\\" ]]; then echo \\\"Open from a Node project root.\\\"; else jq -r --arg k \\\"\\$1\\\" '.scripts[\\$k] // empty' package.json; fi\" _ '{split:\t:0}'"
 
 [keybindings]
 enter = "actions:run"
 
 [actions.run]
 description = "Run the selected npm script"
-command = "npm run '{split:\\t:0}'"
+command = "bash -c \"case \\$1 in _) exit 0;; *) exec npm run -- \\\"\\$1\\\";; esac\" _ '{split:\t:0}'"
 mode = "execute"
