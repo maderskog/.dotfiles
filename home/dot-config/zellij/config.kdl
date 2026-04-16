@@ -6,7 +6,7 @@
 
 keybinds {
     normal {
-        unbind "Ctrl t" "Ctrl h"
+        unbind "Ctrl t" "Ctrl h" "Ctrl s"
         bind "Alt h" { MoveFocusOrTab "Left"; }
         bind "Alt j" { MoveFocus "Down"; }
         bind "Alt k" { MoveFocus "Up"; }
