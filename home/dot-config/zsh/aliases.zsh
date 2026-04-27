@@ -12,6 +12,19 @@ alias la="lsd --long --almost-all --classify --group-directories-first"
 alias tree="eza --tree --long --icons --git"
 alias vi='nvim'
 alias k9s='~/bin/k9s-patched'
+alias tl='tail -f *(.om[1])'
+
+# fun
+alias boids='tarts boids'
+alias crab='tarts crab'
+alias cube='tarts cube'
+alias donut='tarts donut'
+alias fire='tarts fire'
+alias life='tarts life'
+alias matrix='tarts matrix'
+alias maze='tarts maze'
+alias pipes='tarts pipes'
+alias plasma='tarts plasma'
 
 # Suffix aliases
 alias -s json='jless'
