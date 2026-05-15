@@ -5,3 +5,5 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 export LM_STUDIO_API_KEY="lm-studio"
+
+export PI_CODING_AGENT_DIR="$HOME/.config/pi"
